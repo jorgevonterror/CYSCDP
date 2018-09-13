@@ -20,4 +20,10 @@
 *.rar
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+<<<<<<< HEAD
 hs_err_pid*
+=======
+hs_err_pid*
+/CYSCDP_RANKINGS/build/
+/CYSCDP_RANKINGS/
+>>>>>>> de2e7d0dded13bb4fd1a58039e4a5012890f896d

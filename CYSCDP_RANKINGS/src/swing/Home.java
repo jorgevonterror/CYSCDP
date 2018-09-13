@@ -15,7 +15,8 @@ import javax.swing.JPanel;
  * @author Jorge García
  */
 public class Home extends javax.swing.JFrame {
-
+//ESTE ES UN COMENTARIO DE JORGE :B
+    // ESTE ES UN COMENTARIO DE KEVIN :BB
     /**
      * Creates new form Home
      */
