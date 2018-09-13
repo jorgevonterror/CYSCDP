@@ -515,6 +515,7 @@ public class Home extends javax.swing.JFrame {
                 new Home().setVisible(true);
                 Conexion mCon = new Conexion();
                 mCon.conectar();
+                //Comentario de Chendo
             }
         });
     }
