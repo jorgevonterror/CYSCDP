@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/Users/kevincruz/DAS/CYSCDP/CYSCDP_RANKINGS/src/swing/Conexion.java</file>
+=======
+            <file>file:/Users/eduardogarcia/Documents/CYSCDP/CYSCDP_RANKINGS/src/swing/Conexion.java</file>
+            <file>file:/Users/eduardogarcia/Documents/CYSCDP/CYSCDP_RANKINGS/src/swing/Home.java</file>
+>>>>>>> 643042eaa7b57594bb753651c7311069b13cdf57
         </group>
     </open-files>
 </project-private>
