@@ -67,6 +67,40 @@ public class Conexion {
         }
     }
     
+    public boolean AltaParticipante(DatosParticipante mDatosParticipante) {
+        Statement consulta;
+
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("insert into Participantes " +
+                        "values (null,'" + mDatosParticipante.getNombreParticipante()+ "'," +
+                        "'" + mDatosParticipante.getCarrera()+ "'," +
+                        "'" + mDatosParticipante.getSemestre()+ "'," +
+                        "'" + mDatosParticipante.getEquipos_idEquipos()+ "');");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean AltaConcurso(DatosConcurso mDatosConcurso) {
+        Statement consulta;
+
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("insert into Producto " +
+                        "values (null,'" + mDatosConcurso.getFecha()+ "'," +
+                        "'" + mDatosConcurso.getDescripcion()+ "'," +
+                        "'" + mDatosConcurso.getHoraLimite()+ ":" + mDatosConcurso.getMinutoLimite()+ ":00'," + 
+                        "');");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
     public boolean eliminarProducto(DatosPuntajes mDatosPuntajes) {
         Statement consulta;
         try {
