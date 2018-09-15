@@ -49,4 +49,35 @@ public class Conexion {
             System.err.println(e.getMessage());
         }
     }
+    
+    public boolean AltaPuntaje(DatosPuntajes mDatosPuntajes) {
+        Statement consulta;
+
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("insert into Puntajes " +
+                        "values (null,'" + mDatosPuntajes.getHoras()+ ":"+ mDatosPuntajes.getMinutos() + ":00'," +
+                        "'" + mDatosPuntajes.getComplejidad() + "'," +
+                         "'" + mDatosPuntajes.getConcursos_idConcursos() 
+                    + "'," + "'" + mDatosPuntajes.getEquipos_idEquipos()+ "');");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean eliminarProducto(DatosPuntajes mDatosPuntajes) {
+        Statement consulta;
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("delete from Puntajes " + 
+                        " where idPuntajes = " + mDatosPuntajes.getEquipos_idEquipos() + ";");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }  
+    }
+    
 }
