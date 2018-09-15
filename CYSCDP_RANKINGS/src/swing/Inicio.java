@@ -15,7 +15,7 @@ import java.util.GregorianCalendar;
 public class Inicio extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form Inicio
+     * Creates new form 
      */
     public Inicio() {
         initComponents();
