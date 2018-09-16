@@ -71,7 +71,6 @@ public class Conexion {
     
     public boolean AltaParticipante(DatosParticipante mDatosParticipante) {
         Statement consulta;
-
         try {
             consulta = conexion.createStatement();
             consulta.execute("insert into Participantes " +
@@ -88,10 +87,9 @@ public class Conexion {
     
     public boolean AltaConcurso(DatosConcurso mDatosConcurso) {
         Statement consulta;
-
         try {
             consulta = conexion.createStatement();
-            consulta.execute("insert into Producto " +
+            consulta.execute("insert into Concursos " +
                         "values (null,'" + mDatosConcurso.getFecha()+ "'," +
                         "'" + mDatosConcurso.getDescripcion()+ "'," +
                         "'" + mDatosConcurso.getHoraLimite()+ ":" + mDatosConcurso.getMinutoLimite()+ ":00'," + 
@@ -109,6 +107,19 @@ public class Conexion {
             consulta = conexion.createStatement();
             consulta.execute("delete from Puntajes " + 
                         " where idPuntajes = " + mDatosPuntajes.idPuntajes + ";");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }  
+    }
+    
+    public boolean EliminarConcurso(DatosConcurso mDatosConcurso){
+        Statement consulta;
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("delete from Concursos " + 
+                        " where idConcursos = " + mDatosConcurso.idConcurso + ";");
             return true;
         } catch (Exception e) {
             e.printStackTrace();

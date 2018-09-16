@@ -5,12 +5,19 @@
  */
 package swing;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author jorgeantoniogarciagomez
  */
 public class Participantes extends javax.swing.JInternalFrame {
 
+    Conexion mConexion = new Conexion();
+    int idParticipante = 0, Semestre = 0, Equipos_idEquipos = 0;
+    String NombreParticipante, Carrera;
+    DatosParticipante mDatosParticipante;
+    DefaultTableModel Tabla = new DefaultTableModel();
     /**
      * Creates new form Participantes
      */
