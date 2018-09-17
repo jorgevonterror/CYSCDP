@@ -20,6 +20,7 @@ public class Equipos extends javax.swing.JInternalFrame {
      */
     public Equipos() {
         initComponents();
+        LBL_Men.setText("");
     }
 
     /**
