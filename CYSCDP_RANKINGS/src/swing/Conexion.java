@@ -101,6 +101,19 @@ public class Conexion {
         }
     }
     
+    public boolean AltaEquipos(DatosEquipo mDatosEquipo) {
+        Statement consulta;
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("insert into Equipos " +
+                        "values (null,'" + mDatosEquipo.getNombre()+ "');");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
     public boolean EliminarPuntajes(DatosPuntajes mDatosPuntajes) {
         Statement consulta;
         try {
