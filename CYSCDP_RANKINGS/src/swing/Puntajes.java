@@ -462,6 +462,8 @@ public final class Puntajes extends javax.swing.JInternalFrame {
                 mDatosPuntajes.setIdPuntajes(idPuntajes);
                 if (mConexion.EliminarPuntajes(mDatosPuntajes)) {
                     LBL_Mensajero1.setText("Se ha eliminado el registro #" + idPuntajes);
+                    LimpiarTabla();
+                    EliminarPuntaje();
                 }
             } else {
                 LBL_Mensajero1.setText("No se ha podido conectar a la BD");
@@ -647,6 +649,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
         } else {
             LBL_Mensajero1.setText("Error al consultar");
         }
+
         mConexion.desconectar();
     }
 
