@@ -5,6 +5,9 @@
  */
 package swing;
 
+import java.awt.Desktop;
+import java.net.URI;
+import java.net.URL;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -94,6 +97,11 @@ public class Inicio extends javax.swing.JInternalFrame {
 
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/icons8_Secured_Letter_25px_2.png"))); // NOI18N
         jLabel15.setToolTipText("Correo");
+        jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel15MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -154,9 +162,9 @@ public class Inicio extends javax.swing.JInternalFrame {
                 .addGroup(PANEL_INFOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(PANEL_INFOLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
                         .addGroup(PANEL_INFOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PANEL_INFOLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
                                 .addComponent(LBL_MES)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel19)
@@ -175,7 +183,7 @@ public class Inicio extends javax.swing.JInternalFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(PANEL_INFOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PANEL_INFOLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(LBL_DIA)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PANEL_INFOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -183,7 +191,7 @@ public class Inicio extends javax.swing.JInternalFrame {
                             .addComponent(LBL_ANYO)
                             .addComponent(jLabel19)))
                     .addGroup(PANEL_INFOLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 40, Short.MAX_VALUE)
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,9 +222,9 @@ public class Inicio extends javax.swing.JInternalFrame {
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addContainerGap(101, Short.MAX_VALUE)
+                .addContainerGap(113, Short.MAX_VALUE)
                 .addComponent(jLabel5)
-                .addGap(39, 39, 39))
+                .addGap(27, 27, 27))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,6 +277,15 @@ public class Inicio extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_jLabel5KeyPressed
+
+    private void jLabel15MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MousePressed
+        // TODO add your handling code here:
+        try{
+            Desktop.getDesktop().browse(new URI("https://www.cloudhq.net/s/94ef609937"));
+        }catch(Exception e){
+        
+        }
+    }//GEN-LAST:event_jLabel15MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
