@@ -10,8 +10,8 @@ package swing;
  * @author Cinthia
  */
 public class DatosConcurso {
-    public int idConcurso = 0, HoraLimite = 0, MinutoLimite = 0;
-    public String Descripcion, Fecha;
+    private int idConcurso = 0, HoraLimite = 0, MinutoLimite = 0;
+    private String Descripcion, Año, Mes, Dia, IDConcursoStg;
 
     public int getIdConcurso() {
         return idConcurso;
@@ -29,8 +29,16 @@ public class DatosConcurso {
         return Descripcion;
     }
 
-    public String getFecha() {
-        return Fecha;
+    public String getAño() {
+        return Año;
+    }
+
+    public String getMes() {
+        return Mes;
+    }
+
+    public String getDia() {
+        return Dia;
     }
 
     public void setIdConcurso(int idConcurso) {
@@ -49,9 +57,16 @@ public class DatosConcurso {
         this.Descripcion = Descripcion;
     }
 
-    public void setFecha(String Fecha) {
-        this.Fecha = Fecha;
+    public void setAño(String Año) {
+        this.Año = Año;
     }
-    
-    
+
+    public void setMes(String Mes) {
+        this.Mes = Mes;
+    }
+
+    public void setDia(String Dia) {
+        this.Dia = Dia;
+    }
+
 }

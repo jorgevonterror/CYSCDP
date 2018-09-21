@@ -90,10 +90,11 @@ public class Conexion {
         try {
             consulta = conexion.createStatement();
             consulta.execute("insert into Concursos " +
-                        "values (null,'" + mDatosConcurso.getFecha()+ "'," +
+                        "values (null,'" + mDatosConcurso.getAño()+ "/," +
+                        "" + mDatosConcurso.getMes()+ "/," +
+                        "" + mDatosConcurso.getDia()+ "'," +
                         "'" + mDatosConcurso.getDescripcion()+ "'," +
-                        "'" + mDatosConcurso.getHoraLimite()+ ":" + mDatosConcurso.getMinutoLimite()+ ":00'," + 
-                        "');");
+                        "'" + mDatosConcurso.getHoraLimite()+ ":" + mDatosConcurso.getMinutoLimite()+ ":00');");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -118,8 +119,8 @@ public class Conexion {
         Statement consulta;
         try {
             consulta = conexion.createStatement();
-            consulta.execute("delete from Concursos " + 
-                        " where idConcursos = " + mDatosConcurso.idConcurso + ";");
+            consulta.execute("delete from Concursos " +
+                        " where idConcursos = " + mDatosConcurso.getIdConcurso() + ";");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -218,5 +219,26 @@ public class Conexion {
         }
         return mListaPuntajes;
       }
+    
+    public ArrayList ConsultarFechaConcurso(String Año, String Mes, String Dia){
+        ArrayList mListaFechasConcurso = new ArrayList();
+        DatosConcurso mDatosConcurso=null;
+        Statement consulta;
+        ResultSet res;
+        String Datos = "";
 
+        try {
+            consulta = conexion.createStatement();
+            res = consulta.executeQuery("SELECT Fecha, Descripcion, Tiempo_Limite FROM Concursos where Fecha = '" + Año + "/," + "" + Mes + "/," + "" + Dia + "';"); 
+            while(res.next()){
+                Datos = "";
+                Datos = res.getString("Fecha") + res.getString("Descripcion") + res.getString("Tiempo_Limite");
+                
+                mListaFechasConcurso.add(Datos);
+            }
+            } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mListaFechasConcurso;
+    }  
 }
