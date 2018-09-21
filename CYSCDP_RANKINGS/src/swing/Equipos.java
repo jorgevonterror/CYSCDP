@@ -5,17 +5,22 @@
  */
 package swing;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author jorgeantoniogarciagomez
  */
 public class Equipos extends javax.swing.JInternalFrame {
 
+    Conexion mConexion = new Conexion();
+
     /**
      * Creates new form Equipos
      */
     public Equipos() {
         initComponents();
+        LBL_Men.setText("");
     }
 
     /**
@@ -31,10 +36,11 @@ public class Equipos extends javax.swing.JInternalFrame {
         jTabbedPane4 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        TXT_Nom = new javax.swing.JTextField();
+        BTN_alta = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        LBL_Men = new javax.swing.JLabel();
         jTabbedPane5 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -49,8 +55,13 @@ public class Equipos extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Nombre:");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/16 (User add).jpg"))); // NOI18N
-        jButton1.setText("Dar de alta");
+        BTN_alta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/16 (User add).jpg"))); // NOI18N
+        BTN_alta.setText("Dar de alta");
+        BTN_alta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_altaActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -73,6 +84,8 @@ public class Equipos extends javax.swing.JInternalFrame {
         });
         jScrollPane4.setViewportView(jTable1);
 
+        LBL_Men.setText("-  ");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -83,12 +96,15 @@ public class Equipos extends javax.swing.JInternalFrame {
                         .addGap(14, 14, 14)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TXT_Nom, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
-                        .addComponent(jButton1))
+                        .addComponent(BTN_alta))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(119, 119, 119)
+                        .addComponent(LBL_Men, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -97,11 +113,13 @@ public class Equipos extends javax.swing.JInternalFrame {
                 .addGap(33, 33, 33)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                    .addComponent(TXT_Nom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BTN_alta))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LBL_Men)
+                .addGap(9, 9, 9))
         );
 
         jTabbedPane4.addTab("Alta", jPanel4);
@@ -114,7 +132,7 @@ public class Equipos extends javax.swing.JInternalFrame {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 197, Short.MAX_VALUE)
+            .addGap(0, 217, Short.MAX_VALUE)
         );
 
         jTabbedPane5.addTab("Dar de baja un equipo", jPanel5);
@@ -159,9 +177,9 @@ public class Equipos extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(173, 173, 173)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
                 .addComponent(jLabel5)
-                .addGap(43, 43, 43))
+                .addGap(23, 23, 23))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,8 +208,8 @@ public class Equipos extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(193, Short.MAX_VALUE))
         );
 
         pack();
@@ -204,7 +222,7 @@ public class Equipos extends javax.swing.JInternalFrame {
 
     private void jLabel5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel5KeyPressed
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_jLabel5KeyPressed
 
     private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseDragged
@@ -215,9 +233,29 @@ public class Equipos extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jPanel2MousePressed
 
+    public boolean ValidarCajas() {
+        return !(TXT_Nom.getText().equals(""));
+    }
+
+    private void BTN_altaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_altaActionPerformed
+        DatosEquipo mDatosEquipo = new DatosEquipo();
+        if (ValidarCajas()) {
+            if (mConexion.conectar()) {
+                mDatosEquipo.setNombre(TXT_Nom.getText());
+                mConexion.AltaEquipos(mDatosEquipo);
+                LBL_Men.setText("Equipo agregado exitosamente");
+            }
+            mConexion.desconectar();
+        } else {
+            LBL_Men.setText("Escribe un nombre para un equipo");
+        }
+    }//GEN-LAST:event_BTN_altaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton BTN_alta;
+    private javax.swing.JLabel LBL_Men;
+    private javax.swing.JTextField TXT_Nom;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
@@ -229,6 +267,5 @@ public class Equipos extends javax.swing.JInternalFrame {
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

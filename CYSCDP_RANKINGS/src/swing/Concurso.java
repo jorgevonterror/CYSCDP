@@ -117,11 +117,15 @@ public class Concurso extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+<<<<<<< HEAD
                 .addContainerGap(154, Short.MAX_VALUE)
+=======
+                .addContainerGap(169, Short.MAX_VALUE)
+>>>>>>> 1ab749da9e6c43ec317dba1eda9640b50626b5ea
                 .addComponent(jLabel1)
-                .addGap(112, 112, 112)
+                .addGap(123, 123, 123)
                 .addComponent(jLabel5)
-                .addGap(30, 30, 30))
+                .addGap(19, 19, 19))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
