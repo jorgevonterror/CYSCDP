@@ -10,63 +10,40 @@ package swing;
  * @author Cinthia
  */
 public class DatosConcurso {
-    private int idConcurso = 0, HoraLimite = 0, MinutoLimite = 0;
-    private String Descripcion, Año, Mes, Dia, IDConcursoStg;
+    private int idConcurso = 0;
+    private String Descripcion, Fecha, Tiempo;
 
     public int getIdConcurso() {
         return idConcurso;
-    }
-
-    public int getHoraLimite() {
-        return HoraLimite;
-    }
-
-    public int getMinutoLimite() {
-        return MinutoLimite;
     }
 
     public String getDescripcion() {
         return Descripcion;
     }
 
-    public String getAño() {
-        return Año;
+
+    public String getFecha() {
+        return Fecha;
     }
 
-    public String getMes() {
-        return Mes;
-    }
-
-    public String getDia() {
-        return Dia;
+    public String getTiempo() {
+        return Tiempo;
     }
 
     public void setIdConcurso(int idConcurso) {
         this.idConcurso = idConcurso;
     }
 
-    public void setHoraLimite(int HoraLimite) {
-        this.HoraLimite = HoraLimite;
-    }
-
-    public void setMinutoLimite(int MinutoLimite) {
-        this.MinutoLimite = MinutoLimite;
-    }
-
     public void setDescripcion(String Descripcion) {
         this.Descripcion = Descripcion;
     }
 
-    public void setAño(String Año) {
-        this.Año = Año;
+    public void setFecha(String Fecha) {
+        this.Fecha = Fecha;
     }
 
-    public void setMes(String Mes) {
-        this.Mes = Mes;
-    }
-
-    public void setDia(String Dia) {
-        this.Dia = Dia;
+    public void setTiempo(String Tiempo) {
+        this.Tiempo = Tiempo;
     }
 
 }

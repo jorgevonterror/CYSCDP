@@ -5,6 +5,7 @@
  */
 package swing;
 
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -14,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 public class Participantes extends javax.swing.JInternalFrame {
 
     Conexion mConexion = new Conexion();
-    int idParticipante = 0, Semestre = 0, Equipos_idEquipos = 0;
+    int  idParticipante = 0, Semestre = 0, Equipos_idEquipos = 0, IDEquipo=0;
     String NombreParticipante, Carrera;
     DatosParticipante mDatosParticipante;
     DefaultTableModel Tabla = new DefaultTableModel();
@@ -41,16 +42,16 @@ public class Participantes extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TXT_Nombre = new javax.swing.JTextPane();
+        TXTnombre = new javax.swing.JTextPane();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        TXT_Carrera = new javax.swing.JTextPane();
         jLabel4 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        TXT_Semestre = new javax.swing.JTextPane();
-        jButton1 = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        BTNguardar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        CBequipo = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        LBL_Mensajero = new javax.swing.JLabel();
+        CBcarrera = new javax.swing.JComboBox<>();
+        CBsemestre = new javax.swing.JComboBox<>();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
@@ -98,7 +99,7 @@ public class Participantes extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGap(113, 113, 113)
                 .addComponent(jLabel5)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,78 +113,91 @@ public class Participantes extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Nombre:");
 
-        jScrollPane1.setViewportView(TXT_Nombre);
+        jScrollPane1.setViewportView(TXTnombre);
 
         jLabel3.setText("Carrera:");
 
-        jScrollPane2.setViewportView(TXT_Carrera);
-
         jLabel4.setText("Semestre:");
 
-        jScrollPane3.setViewportView(TXT_Semestre);
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/16 (User add).jpg"))); // NOI18N
-        jButton1.setText("Dar de alta");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID", "Nombre", "Carrera", "Semestre"
+        BTNguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/16 (User add).jpg"))); // NOI18N
+        BTNguardar.setText("Dar de alta");
+        BTNguardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNguardarActionPerformed(evt);
             }
-        ));
-        jScrollPane4.setViewportView(jTable1);
+        });
+
+        jLabel6.setText("Equipo:");
+
+        jLabel7.setText("Presione dar de alta para guardar el participante");
+
+        CBcarrera.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguna", "II", "ISC", "ITICS", "IS", "IC" }));
+
+        CBsemestre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jScrollPane3))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addGap(18, 18, 18)
-                            .addComponent(jScrollPane2))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel7))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(CBequipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(CBcarrera, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane1))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(CBsemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(LBL_Mensajero, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(BTNguardar))))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CBcarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+                    .addComponent(CBsemestre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(CBequipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(BTNguardar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(LBL_Mensajero, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                .addGap(92, 92, 92))
         );
 
         jTabbedPane1.addTab("Alta", jPanel1);
@@ -192,7 +206,7 @@ public class Participantes extends javax.swing.JInternalFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 334, Short.MAX_VALUE)
+            .addGap(0, 402, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,7 +221,7 @@ public class Participantes extends javax.swing.JInternalFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 334, Short.MAX_VALUE)
+            .addGap(0, 402, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,17 +238,17 @@ public class Participantes extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(118, 118, 118)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(53, 53, 53)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(130, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -244,7 +258,26 @@ public class Participantes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jLabel5MouseClicked
+    public void LlenarComboEquipo() {
+        CBequipo.addItem("Ninguno");
+        if (mConexion.conectar()) {
+            ArrayList mArrayList = new ArrayList();
+            mArrayList = mConexion.ConsultaNombresEquipos();
 
+            if (mArrayList != null) {
+
+                for (int i = 0; i < mArrayList.size(); i++) {
+                    CBequipo.addItem(mArrayList.get(i).toString());
+                }
+
+            } else {
+                LBL_Mensajero.setText("No tiene Equipos Dados de Alta");
+            }
+            mConexion.desconectar();
+        } else {
+            LBL_Mensajero.setText("No conectado a la BD");
+        }
+    }
     private void jLabel5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel5KeyPressed
         // TODO add your handling code here:
 
@@ -258,28 +291,131 @@ public class Participantes extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jPanel2MousePressed
 
+    private void BTNguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNguardarActionPerformed
+        // TODO add your handling code here:
+        if (CBcarrera.getSelectedItem() == "Ninguna") {
+
+        } else {
+            if (CBcarrera.getSelectedItem() == "II") {
+                Carrera = "II"; //Basico
+            } else {
+                if (CBcarrera.getSelectedItem() == "ISC") {
+                    Carrera = "ISC"; //Medio
+                } else {
+                    if (CBcarrera.getSelectedItem() == "ITICS") {
+                        Carrera = "ITICS"; //Avanzado
+                    } else {
+                        if (CBcarrera.getSelectedItem() == "IS") {
+                            Carrera = "IS"; //Avanzado
+                        } else {
+                            if (CBcarrera.getSelectedItem() == "IC") {
+                                Carrera = "IC"; //Avanzado
+                            } else {
+                                LBL_Mensajero.setText("Selecciona una Carrera");
+                            }  
+                        }
+                    }
+                }
+            }
+        }
+        if (CBsemestre.getSelectedItem() == "Ninguno") {
+
+        } else {
+            if (CBsemestre.getSelectedItem() == "1") {
+                Semestre = 1; //Basico
+            } else {
+                if (CBsemestre.getSelectedItem() == "2") {
+                    Semestre = 2; //Medio
+                } else {
+                    if (CBsemestre.getSelectedItem() == "3") {
+                        Semestre = 3; //Avanzado
+                    } else {
+                        if (CBsemestre.getSelectedItem() == "4") {
+                            Semestre = 4; //Avanzado
+                        } else {
+                            if (CBsemestre.getSelectedItem() == "5") {
+                                Semestre = 5; //Avanzado
+                            } else {
+                                if (CBsemestre.getSelectedItem() == "6") {
+                                    Semestre = 6; //Avanzado
+                                } else {
+                                    if (CBsemestre.getSelectedItem() == "7") {
+                                        Semestre = 7; //Avanzado
+                                    } else {
+                                        if (CBsemestre.getSelectedItem() == "8") {
+                                            Semestre = 8; //Avanzado
+                                        } else {
+                                            if (CBsemestre.getSelectedItem() == "9") {
+                                                Semestre = 9; //Avanzado
+                                            } else {
+                                                LBL_Mensajero.setText("Selecciona un Semestre");
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        mDatosParticipante = new DatosParticipante();
+        mDatosParticipante.setNombreParticipante(TXTnombre.getText());
+        if (mConexion.conectar()) {
+            if ((CBcarrera.getSelectedItem() != "Ninguna") && (CBsemestre.getSelectedItem() != "Ninguno") && (CBequipo.getSelectedItem() != "Ninguno")) {
+                IDEquipo = mConexion.ConsultarIDEquipos(CBequipo.getSelectedItem().toString());
+            } else {
+                LBL_Mensajero.setText("Selecciona un equipo");
+            }
+            mConexion.desconectar();
+        } else {
+            LBL_Mensajero.setText("No conectado a la BD");
+        }
+        mDatosParticipante.setCarrera(Carrera);
+        mDatosParticipante.setSemestre(Semestre);
+        mDatosParticipante.setEquipos_idEquipos(IDEquipo);
+
+        if (mConexion.conectar()) {
+            if ((CBcarrera.getSelectedItem() != "Ninguna") && (CBsemestre.getSelectedItem() != "Ninguno") && (CBequipo.getSelectedItem() != "Ninguno") && (TXTnombre.getText()!=null)) {
+                if (mConexion.AltaParticipante(mDatosParticipante)) {
+                    LBL_Mensajero.setText("Se guardo el participante");
+                    TXTnombre.setText("");
+                    CBsemestre.setSelectedIndex(0);
+                    CBcarrera.setSelectedIndex(0);
+                    CBequipo.setSelectedIndex(0);
+                }
+            } else {
+                LBL_Mensajero.setText("Favor de llenar bien los campos");
+            }
+            mConexion.desconectar();
+        } else {
+            LBL_Mensajero.setText("No conectado a la BD");
+        }
+    }//GEN-LAST:event_BTNguardarActionPerformed
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextPane TXT_Carrera;
-    private javax.swing.JTextPane TXT_Nombre;
-    private javax.swing.JTextPane TXT_Semestre;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton BTNguardar;
+    private javax.swing.JComboBox<String> CBcarrera;
+    private javax.swing.JComboBox<String> CBequipo;
+    private javax.swing.JComboBox<String> CBsemestre;
+    private javax.swing.JLabel LBL_Mensajero;
+    private javax.swing.JTextPane TXTnombre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
