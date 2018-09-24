@@ -76,11 +76,11 @@ public class Participantes extends javax.swing.JInternalFrame {
         CBeq = new javax.swing.JComboBox<>();
         LBLmen = new javax.swing.JLabel();
         TXTnom = new javax.swing.JTextField();
-        TXTsem = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         BTNmod = new javax.swing.JButton();
         LBLid = new javax.swing.JLabel();
+        CBsem = new javax.swing.JComboBox<>();
 
         setBorder(null);
 
@@ -258,12 +258,6 @@ public class Participantes extends javax.swing.JInternalFrame {
 
         LBLmen.setText("*");
 
-        TXTsem.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                TXTsemKeyTyped(evt);
-            }
-        });
-
         jLabel8.setText("Carrera: ");
 
         jLabel9.setText("Equipo: ");
@@ -276,6 +270,8 @@ public class Participantes extends javax.swing.JInternalFrame {
         });
 
         LBLid.setText("ID");
+
+        CBsem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -292,12 +288,12 @@ public class Participantes extends javax.swing.JInternalFrame {
                                     .addComponent(LBLid)
                                     .addGroup(jPanel4Layout.createSequentialGroup()
                                         .addComponent(jLabel13)
+                                        .addGap(12, 12, 12)
+                                        .addComponent(CBsem, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(TXTsem, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(25, 25, 25)
                                         .addComponent(jLabel9)))
                                 .addGap(160, 160, 160)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(38, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -330,9 +326,9 @@ public class Participantes extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(CBeq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TXTsem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                    .addComponent(jLabel9)
+                    .addComponent(CBsem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(LBLmen)
@@ -513,26 +509,24 @@ public class Participantes extends javax.swing.JInternalFrame {
 
     private void tbl_ParticipantesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_ParticipantesMouseClicked
         TXTnom.setText("");
-        TXTsem.setText("");
+
         String EQtemp = "";
         Selec = tbl_Participantes.rowAtPoint(evt.getPoint());
         LBLid.setText(tbl_Participantes.getModel().getValueAt(Selec, 0).toString());
         TXTnom.setText(tbl_Participantes.getModel().getValueAt(Selec, 1).toString());
-        TXTsem.setText(tbl_Participantes.getModel().getValueAt(Selec, 3).toString());
+        String temp = (tbl_Participantes.getModel().getValueAt(Selec, 3).toString());
         EQtemp = (tbl_Participantes.getModel().getValueAt(Selec, 4).toString());
         for (int i = 0; i < CBeq.getItemCount(); i++) {
             if (EQtemp.equals(CBeq.getItemAt(i))) {
                 CBeq.setSelectedIndex(i);
             }
         }
-    }//GEN-LAST:event_tbl_ParticipantesMouseClicked
-
-    private void TXTsemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXTsemKeyTyped
-        char c = evt.getKeyChar();
-        if (c < '0' || c > '9') {
-            evt.consume();
+        for (int i = 0; i < CBsem.getItemCount(); i++) {
+            if (temp.equals(CBsem.getItemAt(i))) {
+                CBsem.setSelectedIndex(i);
+            }
         }
-    }//GEN-LAST:event_TXTsemKeyTyped
+    }//GEN-LAST:event_tbl_ParticipantesMouseClicked
 
     public void ConsultaTabla() {
         int ID = 0;
@@ -575,7 +569,7 @@ public class Participantes extends javax.swing.JInternalFrame {
     }
 
     public boolean Validarcajas() {
-        return !(TXTnom.getText().equals("") || TXTsem.getText().equals("") || Integer.parseInt(TXTsem.getText()) < 1);
+        return !(TXTnom.getText().equals(""));
     }
 
 
@@ -589,7 +583,7 @@ public class Participantes extends javax.swing.JInternalFrame {
                 vParticipante.setIdParticipante(Integer.parseInt(LBLid.getText()));
                 nParticipante.setNombreParticipante(this.TXTnom.getText());
                 nParticipante.setCarrera((String) CBcar.getSelectedItem());
-                nParticipante.setSemestre(Integer.parseInt(this.TXTsem.getText()));
+                nParticipante.setSemestre(Integer.parseInt((String) CBsem.getSelectedItem()));
                 nParticipante.setEquipos_idEquipos(ID);
                 if (mConexion.ModificarParticipantes(vParticipante, nParticipante)) {
                     LBLmen.setText("Participante modificado exitosamente");
@@ -615,13 +609,13 @@ public class Participantes extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> CBcarrera;
     private javax.swing.JComboBox<String> CBeq;
     private javax.swing.JComboBox<String> CBequipo;
+    private javax.swing.JComboBox<String> CBsem;
     private javax.swing.JComboBox<String> CBsemestre;
     private javax.swing.JLabel LBL_Mensajero;
     private javax.swing.JLabel LBLid;
     private javax.swing.JLabel LBLmen;
     private javax.swing.JTextField TXTnom;
     private javax.swing.JTextPane TXTnombre;
-    private javax.swing.JTextField TXTsem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
