@@ -19,11 +19,24 @@ public class Participantes extends javax.swing.JInternalFrame {
     String NombreParticipante, Carrera;
     DatosParticipante mDatosParticipante;
     DefaultTableModel Tabla = new DefaultTableModel();
+    private int Selec = 0;
+    int ID_2 = 0;
+    int ID = 0;
+
     /**
      * Creates new form Participantes
      */
     public Participantes() {
         initComponents();
+        Tabla.addColumn("ID");
+        Tabla.addColumn("Nombre");
+        Tabla.addColumn("Carrera");
+        Tabla.addColumn("Semestre");
+        Tabla.addColumn("Equipo");
+        ConsultaTabla();
+        LBLmen.setText("");
+        LlenarComboEquipo();
+        LBLid.setVisible(false);
     }
 
     /**
@@ -45,6 +58,13 @@ public class Participantes extends javax.swing.JInternalFrame {
         TXTnombre = new javax.swing.JTextPane();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+<<<<<<< HEAD
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TXT_Semestre = new javax.swing.JTextPane();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblParticipantes = new javax.swing.JTable();
+=======
         BTNguardar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         CBequipo = new javax.swing.JComboBox<>();
@@ -52,10 +72,24 @@ public class Participantes extends javax.swing.JInternalFrame {
         LBL_Mensajero = new javax.swing.JLabel();
         CBcarrera = new javax.swing.JComboBox<>();
         CBsemestre = new javax.swing.JComboBox<>();
+>>>>>>> d5d65b37d64e55a761011f743ad625169ae8d48d
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tbl_Participantes = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        CBcar = new javax.swing.JComboBox<>();
+        CBeq = new javax.swing.JComboBox<>();
+        LBLmen = new javax.swing.JLabel();
+        TXTnom = new javax.swing.JTextField();
+        TXTsem = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        BTNmod = new javax.swing.JButton();
+        LBLid = new javax.swing.JLabel();
 
         setBorder(null);
 
@@ -99,7 +133,11 @@ public class Participantes extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGap(113, 113, 113)
                 .addComponent(jLabel5)
+<<<<<<< HEAD
+                .addContainerGap(125, Short.MAX_VALUE))
+=======
                 .addContainerGap(38, Short.MAX_VALUE))
+>>>>>>> d5d65b37d64e55a761011f743ad625169ae8d48d
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,15 +169,64 @@ public class Participantes extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Presione dar de alta para guardar el participante");
 
+<<<<<<< HEAD
+        tblParticipantes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nombre", "Carrera", "Semestre", "Equipo"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(tblParticipantes);
+        if (tblParticipantes.getColumnModel().getColumnCount() > 0) {
+            tblParticipantes.getColumnModel().getColumn(0).setResizable(false);
+            tblParticipantes.getColumnModel().getColumn(1).setResizable(false);
+            tblParticipantes.getColumnModel().getColumn(2).setResizable(false);
+            tblParticipantes.getColumnModel().getColumn(3).setResizable(false);
+            tblParticipantes.getColumnModel().getColumn(4).setResizable(false);
+        }
+=======
         CBcarrera.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguna", "II", "ISC", "ITICS", "IS", "IC" }));
 
         CBsemestre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
+>>>>>>> d5d65b37d64e55a761011f743ad625169ae8d48d
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+<<<<<<< HEAD
+                .addGap(37, 37, 37)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jScrollPane3))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addGap(18, 18, 18)
+                            .addComponent(jScrollPane2))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(232, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+=======
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
@@ -171,6 +258,7 @@ public class Participantes extends javax.swing.JInternalFrame {
                                 .addComponent(LBL_Mensajero, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(BTNguardar))))
                 .addContainerGap(21, Short.MAX_VALUE))
+>>>>>>> d5d65b37d64e55a761011f743ad625169ae8d48d
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,6 +274,14 @@ public class Participantes extends javax.swing.JInternalFrame {
                 .addGap(5, 5, 5)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
+<<<<<<< HEAD
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
+=======
                     .addComponent(CBsemestre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -198,6 +294,7 @@ public class Participantes extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(LBL_Mensajero, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                 .addGap(92, 92, 92))
+>>>>>>> d5d65b37d64e55a761011f743ad625169ae8d48d
         );
 
         jTabbedPane1.addTab("Alta", jPanel1);
@@ -206,26 +303,125 @@ public class Participantes extends javax.swing.JInternalFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
+            .addGap(0, 429, Short.MAX_VALUE)
+=======
             .addGap(0, 402, Short.MAX_VALUE)
+>>>>>>> d5d65b37d64e55a761011f743ad625169ae8d48d
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 362, Short.MAX_VALUE)
+            .addGap(0, 333, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Dar de baja un participante.", jPanel3);
 
         jTabbedPane1.addTab("Baja", jTabbedPane2);
 
+        tbl_Participantes.setModel(Tabla);
+        tbl_Participantes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_ParticipantesMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(tbl_Participantes);
+
+        jLabel6.setText("Nombre: ");
+
+        jLabel7.setText("Semestre: ");
+
+        CBcar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ISC", "II", "ITICS", "IS", "IC" }));
+
+        LBLmen.setText("*");
+
+        TXTsem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXTsemKeyTyped(evt);
+            }
+        });
+
+        jLabel8.setText("Carrera: ");
+
+        jLabel9.setText("Equipo: ");
+
+        BTNmod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/16 (User edit).jpg"))); // NOI18N
+        BTNmod.setText("Modificar");
+        BTNmod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNmodActionPerformed(evt);
+            }
+        });
+
+        LBLid.setText("ID");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(LBLid)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(TXTsem, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(25, 25, 25)
+                                        .addComponent(jLabel9)))
+                                .addGap(160, 160, 160)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(LBLmen, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BTNmod))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(TXTnom, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(CBeq, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(CBcar, 0, 130, Short.MAX_VALUE))))
+                        .addGap(30, 30, 30))))
+=======
             .addGap(0, 402, Short.MAX_VALUE)
+>>>>>>> d5d65b37d64e55a761011f743ad625169ae8d48d
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 362, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(CBcar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TXTnom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(CBeq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TXTsem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(LBLmen)
+                        .addComponent(LBLid))
+                    .addComponent(BTNmod, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTabbedPane3.addTab("Modificar un participante.", jPanel4);
@@ -238,17 +434,29 @@ public class Participantes extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+<<<<<<< HEAD
+                .addGap(118, 118, 118)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+=======
                 .addGap(53, 53, 53)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(130, Short.MAX_VALUE))
+>>>>>>> d5d65b37d64e55a761011f743ad625169ae8d48d
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+<<<<<<< HEAD
+                .addGap(18, 18, 18)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
+=======
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
+>>>>>>> d5d65b37d64e55a761011f743ad625169ae8d48d
         );
 
         pack();
@@ -287,10 +495,138 @@ public class Participantes extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jPanel2MouseDragged
 
+    public void ConsultaTabla() {
+        int ID = 0;
+        Tabla = (DefaultTableModel) tbl_Participantes.getModel();
+        int a = Tabla.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            Tabla.removeRow(Tabla.getRowCount() - 1);
+        }
+
+        if (mConexion.conectar()) {
+            ArrayList mListaParticipantes = mConexion.consultarParticipantes();
+            String[] datos;
+
+            for (Object mListaParticipante : mListaParticipantes) {
+                datos = new String[5];
+                mDatosParticipante = (DatosParticipante) mListaParticipante;
+                datos[0] = "" + mDatosParticipante.getIdParticipante();
+                datos[1] = mDatosParticipante.getNombreParticipante();
+                datos[2] = mDatosParticipante.getCarrera();
+                datos[3] = "" + mDatosParticipante.getSemestre();
+                datos[4] = "" + mDatosParticipante.getEquipos_idEquipos();
+                ID = Integer.parseInt(datos[4]);
+                datos[4] = mConexion.ConsultaNombresEquipos(ID);
+                Tabla.addRow(datos);
+            }
+            this.tbl_Participantes = new javax.swing.JTable();
+            this.tbl_Participantes.setModel(Tabla);
+            this.tbl_Participantes.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.tbl_Participantes.getColumnModel().getColumn(1).setPreferredWidth(300);
+            this.tbl_Participantes.getColumnModel().getColumn(2).setPreferredWidth(300);
+            this.tbl_Participantes.getColumnModel().getColumn(3).setPreferredWidth(300);
+            this.tbl_Participantes.getColumnModel().getColumn(4).setPreferredWidth(300);
+            if (this.tbl_Participantes.getRowCount() > 0) {
+                this.tbl_Participantes.setRowSelectionInterval(0, 0);
+            }
+        } else {
+            LBLmen.setText("Error al consultar los participantes");
+        }
+        mConexion.desconectar();
+    }
+
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
 
     }//GEN-LAST:event_jPanel2MousePressed
 
+<<<<<<< HEAD
+    public void LlenarComboEquipo() {
+        CBeq.addItem("Ninguno");
+        if (mConexion.conectar()) {
+            ArrayList mArrayList = new ArrayList();
+            mArrayList = mConexion.ConsultaNombresEquipos();
+            if (mArrayList != null) {
+
+                for (int i = 0; i < mArrayList.size(); i++) {
+                    CBeq.addItem(mArrayList.get(i).toString());
+                }
+            } else {
+                LBLmen.setText("No tiene Equipos Dados de Alta");
+            }
+            mConexion.desconectar();
+        } else {
+            LBLmen.setText("No conectado a la BD");
+        }
+    }
+
+    private void tbl_ParticipantesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_ParticipantesMouseClicked
+        TXTnom.setText("");
+        TXTsem.setText("");
+        String EQtemp = "";
+        Selec = tbl_Participantes.rowAtPoint(evt.getPoint());
+        LBLid.setText(tbl_Participantes.getModel().getValueAt(Selec, 0).toString());
+        TXTnom.setText(tbl_Participantes.getModel().getValueAt(Selec, 1).toString());
+        TXTsem.setText(tbl_Participantes.getModel().getValueAt(Selec, 3).toString());
+        EQtemp = (tbl_Participantes.getModel().getValueAt(Selec, 4).toString());
+        for (int i = 0; i < CBeq.getItemCount(); i++) {
+            if (EQtemp.equals(CBeq.getItemAt(i))) {
+                CBeq.setSelectedIndex(i);
+            }
+        }
+    }//GEN-LAST:event_tbl_ParticipantesMouseClicked
+
+    public boolean Validarcajas() {
+        return !(TXTnom.getText().equals("") || TXTsem.getText().equals("") || Integer.parseInt(TXTsem.getText()) < 1);
+    }
+    
+    private void BTNmodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNmodActionPerformed
+        DatosParticipante vParticipante = new DatosParticipante();
+        DatosParticipante nParticipante = new DatosParticipante();
+
+        if (Validarcajas()) {
+            if (mConexion.conectar()) {
+                ID = mConexion.ConsultarIDEquipos(CBeq.getSelectedItem().toString());
+                vParticipante.setIdParticipante(Integer.parseInt(LBLid.getText()));
+                nParticipante.setNombreParticipante(this.TXTnom.getText());
+                nParticipante.setCarrera((String) CBcar.getSelectedItem());
+                nParticipante.setSemestre(Integer.parseInt(this.TXTsem.getText()));
+                nParticipante.setEquipos_idEquipos(ID);
+                if (mConexion.ModificarParticipantes(vParticipante, nParticipante)) {
+                    LBLmen.setText("Participante modificado exitosamente");
+                } else {
+                    LBLmen.setText("Error al modificar");
+                }
+            } else {
+                LBLmen.setText("Error al conectar con la Base de Datos");
+            }
+            mConexion.desconectar();
+        } else {
+            LBLmen.setText("Por favor completa los campos");
+        }
+        ConsultaTabla();
+    }//GEN-LAST:event_BTNmodActionPerformed
+
+    private void TXTsemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXTsemKeyTyped
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TXTsemKeyTyped
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTNmod;
+    private javax.swing.JComboBox<String> CBcar;
+    private javax.swing.JComboBox<String> CBeq;
+    private javax.swing.JLabel LBLid;
+    private javax.swing.JLabel LBLmen;
+    private javax.swing.JTextPane TXT_Carrera;
+    private javax.swing.JTextPane TXT_Nombre;
+    private javax.swing.JTextPane TXT_Semestre;
+    private javax.swing.JTextField TXTnom;
+    private javax.swing.JTextField TXTsem;
+    private javax.swing.JButton jButton1;
+=======
     private void BTNguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNguardarActionPerformed
         // TODO add your handling code here:
         if (CBcarrera.getSelectedItem() == "Ninguna") {
@@ -402,6 +738,7 @@ public class Participantes extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> CBsemestre;
     private javax.swing.JLabel LBL_Mensajero;
     private javax.swing.JTextPane TXTnombre;
+>>>>>>> d5d65b37d64e55a761011f743ad625169ae8d48d
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -409,13 +746,30 @@ public class Participantes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+<<<<<<< HEAD
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+=======
+>>>>>>> d5d65b37d64e55a761011f743ad625169ae8d48d
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+<<<<<<< HEAD
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JTable tblParticipantes;
+    private javax.swing.JTable tbl_Participantes;
+=======
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTabbedPane jTabbedPane3;
+>>>>>>> d5d65b37d64e55a761011f743ad625169ae8d48d
     // End of variables declaration//GEN-END:variables
 }
