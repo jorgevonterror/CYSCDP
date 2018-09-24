@@ -529,7 +529,6 @@ public class Participantes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tbl_ParticipantesMouseClicked
 
     public void ConsultaTabla() {
-        int ID = 0;
         Tabla = (DefaultTableModel) tbl_Participantes.getModel();
         int a = Tabla.getRowCount() - 1;
         for (int i = a; i >= 0; i--) {
@@ -538,7 +537,7 @@ public class Participantes extends javax.swing.JInternalFrame {
 
         if (mConexion.conectar()) {
             ArrayList mListaParticipantes = mConexion.consultarParticipantes();
-            String[] datos = null;
+            String[] datos;
 
             for (Object mListaParticipante : mListaParticipantes) {
                 datos = new String[5];
