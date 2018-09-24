@@ -292,4 +292,21 @@ public class Conexion {
         }
         return mListaParticipantes;
     }
+    public String ConsultaNombresEquipos(int ID) {
+        String Nombre = "";
+        Statement consulta;
+        ResultSet resultado;
+
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from Equipos where idEquipos = '"+ ID +"';");
+            while (resultado.next()) {
+                Nombre = resultado.getString("NombreEquipo");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Nombre;
+    }
+    
 }

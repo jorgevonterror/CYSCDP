@@ -26,6 +26,7 @@ public class Participantes extends javax.swing.JInternalFrame {
      */
     public Participantes() {
         initComponents();
+        LlenarComboEquipo();
     }
 
     /**
@@ -566,6 +567,8 @@ public class Participantes extends javax.swing.JInternalFrame {
         return !(TXTnom.getText().equals("") || TXTsem.getText().equals("") || Integer.parseInt(TXTsem.getText()) < 1);
     }
     
+    
+    
     private void BTNmodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNmodActionPerformed
         DatosParticipante vParticipante = new DatosParticipante();
         DatosParticipante nParticipante = new DatosParticipante();
@@ -594,6 +597,7 @@ public class Participantes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BTNmodActionPerformed
     
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNguardar;
     private javax.swing.JButton BTNmod;

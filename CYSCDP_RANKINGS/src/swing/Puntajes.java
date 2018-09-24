@@ -24,9 +24,12 @@ import javax.swing.table.DefaultTableModel;
 public final class Puntajes extends javax.swing.JInternalFrame {
 
     Conexion mConexion = new Conexion();
-    int Complejidad = 0, IDConcursos = 0, IDEquipo = 0, IDConcursos1 = 0, IDEquipo1 = 0, ContadorColumna = 1, idPuntajes = 0;
+    int Complejidad = 0, IDConcursos = 0, IDEquipo = 0, IDConcursos1 = 0, IDConcursos2 = 0, IDEquipo1 = 0, ContadorColumna = 1, idPuntajes = 0 , IDEquipo2 = 0;
+    /*Para modificar Datos*/ int idPuntajeViejo = 0, HorasNuevas = 0, HorasViejas = 0, MinutosNuevos = 0, MinutosViejos = 0;
+                                
     DatosPuntajes mDatosPuntajes;
     DefaultTableModel Tabla = new DefaultTableModel();
+    DefaultTableModel Tabla2 = new DefaultTableModel();
 
     /**
      * Creates new form Puntajes
@@ -77,6 +80,26 @@ public final class Puntajes extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        CBConcurso2 = new javax.swing.JComboBox<>();
+        jLabel12 = new javax.swing.JLabel();
+        CBEquipo2 = new javax.swing.JComboBox<>();
+        jButton4 = new javax.swing.JButton();
+        LBL_Mensajero2 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TBPuntajes1 = new javax.swing.JTable();
+        LDBLPrueba1 = new javax.swing.JLabel();
+        CBHoras1 = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        CBMinutos1 = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        CBComplejidad1 = new javax.swing.JComboBox<>();
+        jLabel15 = new javax.swing.JLabel();
+        CBConcurso3 = new javax.swing.JComboBox<>();
+        jLabel16 = new javax.swing.JLabel();
+        CBEquipo3 = new javax.swing.JComboBox<>();
 
         setBorder(null);
 
@@ -116,7 +139,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(175, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(136, 136, 136)
                 .addComponent(jLabel5)
@@ -223,7 +246,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(LBL_Mensajero)))
-                .addGap(6, 83, Short.MAX_VALUE))
+                .addGap(6, 99, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,15 +377,160 @@ public final class Puntajes extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Baja", jTabbedPane2);
 
+        jLabel11.setText("Concurso");
+
+        CBConcurso2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CBConcurso2ActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("Equipo");
+
+        jButton4.setText("Buscar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        LBL_Mensajero2.setText("Presiona Buscar para ver");
+
+        jButton5.setText("Cambiar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        TBPuntajes1.setModel(Tabla2);
+        TBPuntajes1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TBPuntajes1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(TBPuntajes1);
+
+        LDBLPrueba1.setText("Tiempo:");
+
+        CBHoras1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+
+        jLabel8.setText("Horas");
+
+        jLabel13.setText("Minutos");
+
+        CBMinutos1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        CBMinutos1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CBMinutos1ActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setText("Complejidad");
+
+        CBComplejidad1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguna", "Básico", "Medio", "Avanzado" }));
+
+        jLabel15.setText("Concurso");
+
+        CBConcurso3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CBConcurso3ActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setText("Equipo");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 494, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12))
+                        .addGap(7, 7, 7)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(CBConcurso2, 0, 209, Short.MAX_VALUE)
+                            .addComponent(CBEquipo2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LBL_Mensajero2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jButton5))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel16))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(CBConcurso3, 0, 150, Short.MAX_VALUE)
+                            .addComponent(CBEquipo3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                            .addComponent(jLabel14)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(CBComplejidad1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addComponent(LDBLPrueba1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(CBHoras1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel8))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(CBMinutos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel13)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 292, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(CBConcurso2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LBL_Mensajero2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(CBEquipo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton4)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(11, 11, 11))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LDBLPrueba1)
+                            .addComponent(CBHoras1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CBMinutos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel13))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(CBComplejidad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(CBConcurso3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(CBEquipo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5)
+                        .addContainerGap(31, Short.MAX_VALUE))))
         );
 
         jTabbedPane3.addTab("Cambiar", jPanel5);
@@ -376,8 +544,8 @@ public final class Puntajes extends javax.swing.JInternalFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -480,9 +648,74 @@ public final class Puntajes extends javax.swing.JInternalFrame {
         //JOptionPane.showConfirmDialog(null, "Deseas borrar este puntaje", "Confirmar eliminacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
     }//GEN-LAST:event_TBPuntajesMouseClicked
 
+    private void CBConcurso2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBConcurso2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CBConcurso2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        BuscarPuntajeParaModificar();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void TBPuntajes1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBPuntajes1MouseClicked
+        // TODO add your handling code here:
+        //Para llenado
+        int Fila = TBPuntajes1.rowAtPoint(evt.getPoint());
+        String TemporalPuntaje = String.valueOf(TBPuntajes1.getValueAt(Fila, 0));
+        String TemporalHoras = String.valueOf(TBPuntajes1.getValueAt(Fila, 1)).substring(0, 2);
+        String TemporalMinutos = String.valueOf(TBPuntajes1.getValueAt(Fila, 1)).substring(3, 5);
+        String Complejidad =  String.valueOf(TBPuntajes1.getValueAt(Fila, 2));
+        //LBL_Mensajero2.setText(String.valueOf(TBPuntajes.getValueAt(Fila,0)));
+
+        idPuntajeViejo = Integer.parseInt(TemporalPuntaje);
+        HorasViejas = Integer.parseInt(TemporalHoras);
+        MinutosViejos = Integer.parseInt(TemporalMinutos);
+
+        for (int i = 0; i < CBHoras1.getItemCount(); i++) {
+            if (HorasViejas == Integer.parseInt(CBHoras1.getItemAt(i))) {
+                CBHoras1.setSelectedIndex(i); //LLENAMOS HORAS
+            }
+        }
+        for (int i = 0; i < CBMinutos1.getItemCount(); i++) {
+            if (MinutosViejos == Integer.parseInt(CBMinutos1.getItemAt(i))) {
+                CBMinutos1.setSelectedIndex(i); //LLENAMOS MINUTOS
+            }
+        }
+        for (int i = 0; i < CBComplejidad1.getItemCount(); i++) {
+            if (Complejidad.equals(CBComplejidad1.getItemAt(i))) {
+                CBComplejidad1.setSelectedIndex(i); //LLENAMOS COMPLEJIDAD
+            }
+        }
+        for (int i = 0; i < CBConcurso3.getItemCount(); i++) {
+            if (CBConcurso2.getSelectedItem().equals(CBConcurso3.getItemAt(i))) {
+                CBConcurso3.setSelectedIndex(i); //LLENAMOS CONCURSO
+            }
+        }
+        for (int i = 0; i < CBEquipo3.getItemCount(); i++) {
+            if (CBEquipo2.getSelectedItem().equals(CBEquipo3.getItemAt(i))) {
+                CBEquipo3.setSelectedIndex(i); //LLENAMOS EQUIPO
+            }
+        }
+
+    }//GEN-LAST:event_TBPuntajes1MouseClicked
+
+    private void CBMinutos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBMinutos1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CBMinutos1ActionPerformed
+
+    private void CBConcurso3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBConcurso3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CBConcurso3ActionPerformed
+
     public void LlenarComboConcurso() {
         CBConcurso.addItem("Ninguno");
         CBConcurso1.addItem("Ninguno");
+        CBConcurso2.addItem("Ninguno");
+        CBConcurso3.addItem("Ninguno");
         if (mConexion.conectar()) {
             ArrayList mArrayList = new ArrayList();
             mArrayList = mConexion.ConsultaNombresConcurso();
@@ -492,6 +725,8 @@ public final class Puntajes extends javax.swing.JInternalFrame {
                 for (int i = 0; i < mArrayList.size(); i++) {
                     CBConcurso.addItem(mArrayList.get(i).toString());
                     CBConcurso1.addItem(mArrayList.get(i).toString()); //Para baja
+                    CBConcurso2.addItem(mArrayList.get(i).toString()); //Para consultar el que se va a modificar
+                    CBConcurso3.addItem(mArrayList.get(i).toString()); //Para el que se va a cambiar
                 }
 
             } else {
@@ -506,6 +741,8 @@ public final class Puntajes extends javax.swing.JInternalFrame {
     public void LlenarComboEquipo() {
         CBEquipo.addItem("Ninguno");
         CBEquipo1.addItem("Ninguno");
+        CBEquipo2.addItem("Ninguno");
+        CBEquipo3.addItem("Ninguno");
         if (mConexion.conectar()) {
             ArrayList mArrayList = new ArrayList();
             mArrayList = mConexion.ConsultaNombresEquipos();
@@ -515,6 +752,8 @@ public final class Puntajes extends javax.swing.JInternalFrame {
                 for (int i = 0; i < mArrayList.size(); i++) {
                     CBEquipo.addItem(mArrayList.get(i).toString());
                     CBEquipo1.addItem(mArrayList.get(i).toString()); //Para Baja
+                    CBEquipo2.addItem(mArrayList.get(i).toString()); //Para consultar el que se va a Modificar
+                    CBEquipo3.addItem(mArrayList.get(i).toString()); //Para el que se va a cambiar
                 }
 
             } else {
@@ -589,8 +828,16 @@ public final class Puntajes extends javax.swing.JInternalFrame {
             TablaLimpiar.removeRow(TablaLimpiar.getRowCount() - 1);
         }
     }
+    
+    public void LimpiarTabla1() {
+        DefaultTableModel TablaLimpiar = (DefaultTableModel) TBPuntajes1.getModel();
+        int a = TBPuntajes1.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            TablaLimpiar.removeRow(TablaLimpiar.getRowCount() - 1);
+        }
+    }
 
-    public void EliminarPuntaje() {
+    public void BuscarPuntaje() {
         LimpiarTabla();
         if (mConexion.conectar()) {
 
@@ -649,37 +896,137 @@ public final class Puntajes extends javax.swing.JInternalFrame {
         }
 
         mConexion.desconectar();
+        ContadorColumna = 1;
+    }
+    
+    public void BuscarPuntajeParaModificar() {
+        LimpiarTabla1();
+        if (mConexion.conectar()) {
+
+            if ((CBConcurso2.getSelectedItem() != "Ninguna") && (CBEquipo2.getSelectedItem() != "Ninguno")) {
+                IDConcursos2 = mConexion.ConsultarIDConcursos(CBConcurso2.getSelectedItem().toString());
+                IDEquipo2 = mConexion.ConsultarIDEquipos(CBEquipo2.getSelectedItem().toString());
+            } else {
+                LBL_Mensajero2.setText("Selecciona opcion correcta");
+            }
+
+            ArrayList mArrayListEliminarPuntajes = new ArrayList();
+            mArrayListEliminarPuntajes = mConexion.ConsultarIDPuntajes(IDConcursos2, IDEquipo2);
+
+            String[] Datos = null;
+            if (mArrayListEliminarPuntajes != null) {
+                if (ContadorColumna == 1) {
+                    Tabla2.addColumn("ID");
+                    Tabla2.addColumn("Tiempo");
+                    Tabla2.addColumn("Complejidad");
+                    ContadorColumna = 2;
+                }
+
+                for (int i = 0; i < mArrayListEliminarPuntajes.size(); i++) {
+                    Datos = new String[3];
+                    Datos[0] = mArrayListEliminarPuntajes.get(i).toString().substring(9); //ID
+                    Datos[1] = mArrayListEliminarPuntajes.get(i).toString().substring(0, 8); //Tiempo
+                    switch (Integer.parseInt(mArrayListEliminarPuntajes.get(i).toString().substring(8, 9))) {
+                        case 1:
+                            Datos[2] = "Básico";
+                            break;
+                        case 2:
+                            Datos[2] = "Medio";
+                            break;
+                        case 3:
+                            Datos[2] = "Avanzado";
+                            break;
+                    }
+
+                    Tabla2.addRow(Datos);
+                }
+
+            } else {
+                LBL_Mensajero2.setText("No hay puntajes");
+            }
+            this.TBPuntajes1 = new javax.swing.JTable();
+            this.TBPuntajes1.setModel(Tabla2);
+            this.TBPuntajes1.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.TBPuntajes1.getColumnModel().getColumn(1).setPreferredWidth(50);
+            this.TBPuntajes1.getColumnModel().getColumn(2).setPreferredWidth(100);
+            if (this.TBPuntajes1.getRowCount() > 0) {
+                this.TBPuntajes1.setRowSelectionInterval(0, 0);
+            }
+
+        } else {
+            LBL_Mensajero2.setText("Error al consultar");
+        }
+
+        mConexion.desconectar();
+    }
+    
+    public void EliminarPuntaje() {
+        try {
+            if (mConexion.conectar()) {
+                mDatosPuntajes = new DatosPuntajes();
+                mDatosPuntajes.setIdPuntajes(idPuntajes);
+                if (mConexion.EliminarPuntajes(mDatosPuntajes)) {
+                    LBL_Mensajero1.setText("Se ha eliminado el registro #" + idPuntajes);
+                    LimpiarTabla();
+                    BuscarPuntaje();
+                }
+            } else {
+                LBL_Mensajero1.setText("No se ha podido conectar a la BD");
+            }
+        } catch (Exception e) {
+
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> CBComplejidad;
+    private javax.swing.JComboBox<String> CBComplejidad1;
     private javax.swing.JComboBox<String> CBConcurso;
     private javax.swing.JComboBox<String> CBConcurso1;
+    private javax.swing.JComboBox<String> CBConcurso2;
+    private javax.swing.JComboBox<String> CBConcurso3;
     private javax.swing.JComboBox<String> CBEquipo;
     private javax.swing.JComboBox<String> CBEquipo1;
+    private javax.swing.JComboBox<String> CBEquipo2;
+    private javax.swing.JComboBox<String> CBEquipo3;
     private javax.swing.JComboBox<String> CBHoras;
+    private javax.swing.JComboBox<String> CBHoras1;
     private javax.swing.JComboBox<String> CBMinutos;
+    private javax.swing.JComboBox<String> CBMinutos1;
     private javax.swing.JLabel LBL_Mensajero;
     private javax.swing.JLabel LBL_Mensajero1;
+    private javax.swing.JLabel LBL_Mensajero2;
     private javax.swing.JLabel LDBLPrueba;
+    private javax.swing.JLabel LDBLPrueba1;
     private javax.swing.JTable TBPuntajes;
+    private javax.swing.JTable TBPuntajes1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
