@@ -139,6 +139,21 @@ public class Conexion {
         }  
     }
     
+    public boolean ModificarParticipantes(DatosParticipante vParticipante, DatosParticipante nParticipante) {
+        Statement consulta;
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("update Participantes set "
+                    + "NombreParticipante = '" + nParticipante.getNombreParticipante() + "'," + "Carrera = '" + nParticipante.getCarrera()
+                    + "',Semestre = " + nParticipante.getSemestre() + ", Equipos_idEquipos = " + nParticipante.getEquipos_idEquipos()
+                    + " where id_Participantes = " + vParticipante.getIdParticipante() + ";");
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error " + e);
+            return false;
+        }
+    }
+    
     public ArrayList ConsultaNombresConcurso() {
         ArrayList mListaNombresConcurso = new ArrayList();
         Statement consulta;
@@ -252,5 +267,29 @@ public class Conexion {
             e.printStackTrace();
         }
         return mListaConcursos;
-    }  
+    }
+    
+    public ArrayList consultarParticipantes() {
+        DatosParticipante mParticipante = null;
+        Statement consulta;
+        ResultSet resultado;
+        ArrayList mListaParticipantes = new ArrayList();
+
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from Participantes;");
+            while (resultado.next()) {
+                mParticipante = new DatosParticipante();
+                mParticipante.setIdParticipante(resultado.getInt("idParticipantes"));
+                mParticipante.setNombreParticipante(resultado.getString("NombreParticipante"));
+                mParticipante.setCarrera(resultado.getString("Carrera"));
+                mParticipante.setSemestre(resultado.getInt("Semestre"));
+                mParticipante.setEquipos_idEquipos(resultado.getInt("Equipos_idEquipos"));
+                mListaParticipantes.add(mParticipante);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mListaParticipantes;
+    }
 }
