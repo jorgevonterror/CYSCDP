@@ -86,18 +86,11 @@ public class Conexion {
         Statement consulta;
         try {
             consulta = conexion.createStatement();
-<<<<<<< HEAD
             consulta.execute("insert into Concursos "
                     + "values (null,'" + mDatosConcurso.getFecha() + "',"
                     + "'" + mDatosConcurso.getDescripcion() + "',"
                     + "'" + mDatosConcurso.getHoraLimite() + ":" + mDatosConcurso.getMinutoLimite() + ":00',"
                     + "');");
-=======
-            consulta.execute("insert into Concursos " +
-                        "values (null,'" + mDatosConcurso.getFecha()+ "'," +
-                        "'" + mDatosConcurso.getDescripcion()+ "'," +
-                        "'" + mDatosConcurso.getTiempo()+"');");
->>>>>>> d5d65b37d64e55a761011f743ad625169ae8d48d
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -135,13 +128,8 @@ public class Conexion {
         Statement consulta;
         try {
             consulta = conexion.createStatement();
-<<<<<<< HEAD
             consulta.execute("delete from Concursos "
                     + " where idConcursos = " + mDatosConcurso.idConcurso + ";");
-=======
-            consulta.execute("delete from Concursos " +
-                        " where idConcursos = " + mDatosConcurso.getIdConcurso() + ";");
->>>>>>> d5d65b37d64e55a761011f743ad625169ae8d48d
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -276,7 +264,6 @@ public class Conexion {
                 mParticipante.setEquipos_idEquipos(resultado.getInt("Equipos_idEquipos"));
                 mListaParticipantes.add(mParticipante);
 
-<<<<<<< HEAD
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -294,33 +281,10 @@ public class Conexion {
             resultado = consulta.executeQuery("select * from Equipos where idEquipos = '"+ ID +"';");
             while (resultado.next()) {
                 Nombre = resultado.getString("NombreEquipo");
-=======
-    public ArrayList ConsultarConcursos(){
-        ArrayList mListaConcursos = new ArrayList();
-        DatosConcurso mDatosConcurso=null;
-        Statement consulta;
-        ResultSet resultado;
-        
-        try {
-            consulta = conexion.createStatement();
-            resultado = consulta.executeQuery("select * from Concursos;");
-            while (resultado.next()) {
-                mDatosConcurso = new DatosConcurso();
-                mDatosConcurso.setIdConcurso(resultado.getInt("idConcursos"));
-                mDatosConcurso.setFecha(resultado.getString("Fecha"));
-                mDatosConcurso.setDescripcion(resultado.getString("Descripcion"));
-                mDatosConcurso.setTiempo(resultado.getString("Tiempo_Limite"));
-                mListaConcursos.add(mDatosConcurso);
->>>>>>> d5d65b37d64e55a761011f743ad625169ae8d48d
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-<<<<<<< HEAD
         return Nombre;
     }
-=======
-        return mListaConcursos;
-    }  
->>>>>>> d5d65b37d64e55a761011f743ad625169ae8d48d
 }
