@@ -5,17 +5,32 @@
  */
 package swing;
 
+import java.awt.HeadlessException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author jorgeantoniogarciagomez
  */
 public class Concurso extends javax.swing.JInternalFrame {
+    
+    Conexion mConexion = new Conexion();
+    DatosConcurso mDatosConcurso = new DatosConcurso();
+    public int idConcurso = 0, HoraLimite = 0, MinutoLimite = 0,Dia=0,Mes=0, Año = 0, ContadorColumna = 1, IDconcurso;
+    public String Descripcion;
+    int Seleccion = 0;
+    int ID = 0;
+    //DatosConcurso mDatosConcurso;
+    DefaultTableModel Tabla = new DefaultTableModel();
 
     /**
      * Creates new form Concurso
      */
     public Concurso() {
         initComponents();
+        
     }
 
     /**
@@ -31,21 +46,33 @@ public class Concurso extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
-        jLabel3 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane2 = new javax.swing.JTextPane();
-        jLabel4 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextPane3 = new javax.swing.JTextPane();
-        jButton1 = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
+        BTNbuscar = new javax.swing.JButton();
+        LBL_Mensajero1 = new javax.swing.JLabel();
+        BTNborrar = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        TBLConcursos = new javax.swing.JTable();
+        jLabel14 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        BTNalta = new javax.swing.JButton();
+        CBhora = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        CBminutos = new javax.swing.JComboBox<>();
+        CBdia = new javax.swing.JComboBox<>();
+        CBmes = new javax.swing.JComboBox<>();
+        CBaño = new javax.swing.JComboBox<>();
+        LBL_mensaje = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        TXTdescripcion = new javax.swing.JTextField();
 
         setBorder(null);
 
@@ -85,7 +112,7 @@ public class Concurso extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(149, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(112, 112, 112)
                 .addComponent(jLabel5)
@@ -101,33 +128,111 @@ public class Concurso extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jLabel2.setText("Fecha:");
+        jPanel3.setMaximumSize(new java.awt.Dimension(3276, 32767));
+        jPanel3.setPreferredSize(new java.awt.Dimension(500, 580));
 
-        jScrollPane1.setViewportView(jTextPane1);
+        BTNbuscar.setText("Buscar");
+        BTNbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNbuscarActionPerformed(evt);
+            }
+        });
+
+        LBL_Mensajero1.setText("Presiona Buscar para visualizar la lista de concursos");
+
+        BTNborrar.setText("Borrar");
+        BTNborrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNborrarActionPerformed(evt);
+            }
+        });
+
+        TBLConcursos.setModel(Tabla);
+        TBLConcursos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TBLConcursosMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(TBLConcursos);
+
+        jLabel14.setText("Seleccione el concurso que desee borrar y enseguida presiona el Botón Borrar");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(BTNborrar)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(BTNbuscar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(LBL_Mensajero1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel14)))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BTNbuscar)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(LBL_Mensajero1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(26, 26, 26)
+                .addComponent(jLabel14)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(BTNborrar)
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
+        );
+
+        jTabbedPane2.addTab("Dar de baja un concurso.", jPanel3);
+
+        jTabbedPane1.addTab("Baja", jTabbedPane2);
+
+        jLabel2.setText("Fecha:");
 
         jLabel3.setText("Descripción:");
 
-        jScrollPane2.setViewportView(jTextPane2);
-
         jLabel4.setText("Tiempo límite:");
 
-        jScrollPane3.setViewportView(jTextPane3);
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/16 (User add).jpg"))); // NOI18N
-        jButton1.setText("Dar de alta");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID", "Fecha", "Descripción", "T. Límite"
+        BTNalta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/16 (User add).jpg"))); // NOI18N
+        BTNalta.setText("Dar de alta");
+        BTNalta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNaltaActionPerformed(evt);
             }
-        ));
-        jScrollPane4.setViewportView(jTable1);
+        });
+
+        CBhora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24" }));
+
+        jLabel7.setText(":");
+
+        CBminutos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+
+        CBdia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+
+        CBmes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+
+        CBaño.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025" }));
+
+        jLabel8.setText("Horas");
+
+        jLabel9.setText("Minutos");
+
+        jLabel10.setText("Dia");
+
+        jLabel11.setText("Mes");
+
+        jLabel12.setText("Año");
+
+        jLabel13.setText("Breve descripción del concurso");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -135,65 +240,100 @@ public class Concurso extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addGap(24, 24, 24)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(BTNalta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(LBL_mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(10, 10, 10))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(24, 24, 24)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(CBdia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGap(6, 6, 6)
+                                                        .addComponent(jLabel10)))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addComponent(CBmes, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(CBaño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGap(6, 6, 6)
+                                                        .addComponent(jLabel11)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(jLabel12)
+                                                        .addGap(20, 20, 20))))
+                                            .addComponent(jLabel13)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(TXTdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jLabel8))
+                                    .addComponent(CBhora, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jLabel9))
+                                    .addComponent(CBminutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(147, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(CBdia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CBmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CBaño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12))
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TXTdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel13)
+                .addGap(55, 55, 55)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                    .addComponent(CBhora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(CBminutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9))
+                .addGap(63, 63, 63)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LBL_mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BTNalta))
+                .addContainerGap(258, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Alta", jPanel1);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 345, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 322, Short.MAX_VALUE)
-        );
-
-        jTabbedPane2.addTab("Dar de baja un concurso.", jPanel3);
-
-        jTabbedPane1.addTab("Baja", jTabbedPane2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -201,17 +341,16 @@ public class Concurso extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(113, 113, 113)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 44, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -234,26 +373,158 @@ public class Concurso extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jPanel2MousePressed
 
+    private void BTNaltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNaltaActionPerformed
+        // TODO add your handling code here:
+        try {
+            //if (TXTdescripcion.getText() != null) { 
+            String Anyo = (String) CBaño.getSelectedItem();
+            String Mes = (String) CBmes.getSelectedItem();
+            String Dia = (String) CBdia.getSelectedItem();
+            String Fecha1 = Anyo + "-" + Mes + "-" + Dia;
+            int HoraLim = Integer.parseInt(CBhora.getSelectedItem().toString());
+            int MinLim = Integer.parseInt(CBminutos.getSelectedItem().toString());
+            String Tiempo1= HoraLim + ":" + MinLim + ":00";
+            mDatosConcurso.setFecha(Fecha1);
+            mDatosConcurso.setDescripcion(this.TXTdescripcion.getText());
+            mDatosConcurso.setTiempo(Tiempo1);
+            
+            if (TXTdescripcion.getText() != null) {
+                if (mConexion.conectar()) {
+                    if (mConexion.AltaConcurso(mDatosConcurso)) {
+                        LBL_mensaje.setText("El concurso fue guardado con éxito");
+                    } else {
+                        LBL_mensaje.setText("Error al guardar el concurso");
+                    }
+                    mConexion.desconectar();
+                }
+                CBdia.setSelectedItem(0);
+                CBmes.setSelectedItem(0);
+                CBaño.setSelectedItem(0);
+                TXTdescripcion.setText("");
+                CBhora.setSelectedItem(0);
+                CBminutos.setSelectedItem(0);
+            } else {
+                LBL_mensaje.setText("Debe ingresar todos los datos correctamente");
+            }
+        } catch (HeadlessException | NumberFormatException e) {
+            LBL_mensaje.setText("POR FAVOR, LLENE BIEN LOS DATOS");
+        }
+    }//GEN-LAST:event_BTNaltaActionPerformed
+
+    private void BTNbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNbuscarActionPerformed
+        // TODO add your handling code here:
+        //LimpiarTabla();
+        DefaultTableModel TablaLimpiar = (DefaultTableModel) TBLConcursos.getModel();
+        int a = TBLConcursos.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            TablaLimpiar.removeRow(TablaLimpiar.getRowCount() - 1);
+        }
+        
+        if (mConexion.conectar()) {
+            ArrayList mArrayListFechasConcursos = new ArrayList();
+            mArrayListFechasConcursos = mConexion.ConsultarConcursos();
+
+            String[] Datos = null;
+            if (mArrayListFechasConcursos != null) {
+                if (ContadorColumna == 1) {
+                    Tabla.addColumn("id");
+                    Tabla.addColumn("Descripcion");
+                    Tabla.addColumn("Fecha");
+                    Tabla.addColumn("Tiempo_Limite");
+                    ContadorColumna = 2;
+                }
+
+                for (int i = 0; i < mArrayListFechasConcursos.size(); i++) {
+                    mDatosConcurso = (DatosConcurso) mArrayListFechasConcursos.get(i);
+                    Datos = new String[4];
+                    Datos[0] = "" + mDatosConcurso.getIdConcurso();
+                    Datos[1] = mDatosConcurso.getDescripcion(); 
+                    Datos[2] = mDatosConcurso.getFecha(); 
+                    Datos[3] = "" + mDatosConcurso.getTiempo();
+                    Tabla.addRow(Datos);
+                }
+
+            } else {
+                LBL_Mensajero1.setText("No hay concursos");
+            }
+            this.TBLConcursos = new javax.swing.JTable();
+            this.TBLConcursos.setModel(Tabla);
+            this.TBLConcursos.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.TBLConcursos.getColumnModel().getColumn(1).setPreferredWidth(50);
+            this.TBLConcursos.getColumnModel().getColumn(2).setPreferredWidth(100);
+            this.TBLConcursos.getColumnModel().getColumn(2).setPreferredWidth(100);
+            if (this.TBLConcursos.getRowCount() > 0) {
+                this.TBLConcursos.setRowSelectionInterval(0, 0);
+            }
+
+        } else {
+            LBL_Mensajero1.setText("Error al consultar");
+        }
+
+        mConexion.desconectar();
+    }//GEN-LAST:event_BTNbuscarActionPerformed
+
+    private void TBLConcursosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBLConcursosMouseClicked
+        // TODO add your handling code here:
+        Seleccion = TBLConcursos.rowAtPoint(evt.getPoint());
+        ID = Integer.parseInt(TBLConcursos.getModel().getValueAt(Seleccion, 0).toString());
+    }//GEN-LAST:event_TBLConcursosMouseClicked
+
+    private void BTNborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNborrarActionPerformed
+        // TODO add your handling code here:
+        if (Seleccion > 0) {
+            try {
+                if (mConexion.conectar()) {
+                    mDatosConcurso = new DatosConcurso();
+                    mDatosConcurso.setIdConcurso(ID);
+                    if (mConexion.EliminarConcurso(mDatosConcurso)) {
+                        LBL_Mensajero1.setText("Concurso eliminado con éxito");
+                    } else {
+                        LBL_Mensajero1.setText("Este concurso no se puede eliminar,tiene relacion con otros registros");
+                    }
+                    mConexion.desconectar();
+                }
+
+            } catch (Exception e) {
+                LBL_Mensajero1.setText("ERROR, Seleccione un concurso");
+            }
+        } else {
+            LBL_Mensajero1.setText("PORFAVOR seleccione un concurso");
+        }
+    }//GEN-LAST:event_BTNborrarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton BTNalta;
+    private javax.swing.JButton BTNborrar;
+    private javax.swing.JButton BTNbuscar;
+    private javax.swing.JComboBox<String> CBaño;
+    private javax.swing.JComboBox<String> CBdia;
+    private javax.swing.JComboBox<String> CBhora;
+    private javax.swing.JComboBox<String> CBmes;
+    private javax.swing.JComboBox<String> CBminutos;
+    private javax.swing.JLabel LBL_Mensajero1;
+    private javax.swing.JLabel LBL_mensaje;
+    private javax.swing.JTable TBLConcursos;
+    private javax.swing.JTextField TXTdescripcion;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JTextPane jTextPane2;
-    private javax.swing.JTextPane jTextPane3;
     // End of variables declaration//GEN-END:variables
 }

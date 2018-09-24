@@ -10,8 +10,8 @@ package swing;
  * @author Cinthia
  */
 public class DatosParticipante {
-    public int idParticipante = 0, Semestre = 0, Equipos_idEquipos = 0;
-    public String NombreParticipante, Carrera;
+    private int idParticipante = 0, Semestre = 0, Equipos_idEquipos = 0;
+    private String NombreParticipante, Carrera;
 
     public int getIdParticipante() {
         return idParticipante;
