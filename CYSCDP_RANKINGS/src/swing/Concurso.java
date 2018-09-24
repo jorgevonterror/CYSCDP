@@ -388,7 +388,7 @@ public class Concurso extends javax.swing.JInternalFrame {
             mDatosConcurso.setDescripcion(this.TXTdescripcion.getText());
             mDatosConcurso.setTiempo(Tiempo1);
             
-            if (TXTdescripcion.getText() != null) {
+            if (TXTdescripcion.getText() == null) {
                 if (mConexion.conectar()) {
                     if (mConexion.AltaConcurso(mDatosConcurso)) {
                         LBL_mensaje.setText("El concurso fue guardado con éxito");

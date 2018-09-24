@@ -15,18 +15,27 @@ import javax.swing.table.DefaultTableModel;
 public class Participantes extends javax.swing.JInternalFrame {
 
     Conexion mConexion = new Conexion();
-    int  idParticipante = 0, Semestre = 0, Equipos_idEquipos = 0, IDEquipo=0;
+    int idParticipante = 0, Semestre = 0, Equipos_idEquipos = 0, IDEquipo = 0;
     String NombreParticipante, Carrera;
     DatosParticipante mDatosParticipante;
     DefaultTableModel Tabla = new DefaultTableModel();
     private int Selec = 0;
     private int ID = 0;
+
     /**
      * Creates new form Participantes
      */
     public Participantes() {
         initComponents();
+        Tabla.addColumn("ID");
+        Tabla.addColumn("Nombre");
+        Tabla.addColumn("Carrera");
+        Tabla.addColumn("Semestre");
+        Tabla.addColumn("Equipo");
         LlenarComboEquipo();
+        ConsultaTabla();
+        LBLmen.setText("");
+        LBLid.setVisible(false);
     }
 
     /**
@@ -366,6 +375,7 @@ public class Participantes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jLabel5MouseClicked
     public void LlenarComboEquipo() {
         CBequipo.addItem("Ninguno");
+        CBeq.addItem("Ninguno");
         if (mConexion.conectar()) {
             ArrayList mArrayList = new ArrayList();
             mArrayList = mConexion.ConsultaNombresEquipos();
@@ -374,6 +384,7 @@ public class Participantes extends javax.swing.JInternalFrame {
 
                 for (int i = 0; i < mArrayList.size(); i++) {
                     CBequipo.addItem(mArrayList.get(i).toString());
+                    CBeq.addItem(mArrayList.get(i).toString());
                 }
 
             } else {
@@ -418,7 +429,7 @@ public class Participantes extends javax.swing.JInternalFrame {
                                 Carrera = "IC"; //Avanzado
                             } else {
                                 LBL_Mensajero.setText("Selecciona una Carrera");
-                            }  
+                            }
                         }
                     }
                 }
@@ -465,7 +476,7 @@ public class Participantes extends javax.swing.JInternalFrame {
                 }
             }
         }
-        
+
         mDatosParticipante = new DatosParticipante();
         mDatosParticipante.setNombreParticipante(TXTnombre.getText());
         if (mConexion.conectar()) {
@@ -483,7 +494,7 @@ public class Participantes extends javax.swing.JInternalFrame {
         mDatosParticipante.setEquipos_idEquipos(IDEquipo);
 
         if (mConexion.conectar()) {
-            if ((CBcarrera.getSelectedItem() != "Ninguna") && (CBsemestre.getSelectedItem() != "Ninguno") && (CBequipo.getSelectedItem() != "Ninguno") && (TXTnombre.getText()!=null)) {
+            if ((CBcarrera.getSelectedItem() != "Ninguna") && (CBsemestre.getSelectedItem() != "Ninguno") && (CBequipo.getSelectedItem() != "Ninguno") && (TXTnombre.getText() != null)) {
                 if (mConexion.AltaParticipante(mDatosParticipante)) {
                     LBL_Mensajero.setText("Se guardo el participante");
                     TXTnombre.setText("");
@@ -533,7 +544,7 @@ public class Participantes extends javax.swing.JInternalFrame {
 
         if (mConexion.conectar()) {
             ArrayList mListaParticipantes = mConexion.consultarParticipantes();
-            String[] datos;
+            String[] datos = null;
 
             for (Object mListaParticipante : mListaParticipantes) {
                 datos = new String[5];
@@ -544,16 +555,16 @@ public class Participantes extends javax.swing.JInternalFrame {
                 datos[3] = "" + mDatosParticipante.getSemestre();
                 datos[4] = "" + mDatosParticipante.getEquipos_idEquipos();
                 ID = Integer.parseInt(datos[4]);
-                //datos[4] = mConexion.ConsultaNombresEquipos(ID);
+                datos[4] = mConexion.ConsultaNombresEquipos(ID);
                 Tabla.addRow(datos);
             }
             this.tbl_Participantes = new javax.swing.JTable();
             this.tbl_Participantes.setModel(Tabla);
             this.tbl_Participantes.getColumnModel().getColumn(0).setPreferredWidth(50);
-            this.tbl_Participantes.getColumnModel().getColumn(1).setPreferredWidth(300);
-            this.tbl_Participantes.getColumnModel().getColumn(2).setPreferredWidth(300);
-            this.tbl_Participantes.getColumnModel().getColumn(3).setPreferredWidth(300);
-            this.tbl_Participantes.getColumnModel().getColumn(4).setPreferredWidth(300);
+            this.tbl_Participantes.getColumnModel().getColumn(1).setPreferredWidth(250);
+            this.tbl_Participantes.getColumnModel().getColumn(2).setPreferredWidth(250);
+            this.tbl_Participantes.getColumnModel().getColumn(3).setPreferredWidth(250);
+            this.tbl_Participantes.getColumnModel().getColumn(4).setPreferredWidth(250);
             if (this.tbl_Participantes.getRowCount() > 0) {
                 this.tbl_Participantes.setRowSelectionInterval(0, 0);
             }
@@ -562,13 +573,12 @@ public class Participantes extends javax.swing.JInternalFrame {
         }
         mConexion.desconectar();
     }
-    
+
     public boolean Validarcajas() {
         return !(TXTnom.getText().equals("") || TXTsem.getText().equals("") || Integer.parseInt(TXTsem.getText()) < 1);
     }
-    
-    
-    
+
+
     private void BTNmodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNmodActionPerformed
         DatosParticipante vParticipante = new DatosParticipante();
         DatosParticipante nParticipante = new DatosParticipante();
@@ -594,10 +604,10 @@ public class Participantes extends javax.swing.JInternalFrame {
             LBLmen.setText("Por favor completa los campos");
         }
         ConsultaTabla();
-    }//GEN-LAST:event_BTNmodActionPerformed
-    
 
-    
+    }//GEN-LAST:event_BTNmodActionPerformed
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNguardar;
     private javax.swing.JButton BTNmod;

@@ -146,7 +146,7 @@ public class Conexion {
             consulta.execute("update Participantes set "
                     + "NombreParticipante = '" + nParticipante.getNombreParticipante() + "'," + "Carrera = '" + nParticipante.getCarrera()
                     + "',Semestre = " + nParticipante.getSemestre() + ", Equipos_idEquipos = " + nParticipante.getEquipos_idEquipos()
-                    + " where id_Participantes = " + vParticipante.getIdParticipante() + ";");
+                    + " where idParticipantes = " + vParticipante.getIdParticipante() + ";");
             return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error " + e);

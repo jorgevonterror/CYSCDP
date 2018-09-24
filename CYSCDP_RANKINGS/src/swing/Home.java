@@ -502,8 +502,6 @@ public class Home extends javax.swing.JFrame {
         
         this.ESCRITORIO.add(p);
         p.show();
-        in.hide();
-        eq.hide();
     }//GEN-LAST:event_btn_4MousePressed
 
     private void btn_2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_2MouseReleased
