@@ -383,12 +383,16 @@ public class Concurso extends javax.swing.JInternalFrame {
             String Fecha1 = Anyo + "-" + Mes + "-" + Dia;
             int HoraLim = Integer.parseInt(CBhora.getSelectedItem().toString());
             int MinLim = Integer.parseInt(CBminutos.getSelectedItem().toString());
-            String Tiempo1= HoraLim + ":" + MinLim + ":00";
+            String Tiempo1 = HoraLim + ":" + MinLim + ":00";
             mDatosConcurso.setFecha(Fecha1);
             mDatosConcurso.setDescripcion(this.TXTdescripcion.getText());
             mDatosConcurso.setTiempo(Tiempo1);
             
-            if (TXTdescripcion.getText() == null) {
+            String texto = TXTdescripcion.getText();
+            texto = texto.replaceAll(" ", "");
+            if (texto.length() == 0) {
+                LBL_mensaje.setText("Debe ingresar todos los datos correctamente");
+            } else {
                 if (mConexion.conectar()) {
                     if (mConexion.AltaConcurso(mDatosConcurso)) {
                         LBL_mensaje.setText("El concurso fue guardado con éxito");
@@ -403,8 +407,6 @@ public class Concurso extends javax.swing.JInternalFrame {
                 TXTdescripcion.setText("");
                 CBhora.setSelectedItem(0);
                 CBminutos.setSelectedItem(0);
-            } else {
-                LBL_mensaje.setText("Debe ingresar todos los datos correctamente");
             }
         } catch (HeadlessException | NumberFormatException e) {
             LBL_mensaje.setText("POR FAVOR, LLENE BIEN LOS DATOS");
