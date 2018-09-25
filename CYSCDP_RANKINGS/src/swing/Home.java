@@ -26,7 +26,7 @@ public class Home extends javax.swing.JFrame {
         //Ponemos el boton 1 seleccionado automaticamente.
         setColor(btn_1); 
         ind_1.setOpaque(true);
-        resetColor(new JPanel[]{btn_2,btn_3,btn_4, btn_6, btn_7}, new JPanel[]{ind_2,ind_3, ind_4, ind_6, ind_7});
+        resetColor(new JPanel[]{btn_2,btn_3,btn_4, btn_6, btn_7, btn_8}, new JPanel[]{ind_2,ind_3, ind_4, ind_6, ind_7, ind_8});
         Inicio in = new Inicio();
         ESCRITORIO.add(in);
         in.show();
@@ -63,6 +63,9 @@ public class Home extends javax.swing.JFrame {
         btn_7 = new javax.swing.JPanel();
         ind_7 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
+        btn_8 = new javax.swing.JPanel();
+        ind_8 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -372,6 +375,55 @@ public class Home extends javax.swing.JFrame {
 
         side_pane.add(btn_7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 120, -1));
 
+        btn_8.setBackground(new java.awt.Color(23, 35, 51));
+        btn_8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btn_8MouseReleased(evt);
+            }
+        });
+
+        ind_8.setOpaque(false);
+        ind_8.setPreferredSize(new java.awt.Dimension(3, 43));
+
+        javax.swing.GroupLayout ind_8Layout = new javax.swing.GroupLayout(ind_8);
+        ind_8.setLayout(ind_8Layout);
+        ind_8Layout.setHorizontalGroup(
+            ind_8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
+        ind_8Layout.setVerticalGroup(
+            ind_8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 43, Short.MAX_VALUE)
+        );
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/icons8_Contacts_25px.png"))); // NOI18N
+        jLabel14.setText("Contacto");
+
+        javax.swing.GroupLayout btn_8Layout = new javax.swing.GroupLayout(btn_8);
+        btn_8.setLayout(btn_8Layout);
+        btn_8Layout.setHorizontalGroup(
+            btn_8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_8Layout.createSequentialGroup()
+                .addComponent(ind_8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel14)
+                .addGap(0, 20, Short.MAX_VALUE))
+        );
+        btn_8Layout.setVerticalGroup(
+            btn_8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_8Layout.createSequentialGroup()
+                .addComponent(ind_8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(btn_8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        side_pane.add(btn_8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 120, -1));
+
         getContentPane().add(side_pane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 590));
 
         jPanel2.setBackground(new java.awt.Color(71, 120, 197));
@@ -468,7 +520,7 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         setColor(btn_1); 
         ind_1.setOpaque(true);
-        resetColor(new JPanel[]{btn_2,btn_3,btn_4, btn_6, btn_7}, new JPanel[]{ind_2,ind_3, ind_4, ind_6, ind_7});
+        resetColor(new JPanel[]{btn_2,btn_3,btn_4, btn_6, btn_7, btn_8}, new JPanel[]{ind_2,ind_3, ind_4, ind_6, ind_7, ind_8});
         
         Inicio in = new Inicio();
         ESCRITORIO.add(in);
@@ -479,7 +531,7 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         setColor(btn_3); 
         ind_3.setOpaque(true);
-        resetColor(new JPanel[]{btn_2,btn_1,btn_4, btn_6, btn_7}, new JPanel[]{ind_2,ind_1, ind_4, ind_6, ind_7});
+        resetColor(new JPanel[]{btn_2,btn_1,btn_4, btn_6, btn_7,btn_8}, new JPanel[]{ind_2,ind_1, ind_4, ind_6, ind_7, ind_8});
         Equipos eq = new Equipos();
         Participantes p = new Participantes();
         Inicio in = new Inicio();
@@ -495,7 +547,7 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         setColor(btn_4); 
         ind_4.setOpaque(true);
-        resetColor(new JPanel[]{btn_2,btn_3,btn_1, btn_6, btn_7}, new JPanel[]{ind_2,ind_3, ind_1, ind_6, ind_7});
+        resetColor(new JPanel[]{btn_2,btn_3,btn_1, btn_6, btn_7,btn_8}, new JPanel[]{ind_2,ind_3, ind_1, ind_6, ind_7, ind_8});
         Participantes p = new Participantes();
         Inicio in = new Inicio();
         Equipos eq = new Equipos();
@@ -508,7 +560,7 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         setColor(btn_2); 
         ind_2.setOpaque(true);
-        resetColor(new JPanel[]{btn_1,btn_3,btn_4, btn_6, btn_7}, new JPanel[]{ind_1,ind_3, ind_4, ind_6, ind_7});
+        resetColor(new JPanel[]{btn_1,btn_3,btn_4, btn_6, btn_7, btn_8}, new JPanel[]{ind_1,ind_3, ind_4, ind_6, ind_7, ind_8});
         
         Concurso c = new Concurso();
         this.ESCRITORIO.add(c);
@@ -538,7 +590,7 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         setColor(btn_6); 
         ind_6.setOpaque(true);
-        resetColor(new JPanel[]{btn_1,btn_3,btn_4, btn_2, btn_7}, new JPanel[]{ind_1,ind_3, ind_4, ind_2, ind_7});
+        resetColor(new JPanel[]{btn_1,btn_3,btn_4, btn_2, btn_7,btn_8}, new JPanel[]{ind_1,ind_3, ind_4, ind_2, ind_7, ind_8});
         Puntajes P = new Puntajes();
         this.ESCRITORIO.add(P);
         P.show();
@@ -548,7 +600,7 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         setColor(btn_7); 
         ind_7.setOpaque(true);
-        resetColor(new JPanel[]{btn_1,btn_3,btn_4, btn_2}, new JPanel[]{ind_1,ind_3, ind_4, ind_2});
+        resetColor(new JPanel[]{btn_1,btn_3,btn_4, btn_2, btn_6,btn_8}, new JPanel[]{ind_1,ind_3, ind_4, ind_2, ind_6,ind_8});
         Graficas g = new Graficas();
         this.ESCRITORIO.add(g);
         g.show();
@@ -558,6 +610,16 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setExtendedState(ICONIFIED);
     }//GEN-LAST:event_jLabel2MousePressed
+
+    private void btn_8MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_8MouseReleased
+        // TODO add your handling code here:
+         setColor(btn_8); 
+        ind_8.setOpaque(true);
+        resetColor(new JPanel[]{btn_1,btn_3,btn_4, btn_2, btn_6,btn_7}, new JPanel[]{ind_1,ind_3, ind_4, ind_2, ind_6, ind_7});
+        DatosContacto dc = new DatosContacto();
+        this.ESCRITORIO.add(dc);
+        dc.show();
+    }//GEN-LAST:event_btn_8MouseReleased
 
     /**
      * @param args the command line arguments
@@ -626,12 +688,14 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel btn_4;
     private javax.swing.JPanel btn_6;
     private javax.swing.JPanel btn_7;
+    private javax.swing.JPanel btn_8;
     private javax.swing.JPanel ind_1;
     private javax.swing.JPanel ind_2;
     private javax.swing.JPanel ind_3;
     private javax.swing.JPanel ind_4;
     private javax.swing.JPanel ind_6;
     private javax.swing.JPanel ind_7;
+    private javax.swing.JPanel ind_8;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JDesktopPane jDesktopPane3;
@@ -640,6 +704,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
