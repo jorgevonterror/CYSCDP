@@ -173,8 +173,8 @@ public class Equipos extends javax.swing.JInternalFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(LBLmen, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77))
+                .addComponent(LBLmen, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,7 +344,7 @@ public class Equipos extends javax.swing.JInternalFrame {
 
     private void tblEQMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEQMouseClicked
         TXTnom.setText("");
-        
+
         Selec = tblEQ.rowAtPoint(evt.getPoint());
         LBLid.setText(tblEQ.getModel().getValueAt(Selec, 0).toString());
         TXTnom.setText(tblEQ.getModel().getValueAt(Selec, 1).toString());
@@ -353,9 +353,11 @@ public class Equipos extends javax.swing.JInternalFrame {
     private void BTNelimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNelimActionPerformed
         mDatosEquipo.setId(Integer.parseInt(LBLid.getText()));
         if (mConexion.conectar()) {
-            if (ValidarCajas()) {              
+            if (ValidarCajas()) {
                 if (mConexion.eliminarEquipo(mDatosEquipo)) {
                     LBLmen.setText("Equipo dado de baja exitosamente");
+                } else {
+                    LBLmen.setText("Este equipo tiene participantes, no se puede eliminar");
                 }
             } else {
                 LBLmen.setText("Selecciona el equipo que deseas eliminar");
