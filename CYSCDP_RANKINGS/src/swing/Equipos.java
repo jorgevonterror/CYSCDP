@@ -339,6 +339,7 @@ public class Equipos extends javax.swing.JInternalFrame {
         }
         mConexion.desconectar();
         ConsultaTablaAl();
+        ConsultaTabla();
         TXT_Nom.setText("");
     }//GEN-LAST:event_BTN_altaActionPerformed
 
@@ -367,6 +368,7 @@ public class Equipos extends javax.swing.JInternalFrame {
         }
         mConexion.desconectar();
         ConsultaTabla();
+        ConsultaTablaAl();
         TXTnom.setText("");
     }//GEN-LAST:event_BTNelimActionPerformed
 

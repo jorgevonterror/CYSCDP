@@ -687,7 +687,7 @@ public class Participantes extends javax.swing.JInternalFrame {
             LBLmen.setText("Por favor completa los campos");
         }
         ConsultaTabla();
-
+        ConsultaTablaEquipos();
     }//GEN-LAST:event_BTNmodActionPerformed
 
     private void TBLaltaParticipanteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBLaltaParticipanteMouseClicked

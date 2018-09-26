@@ -539,6 +539,7 @@ public class Concurso extends javax.swing.JInternalFrame {
         } else {
             LBL_Mensajero1.setText("PORFAVOR seleccione un concurso");
         }
+        
     }//GEN-LAST:event_BTNborrarActionPerformed
 
     private void TBLaltaConcursosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBLaltaConcursosMouseClicked
