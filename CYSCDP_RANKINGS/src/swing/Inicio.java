@@ -291,7 +291,11 @@ public class Inicio extends javax.swing.JInternalFrame  {
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
         // TODO add your handling code here:
-       
+        try{
+            Desktop.getDesktop().browse(new URI("https://www.cloudhq.net/s/94ef609937"));
+        }catch(Exception e){
+        
+        }
     }//GEN-LAST:event_jLabel1MousePressed
 
 
