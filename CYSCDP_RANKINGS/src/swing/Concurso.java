@@ -14,23 +14,24 @@ import javax.swing.table.DefaultTableModel;
  * @author jorgeantoniogarciagomez
  */
 public class Concurso extends javax.swing.JInternalFrame {
-    
+
     Conexion mConexion = new Conexion();
     DatosConcurso mDatosConcurso = new DatosConcurso();
-    public int idConcurso = 0, HoraLimite = 0, MinutoLimite = 0,Dia=0,Mes=0, Año = 0, ContadorColumna = 1,ContadorColumna2 = 1, IDconcurso;
+    public int idConcurso = 0, HoraLimite = 0, MinutoLimite = 0, Dia = 0, Mes = 0, Año = 0, ContadorColumna = 1, ContadorColumna2 = 1, IDconcurso;
     public String Descripcion;
     int Seleccion = 0;
     int ID = 0;
     //DatosConcurso mDatosConcurso;
     DefaultTableModel Tabla = new DefaultTableModel();
     DefaultTableModel Tabla2 = new DefaultTableModel();
+
     /**
      * Creates new form Concurso
      */
     public Concurso() {
         initComponents();
         ConsultaTabla();
-        LBL_Mensajero1.setText("************");
+        LBL_Mensajero1.setText("");
         LBL_Mensajero2.setText("");
     }
 
@@ -245,6 +246,7 @@ public class Concurso extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(TBLConcursos);
 
+        BTNbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/16 (Search).jpg"))); // NOI18N
         BTNbuscar.setText("Buscar");
         BTNbuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -400,8 +402,8 @@ public class Concurso extends javax.swing.JInternalFrame {
                     mDatosConcurso = (DatosConcurso) mArrayListaConcursos.get(i);
                     Datos = new String[4];
                     Datos[0] = "" + mDatosConcurso.getIdConcurso();
-                    Datos[1] = mDatosConcurso.getDescripcion(); 
-                    Datos[2] = mDatosConcurso.getFecha(); 
+                    Datos[1] = mDatosConcurso.getDescripcion();
+                    Datos[2] = mDatosConcurso.getFecha();
                     Datos[3] = "" + mDatosConcurso.getTiempo();
                     Tabla.addRow(Datos);
                 }
@@ -423,7 +425,7 @@ public class Concurso extends javax.swing.JInternalFrame {
         }
         mConexion.desconectar();
     }
-    
+
     private void BTNaltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNaltaActionPerformed
         // TODO add your handling code here:
         try {
@@ -438,15 +440,15 @@ public class Concurso extends javax.swing.JInternalFrame {
             mDatosConcurso.setFecha(Fecha1);
             mDatosConcurso.setDescripcion(this.TXTdescripcion.getText());
             mDatosConcurso.setTiempo(Tiempo1);
-            
+
             String texto = TXTdescripcion.getText();
             texto = texto.replaceAll(" ", "");
             if (texto.length() == 0) {
-                LBL_Mensajero1.setText("Debe ingresar todos los datos correctamente");
+                LBL_Mensajero2.setText("Debe ingresar todos los datos correctamente");
             } else {
                 if (mConexion.conectar()) {
                     if (mConexion.AltaConcurso(mDatosConcurso)) {
-                        LBL_Mensajero1.setText("El concurso fue guardado con éxito");
+                        LBL_Mensajero2.setText("El concurso fue guardado con éxito");
                         CBdia.setSelectedIndex(0);
                         CBmes.setSelectedIndex(0);
                         CBaño.setSelectedIndex(0);
@@ -454,17 +456,17 @@ public class Concurso extends javax.swing.JInternalFrame {
                         CBhora.setSelectedIndex(0);
                         CBminutos.setSelectedIndex(0);
                     } else {
-                        LBL_Mensajero1.setText("Error al guardar el concurso");
+                        LBL_Mensajero2.setText("Error al guardar el concurso");
                     }
                     mConexion.desconectar();
                     ConsultaTabla();
                 }
             }
         } catch (HeadlessException | NumberFormatException e) {
-            LBL_Mensajero1.setText("POR FAVOR, LLENE BIEN LOS DATOS");
+            LBL_Mensajero2.setText("POR FAVOR, LLENE BIEN LOS DATOS");
         }
     }//GEN-LAST:event_BTNaltaActionPerformed
-    public void ConsultaTabla2(){
+    public void ConsultaTabla2() {
         Tabla2 = (DefaultTableModel) TBLConcursos.getModel();
         int a = Tabla2.getRowCount() - 1;
         for (int i = a; i >= 0; i--) {
@@ -489,8 +491,8 @@ public class Concurso extends javax.swing.JInternalFrame {
                     mDatosConcurso = (DatosConcurso) mArrayListConcursos.get(i);
                     Datos = new String[4];
                     Datos[0] = "" + mDatosConcurso.getIdConcurso();
-                    Datos[1] = mDatosConcurso.getDescripcion(); 
-                    Datos[2] = mDatosConcurso.getFecha(); 
+                    Datos[1] = mDatosConcurso.getDescripcion();
+                    Datos[2] = mDatosConcurso.getFecha();
                     Datos[3] = "" + mDatosConcurso.getTiempo();
                     Tabla2.addRow(Datos);
                 }
@@ -514,32 +516,27 @@ public class Concurso extends javax.swing.JInternalFrame {
     }
     private void BTNborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNborrarActionPerformed
         // TODO add your handling code here:
-        if (Seleccion > 0) {
-            try {
-                if (mConexion.conectar()) {
-                    mDatosConcurso = new DatosConcurso();
-                    mDatosConcurso.setIdConcurso(ID);
-                    if (mConexion.EliminarConcurso(mDatosConcurso)) {
-                        LBL_Mensajero1.setText("Concurso eliminado con éxito");
-                    } else {
-                        LBL_Mensajero1.setText("Este concurso no se puede eliminar,tiene relacion con otros registros");
-                    }
-                    mConexion.desconectar();
-                    ConsultaTabla2();
+        try {
+            if (mConexion.conectar()) {
+                mDatosConcurso = new DatosConcurso();
+                mDatosConcurso.setIdConcurso(ID);
+                if (mConexion.EliminarConcurso(mDatosConcurso)) {
+                    LBL_Mensajero1.setText("Concurso eliminado con éxito");
+                } else {
+                    LBL_Mensajero1.setText("Este concurso no se puede eliminar,tiene relacion con otros registros");
                 }
-
-            } catch (Exception e) {
-                LBL_Mensajero1.setText("ERROR, Seleccione un concurso");
+                mConexion.desconectar();
+                ConsultaTabla2();
             }
-        } else {
-            LBL_Mensajero1.setText("PORFAVOR seleccione un concurso");
+
+        } catch (Exception e) {
+            LBL_Mensajero1.setText("ERROR, Seleccione un concurso");
         }
-        
     }//GEN-LAST:event_BTNborrarActionPerformed
 
     private void TBLaltaConcursosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBLaltaConcursosMouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_TBLaltaConcursosMouseClicked
 
     private void BTNbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNbuscarActionPerformed
@@ -553,7 +550,7 @@ public class Concurso extends javax.swing.JInternalFrame {
         String TempC = String.valueOf(TBLConcursos.getValueAt(Seleccion, 0));
         //LBL_Mensajero2.setText(String.valueOf(TBPuntajes.getValueAt(Fila,0)));
         ID = Integer.parseInt(TempC);
-        
+
     }//GEN-LAST:event_TBLConcursosMouseClicked
 
 

@@ -294,6 +294,7 @@ public class Equipos extends javax.swing.JInternalFrame {
     public boolean ValidarCajasnom() {
         return !(TXTnom.getText().equals(""));
     }
+
     public void ConsultaTabla() {
         Tabla = (DefaultTableModel) tblEQ.getModel();
         int a = Tabla.getRowCount() - 1;
@@ -352,9 +353,9 @@ public class Equipos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblEQMouseClicked
 
     private void BTNelimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNelimActionPerformed
-        mDatosEquipo.setId(Integer.parseInt(LBLid.getText()));
         if (mConexion.conectar()) {
             if (ValidarCajasnom()) {
+                mDatosEquipo.setId(Integer.parseInt(LBLid.getText()));
                 if (mConexion.eliminarEquipo(mDatosEquipo)) {
                     LBLmen.setText("Equipo dado de baja exitosamente");
                 } else {

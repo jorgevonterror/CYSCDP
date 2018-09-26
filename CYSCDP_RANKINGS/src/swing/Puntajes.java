@@ -73,8 +73,6 @@ public final class Puntajes extends javax.swing.JInternalFrame {
         CBEquipo = new javax.swing.JComboBox<>();
         LDBLPrueba = new javax.swing.JLabel();
         LBL_Mensajero = new javax.swing.JLabel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        Tbl_altaParticipantes = new javax.swing.JTable();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -214,21 +212,6 @@ public final class Puntajes extends javax.swing.JInternalFrame {
 
         LBL_Mensajero.setText("-");
 
-        Tbl_altaParticipantes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        Tbl_altaParticipantes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Tbl_altaParticipantesMouseClicked(evt);
-            }
-        });
-        jScrollPane6.setViewportView(Tbl_altaParticipantes);
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -266,13 +249,9 @@ public final class Puntajes extends javax.swing.JInternalFrame {
                                             .addComponent(CBConcurso, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(CBEquipo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(LBL_Mensajero))
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(91, Short.MAX_VALUE))
+                        .addGap(74, 74, 74)
+                        .addComponent(LBL_Mensajero)))
+                .addContainerGap(192, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,9 +279,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
                     .addComponent(CBEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(173, 173, 173)
                 .addComponent(LBL_Mensajero)
                 .addGap(12, 12, 12))
         );
@@ -761,10 +738,6 @@ public final class Puntajes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_CBConcurso3ActionPerformed
 
-    private void Tbl_altaParticipantesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_altaParticipantesMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Tbl_altaParticipantesMouseClicked
-
     public void LlenarComboConcurso() {
         CBConcurso.addItem("Ninguno");
         CBConcurso1.addItem("Ninguno");
@@ -1050,7 +1023,6 @@ public final class Puntajes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel LDBLPrueba1;
     private javax.swing.JTable TBPuntajes;
     private javax.swing.JTable TBPuntajes1;
-    private javax.swing.JTable Tbl_altaParticipantes;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1078,7 +1050,6 @@ public final class Puntajes extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
