@@ -29,7 +29,7 @@ public class Concurso extends javax.swing.JInternalFrame {
      */
     public Concurso() {
         initComponents();
-        
+        ConsultaTabla();
     }
 
     /**
@@ -61,7 +61,7 @@ public class Concurso extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         TXTdescripcion = new javax.swing.JTextField();
         jScrollPane6 = new javax.swing.JScrollPane();
-        Tbl_concursosAlta = new javax.swing.JTable();
+        TBLaltaConcursos = new javax.swing.JTable();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         BTNbuscar = new javax.swing.JButton();
@@ -88,7 +88,7 @@ public class Concurso extends javax.swing.JInternalFrame {
             }
         });
 
-        CBhora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24" }));
+        CBhora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24" }));
 
         jLabel7.setText(":");
 
@@ -110,7 +110,7 @@ public class Concurso extends javax.swing.JInternalFrame {
 
         jLabel12.setText("Año");
 
-        Tbl_concursosAlta.setModel(new javax.swing.table.DefaultTableModel(
+        TBLaltaConcursos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -118,12 +118,12 @@ public class Concurso extends javax.swing.JInternalFrame {
 
             }
         ));
-        Tbl_concursosAlta.addMouseListener(new java.awt.event.MouseAdapter() {
+        TBLaltaConcursos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Tbl_concursosAltaMouseClicked(evt);
+                TBLaltaConcursosMouseClicked(evt);
             }
         });
-        jScrollPane6.setViewportView(Tbl_concursosAlta);
+        jScrollPane6.setViewportView(TBLaltaConcursos);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -202,11 +202,12 @@ public class Concurso extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addComponent(TXTdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(CBminutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CBhora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel7))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(CBhora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel7)))
                 .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -368,7 +369,55 @@ public class Concurso extends javax.swing.JInternalFrame {
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
 
     }//GEN-LAST:event_jPanel2MousePressed
+    public void ConsultaTabla() {
+        Tabla = (DefaultTableModel) TBLaltaConcursos.getModel();
+        int a = Tabla.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            Tabla.removeRow(Tabla.getRowCount() - 1);
+        }
 
+        if (mConexion.conectar()) {
+            ArrayList mArrayListaConcursos = new ArrayList();
+            mArrayListaConcursos = mConexion.ConsultarConcursos();
+
+            String[] Datos = null;
+            if (mArrayListaConcursos != null) {
+                if (ContadorColumna == 1) {
+                    Tabla.addColumn("id");
+                    Tabla.addColumn("Descripcion");
+                    Tabla.addColumn("Fecha");
+                    Tabla.addColumn("Tiempo_Limite");
+                    ContadorColumna = 2;
+                }
+
+                for (int i = 0; i < mArrayListaConcursos.size(); i++) {
+                    mDatosConcurso = (DatosConcurso) mArrayListaConcursos.get(i);
+                    Datos = new String[4];
+                    Datos[0] = "" + mDatosConcurso.getIdConcurso();
+                    Datos[1] = mDatosConcurso.getDescripcion(); 
+                    Datos[2] = mDatosConcurso.getFecha(); 
+                    Datos[3] = "" + mDatosConcurso.getTiempo();
+                    Tabla.addRow(Datos);
+                }
+
+            } else {
+                LBL_Mensajero1.setText("No hay concursos");
+            }
+            this.TBLaltaConcursos = new javax.swing.JTable();
+            this.TBLaltaConcursos.setModel(Tabla);
+            this.TBLaltaConcursos.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.TBLaltaConcursos.getColumnModel().getColumn(1).setPreferredWidth(50);
+            this.TBLaltaConcursos.getColumnModel().getColumn(2).setPreferredWidth(100);
+            this.TBLaltaConcursos.getColumnModel().getColumn(2).setPreferredWidth(100);
+            if (this.TBLaltaConcursos.getRowCount() > 0) {
+                this.TBLaltaConcursos.setRowSelectionInterval(0, 0);
+            }
+        } else {
+            LBL_Mensajero1.setText("Error al consultar los equipos");
+        }
+        mConexion.desconectar();
+    }
+    
     private void BTNaltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNaltaActionPerformed
         // TODO add your handling code here:
         try {
@@ -392,17 +441,18 @@ public class Concurso extends javax.swing.JInternalFrame {
                 if (mConexion.conectar()) {
                     if (mConexion.AltaConcurso(mDatosConcurso)) {
                         LBL_Mensajero1.setText("El concurso fue guardado con éxito");
+                        CBdia.setSelectedIndex(0);
+                        CBmes.setSelectedIndex(0);
+                        CBaño.setSelectedIndex(0);
+                        TXTdescripcion.setText("");
+                        CBhora.setSelectedIndex(0);
+                        CBminutos.setSelectedIndex(0);
                     } else {
                         LBL_Mensajero1.setText("Error al guardar el concurso");
                     }
                     mConexion.desconectar();
+                    ConsultaTabla();
                 }
-                CBdia.setSelectedItem(0);
-                CBmes.setSelectedItem(0);
-                CBaño.setSelectedItem(0);
-                TXTdescripcion.setText("");
-                CBhora.setSelectedItem(0);
-                CBminutos.setSelectedItem(0);
             }
         } catch (HeadlessException | NumberFormatException e) {
             LBL_Mensajero1.setText("POR FAVOR, LLENE BIEN LOS DATOS");
@@ -491,9 +541,9 @@ public class Concurso extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_BTNborrarActionPerformed
 
-    private void Tbl_concursosAltaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_concursosAltaMouseClicked
+    private void TBLaltaConcursosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBLaltaConcursosMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_Tbl_concursosAltaMouseClicked
+    }//GEN-LAST:event_TBLaltaConcursosMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -507,8 +557,8 @@ public class Concurso extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> CBminutos;
     private javax.swing.JLabel LBL_Mensajero1;
     private javax.swing.JTable TBLConcursos;
+    private javax.swing.JTable TBLaltaConcursos;
     private javax.swing.JTextField TXTdescripcion;
-    private javax.swing.JTable Tbl_concursosAlta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

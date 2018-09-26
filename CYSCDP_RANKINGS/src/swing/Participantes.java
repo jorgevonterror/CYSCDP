@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 public class Participantes extends javax.swing.JInternalFrame {
 
     Conexion mConexion = new Conexion();
-    int idParticipante = 0, Semestre = 0, Equipos_idEquipos = 0, IDEquipo = 0;
+    int idParticipante = 0, Semestre = 0, Equipos_idEquipos = 0, IDEquipo = 0, ContadorColumna = 1;
     String NombreParticipante, Carrera;
     DatosParticipante mDatosParticipante;
     DefaultTableModel Tabla = new DefaultTableModel();
@@ -36,6 +36,7 @@ public class Participantes extends javax.swing.JInternalFrame {
         ConsultaTabla();
         LBLmen.setText("");
         LBLid.setVisible(false);
+        ConsultaTablaEquipos();
     }
 
     /**
@@ -65,7 +66,7 @@ public class Participantes extends javax.swing.JInternalFrame {
         CBcarrera = new javax.swing.JComboBox<>();
         CBsemestre = new javax.swing.JComboBox<>();
         jScrollPane6 = new javax.swing.JScrollPane();
-        Tbl_altaParticipantes = new javax.swing.JTable();
+        TBLaltaParticipante = new javax.swing.JTable();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
@@ -171,7 +172,7 @@ public class Participantes extends javax.swing.JInternalFrame {
 
         CBsemestre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
 
-        Tbl_altaParticipantes.setModel(new javax.swing.table.DefaultTableModel(
+        TBLaltaParticipante.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -179,12 +180,12 @@ public class Participantes extends javax.swing.JInternalFrame {
 
             }
         ));
-        Tbl_altaParticipantes.addMouseListener(new java.awt.event.MouseAdapter() {
+        TBLaltaParticipante.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Tbl_altaParticipantesMouseClicked(evt);
+                TBLaltaParticipanteMouseClicked(evt);
             }
         });
-        jScrollPane6.setViewportView(Tbl_altaParticipantes);
+        jScrollPane6.setViewportView(TBLaltaParticipante);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -343,14 +344,13 @@ public class Participantes extends javax.swing.JInternalFrame {
                         .addGap(10, 10, 10)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(CBeq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18))
+                            .addComponent(CBeq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TXTnom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                            .addComponent(jLabel12))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BTNmod)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -433,7 +433,59 @@ public class Participantes extends javax.swing.JInternalFrame {
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
 
     }//GEN-LAST:event_jPanel2MousePressed
+    public void ConsultaTablaEquipos() {
+        Tabla = (DefaultTableModel) TBLaltaParticipante.getModel();
+        int a = Tabla.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            Tabla.removeRow(Tabla.getRowCount() - 1);
+        }
 
+        if (mConexion.conectar()) {
+         ArrayList mArrayListaPartic = new ArrayList();
+            mArrayListaPartic = mConexion.consultarParticipantes();
+
+            String[] Datos = null;
+            if (mArrayListaPartic != null) {
+                if (ContadorColumna == 1) {
+                    Tabla.addColumn("id");
+                    Tabla.addColumn("Nombre");
+                    Tabla.addColumn("Carrera");
+                    Tabla.addColumn("Semestre");
+                    Tabla.addColumn("Equipo");
+                    ContadorColumna = 2;
+                }
+
+                for (int i = 0; i < mArrayListaPartic.size(); i++) {
+                    mDatosParticipante = (DatosParticipante) mArrayListaPartic.get(i);
+                    Datos = new String[5];
+                    Datos[0] = "" + mDatosParticipante.getIdParticipante();
+                    Datos[1] = mDatosParticipante.getNombreParticipante(); 
+                    Datos[2] = mDatosParticipante.getCarrera(); 
+                    Datos[3] = "" + mDatosParticipante.getSemestre();
+                    Datos[4] = "" + mDatosParticipante.getEquipos_idEquipos();
+                    ID = Integer.parseInt(Datos[4]);
+                    Datos[4] = mConexion.ConsultaNombresEquipos(ID);
+                    Tabla.addRow(Datos);
+                }
+
+            } else {
+                LBL_Mensajero.setText("No hay concursos");
+            }
+            this.TBLaltaParticipante = new javax.swing.JTable();
+            this.TBLaltaParticipante.setModel(Tabla);
+            this.TBLaltaParticipante.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.TBLaltaParticipante.getColumnModel().getColumn(1).setPreferredWidth(50);
+            this.TBLaltaParticipante.getColumnModel().getColumn(2).setPreferredWidth(100);
+            this.TBLaltaParticipante.getColumnModel().getColumn(2).setPreferredWidth(100);
+            if (this.TBLaltaParticipante.getRowCount() > 0) {
+                this.TBLaltaParticipante.setRowSelectionInterval(0, 0);
+            }
+        } else {
+            LBL_Mensajero.setText("Error al consultar los equipos");
+        }
+        mConexion.desconectar();
+    }
+    
     private void BTNguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNguardarActionPerformed
         // TODO add your handling code here:
         if (CBcarrera.getSelectedItem() == "Ninguna") {
@@ -505,6 +557,9 @@ public class Participantes extends javax.swing.JInternalFrame {
 
         mDatosParticipante = new DatosParticipante();
         mDatosParticipante.setNombreParticipante(TXTnombre.getText());
+
+        String texto = TXTnombre.getText();
+        texto = texto.replaceAll(" ", "");
         if (mConexion.conectar()) {
             if ((CBcarrera.getSelectedItem() != "Ninguna") && (CBsemestre.getSelectedItem() != "Ninguno") && (CBequipo.getSelectedItem() != "Ninguno")) {
                 IDEquipo = mConexion.ConsultarIDEquipos(CBequipo.getSelectedItem().toString());
@@ -518,22 +573,26 @@ public class Participantes extends javax.swing.JInternalFrame {
         mDatosParticipante.setCarrera(Carrera);
         mDatosParticipante.setSemestre(Semestre);
         mDatosParticipante.setEquipos_idEquipos(IDEquipo);
-
-        if (mConexion.conectar()) {
-            if ((CBcarrera.getSelectedItem() != "Ninguna") && (CBsemestre.getSelectedItem() != "Ninguno") && (CBequipo.getSelectedItem() != "Ninguno") && (TXTnombre.getText() != null)) {
-                if (mConexion.AltaParticipante(mDatosParticipante)) {
-                    LBL_Mensajero.setText("Se guardo el participante");
-                    TXTnombre.setText("");
-                    CBsemestre.setSelectedIndex(0);
-                    CBcarrera.setSelectedIndex(0);
-                    CBequipo.setSelectedIndex(0);
-                }
-            } else {
-                LBL_Mensajero.setText("Favor de llenar bien los campos");
-            }
-            mConexion.desconectar();
+        if ((texto.length() == 0) || (texto.length() > 150) ) {
+            LBL_Mensajero.setText("Debe ingresar todos los datos correctamente");
         } else {
-            LBL_Mensajero.setText("No conectado a la BD");
+            if (mConexion.conectar()) {
+                if ((CBcarrera.getSelectedItem() != "Ninguna") && (CBsemestre.getSelectedItem() != "Ninguno") && (CBequipo.getSelectedItem() != "Ninguno")) {
+                    if (mConexion.AltaParticipante(mDatosParticipante)) {
+                        LBL_Mensajero.setText("Se guardo el participante");
+                        TXTnombre.setText("");
+                        CBsemestre.setSelectedIndex(0);
+                        CBcarrera.setSelectedIndex(0);
+                        CBequipo.setSelectedIndex(0);
+                    }
+                } else {
+                    LBL_Mensajero.setText("Favor de llenar bien los campos");
+                }
+                mConexion.desconectar();
+                ConsultaTablaEquipos();
+            } else {
+                LBL_Mensajero.setText("No conectado a la BD");
+            }
         }
     }//GEN-LAST:event_BTNguardarActionPerformed
 
@@ -630,9 +689,9 @@ public class Participantes extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_BTNmodActionPerformed
 
-    private void Tbl_altaParticipantesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_altaParticipantesMouseClicked
+    private void TBLaltaParticipanteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBLaltaParticipanteMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_Tbl_altaParticipantesMouseClicked
+    }//GEN-LAST:event_TBLaltaParticipanteMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -647,9 +706,9 @@ public class Participantes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel LBL_Mensajero;
     private javax.swing.JLabel LBLid;
     private javax.swing.JLabel LBLmen;
+    private javax.swing.JTable TBLaltaParticipante;
     private javax.swing.JTextField TXTnom;
     private javax.swing.JTextPane TXTnombre;
-    private javax.swing.JTable Tbl_altaParticipantes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
