@@ -17,7 +17,7 @@ public class Concurso extends javax.swing.JInternalFrame {
     
     Conexion mConexion = new Conexion();
     DatosConcurso mDatosConcurso = new DatosConcurso();
-    public int idConcurso = 0, HoraLimite = 0, MinutoLimite = 0,Dia=0,Mes=0, Año = 0, ContadorColumna = 1, IDconcurso;
+    public int idConcurso = 0, HoraLimite = 0, MinutoLimite = 0,Dia=0,Mes=0, Año = 0, ContadorColumna = 1,ContadorColumna2 = 1, IDconcurso;
     public String Descripcion;
     int Seleccion = 0;
     int ID = 0;
@@ -238,6 +238,11 @@ public class Concurso extends javax.swing.JInternalFrame {
             }
         });
 
+        TBLConcursos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TBLConcursosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TBLConcursos);
 
         BTNbuscar.setText("Buscar");
@@ -459,37 +464,7 @@ public class Concurso extends javax.swing.JInternalFrame {
             LBL_Mensajero1.setText("POR FAVOR, LLENE BIEN LOS DATOS");
         }
     }//GEN-LAST:event_BTNaltaActionPerformed
-
-    private void BTNborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNborrarActionPerformed
-        // TODO add your handling code here:
-        if (Seleccion > 0) {
-            try {
-                if (mConexion.conectar()) {
-                    mDatosConcurso = new DatosConcurso();
-                    mDatosConcurso.setIdConcurso(ID);
-                    if (mConexion.EliminarConcurso(mDatosConcurso)) {
-                        LBL_Mensajero1.setText("Concurso eliminado con éxito");
-                    } else {
-                        LBL_Mensajero1.setText("Este concurso no se puede eliminar,tiene relacion con otros registros");
-                    }
-                    mConexion.desconectar();
-                }
-
-            } catch (Exception e) {
-                LBL_Mensajero1.setText("ERROR, Seleccione un concurso");
-            }
-        } else {
-            LBL_Mensajero1.setText("PORFAVOR seleccione un concurso");
-        }
-        
-    }//GEN-LAST:event_BTNborrarActionPerformed
-
-    private void TBLaltaConcursosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBLaltaConcursosMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TBLaltaConcursosMouseClicked
-
-    private void BTNbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNbuscarActionPerformed
-        // TODO add your handling code here:
+    public void ConsultaTabla2(){
         Tabla2 = (DefaultTableModel) TBLConcursos.getModel();
         int a = Tabla2.getRowCount() - 1;
         for (int i = a; i >= 0; i--) {
@@ -497,21 +472,21 @@ public class Concurso extends javax.swing.JInternalFrame {
         }
 
         if (mConexion.conectar()) {
-            ArrayList mArrayListaConcursos = new ArrayList();
-            mArrayListaConcursos = mConexion.ConsultarConcursos();
+            ArrayList mArrayListConcursos = new ArrayList();
+            mArrayListConcursos = mConexion.ConsultarConcursos();
 
             String[] Datos = null;
-            if (mArrayListaConcursos != null) {
-                if (ContadorColumna == 1) {
+            if (mArrayListConcursos != null) {
+                if (ContadorColumna2 == 1) {
                     Tabla2.addColumn("id");
                     Tabla2.addColumn("Descripcion");
                     Tabla2.addColumn("Fecha");
                     Tabla2.addColumn("Tiempo_Limite");
-                    ContadorColumna = 2;
+                    ContadorColumna2 = 2;
                 }
 
-                for (int i = 0; i < mArrayListaConcursos.size(); i++) {
-                    mDatosConcurso = (DatosConcurso) mArrayListaConcursos.get(i);
+                for (int i = 0; i < mArrayListConcursos.size(); i++) {
+                    mDatosConcurso = (DatosConcurso) mArrayListConcursos.get(i);
                     Datos = new String[4];
                     Datos[0] = "" + mDatosConcurso.getIdConcurso();
                     Datos[1] = mDatosConcurso.getDescripcion(); 
@@ -536,7 +511,50 @@ public class Concurso extends javax.swing.JInternalFrame {
             LBL_Mensajero2.setText("Error al consultar los equipos");
         }
         mConexion.desconectar();
+    }
+    private void BTNborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNborrarActionPerformed
+        // TODO add your handling code here:
+        if (Seleccion > 0) {
+            try {
+                if (mConexion.conectar()) {
+                    mDatosConcurso = new DatosConcurso();
+                    mDatosConcurso.setIdConcurso(ID);
+                    if (mConexion.EliminarConcurso(mDatosConcurso)) {
+                        LBL_Mensajero1.setText("Concurso eliminado con éxito");
+                    } else {
+                        LBL_Mensajero1.setText("Este concurso no se puede eliminar,tiene relacion con otros registros");
+                    }
+                    mConexion.desconectar();
+                    ConsultaTabla2();
+                }
+
+            } catch (Exception e) {
+                LBL_Mensajero1.setText("ERROR, Seleccione un concurso");
+            }
+        } else {
+            LBL_Mensajero1.setText("PORFAVOR seleccione un concurso");
+        }
+        
+    }//GEN-LAST:event_BTNborrarActionPerformed
+
+    private void TBLaltaConcursosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBLaltaConcursosMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_TBLaltaConcursosMouseClicked
+
+    private void BTNbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNbuscarActionPerformed
+        // TODO add your handling code here:
+        ConsultaTabla2();
     }//GEN-LAST:event_BTNbuscarActionPerformed
+
+    private void TBLConcursosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBLConcursosMouseClicked
+        // TODO add your handling code here:
+        Seleccion = TBLConcursos.rowAtPoint(evt.getPoint());
+        String TempC = String.valueOf(TBLConcursos.getValueAt(Seleccion, 0));
+        //LBL_Mensajero2.setText(String.valueOf(TBPuntajes.getValueAt(Fila,0)));
+        ID = Integer.parseInt(TempC);
+        
+    }//GEN-LAST:event_TBLConcursosMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

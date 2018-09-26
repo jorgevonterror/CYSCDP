@@ -38,6 +38,12 @@ public final class Puntajes extends javax.swing.JInternalFrame {
         initComponents();
         LlenarComboConcurso();
         LlenarComboEquipo();
+        Tabla.addColumn("ID");
+        Tabla.addColumn("Tiempo");
+        Tabla.addColumn("Complejidad");
+        Tabla2.addColumn("ID");
+        Tabla2.addColumn("Tiempo");
+        Tabla2.addColumn("Complejidad");
     }
 
     /**
@@ -902,9 +908,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
             String[] Datos = null;
             if (mArrayListEliminarPuntajes != null) {
                 if (ContadorColumna == 1) {
-                    Tabla.addColumn("ID");
-                    Tabla.addColumn("Tiempo");
-                    Tabla.addColumn("Complejidad");
+                    
                     ContadorColumna = 2;
                 }
 
@@ -964,9 +968,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
             String[] Datos = null;
             if (mArrayListEliminarPuntajes != null) {
                 if (ContadorColumna == 1) {
-                    Tabla2.addColumn("ID");
-                    Tabla2.addColumn("Tiempo");
-                    Tabla2.addColumn("Complejidad");
+                    
                     ContadorColumna = 2;
                 }
 
