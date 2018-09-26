@@ -399,7 +399,7 @@ public class Equipos extends javax.swing.JInternalFrame {
                 this.tblAl.setRowSelectionInterval(0, 0);
             }
         } else {
-            LBLmen.setText("Error al consultar los equipos");
+            LBL_Men.setText("Error al consultar los equipos");
         }
         mConexion.desconectar();
     }
