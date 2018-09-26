@@ -23,13 +23,15 @@ public class Concurso extends javax.swing.JInternalFrame {
     int ID = 0;
     //DatosConcurso mDatosConcurso;
     DefaultTableModel Tabla = new DefaultTableModel();
-
+    DefaultTableModel Tabla2 = new DefaultTableModel();
     /**
      * Creates new form Concurso
      */
     public Concurso() {
         initComponents();
         ConsultaTabla();
+        LBL_Mensajero1.setText("************");
+        LBL_Mensajero2.setText("");
     }
 
     /**
@@ -53,7 +55,6 @@ public class Concurso extends javax.swing.JInternalFrame {
         CBdia = new javax.swing.JComboBox<>();
         CBmes = new javax.swing.JComboBox<>();
         CBaño = new javax.swing.JComboBox<>();
-        LBL_Mensajero1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -62,12 +63,14 @@ public class Concurso extends javax.swing.JInternalFrame {
         TXTdescripcion = new javax.swing.JTextField();
         jScrollPane6 = new javax.swing.JScrollPane();
         TBLaltaConcursos = new javax.swing.JTable();
+        LBL_Mensajero2 = new javax.swing.JLabel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
-        BTNbuscar = new javax.swing.JButton();
         BTNborrar = new javax.swing.JButton();
-        jScrollPane5 = new javax.swing.JScrollPane();
+        LBL_Mensajero1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         TBLConcursos = new javax.swing.JTable();
+        BTNbuscar = new javax.swing.JToggleButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -125,6 +128,8 @@ public class Concurso extends javax.swing.JInternalFrame {
         });
         jScrollPane6.setViewportView(TBLaltaConcursos);
 
+        LBL_Mensajero2.setText("- ");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -176,11 +181,10 @@ public class Concurso extends javax.swing.JInternalFrame {
                         .addComponent(jLabel9))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(51, 51, 51)
-                                .addComponent(LBL_Mensajero1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(LBL_Mensajero2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -217,22 +221,14 @@ public class Concurso extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LBL_Mensajero1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addComponent(LBL_Mensajero2)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Alta", jPanel1);
 
         jPanel3.setMaximumSize(new java.awt.Dimension(3276, 32767));
         jPanel3.setPreferredSize(new java.awt.Dimension(500, 580));
-
-        BTNbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/16 (Search).jpg"))); // NOI18N
-        BTNbuscar.setText("Buscar");
-        BTNbuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTNbuscarActionPerformed(evt);
-            }
-        });
 
         BTNborrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/16 (Delete).jpg"))); // NOI18N
         BTNborrar.setText("Borrar");
@@ -242,27 +238,30 @@ public class Concurso extends javax.swing.JInternalFrame {
             }
         });
 
-        TBLConcursos.setModel(Tabla);
-        TBLConcursos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TBLConcursosMouseClicked(evt);
+        jScrollPane1.setViewportView(TBLConcursos);
+
+        BTNbuscar.setText("Buscar");
+        BTNbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNbuscarActionPerformed(evt);
             }
         });
-        jScrollPane5.setViewportView(TBLConcursos);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(38, 38, 38)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(BTNbuscar)
-                        .addGap(302, 302, 302)
+                        .addGap(228, 228, 228)
                         .addComponent(BTNborrar))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(LBL_Mensajero1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,9 +270,11 @@ public class Concurso extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTNborrar)
                     .addComponent(BTNbuscar))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(238, 238, 238))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(LBL_Mensajero1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(420, 420, 420))
         );
 
         jTabbedPane2.addTab("Dar de baja un concurso.", jPanel3);
@@ -401,19 +402,19 @@ public class Concurso extends javax.swing.JInternalFrame {
                 }
 
             } else {
-                LBL_Mensajero1.setText("No hay concursos");
+                LBL_Mensajero2.setText("No hay concursos");
             }
             this.TBLaltaConcursos = new javax.swing.JTable();
             this.TBLaltaConcursos.setModel(Tabla);
             this.TBLaltaConcursos.getColumnModel().getColumn(0).setPreferredWidth(50);
             this.TBLaltaConcursos.getColumnModel().getColumn(1).setPreferredWidth(50);
             this.TBLaltaConcursos.getColumnModel().getColumn(2).setPreferredWidth(100);
-            this.TBLaltaConcursos.getColumnModel().getColumn(2).setPreferredWidth(100);
+            this.TBLaltaConcursos.getColumnModel().getColumn(3).setPreferredWidth(100);
             if (this.TBLaltaConcursos.getRowCount() > 0) {
                 this.TBLaltaConcursos.setRowSelectionInterval(0, 0);
             }
         } else {
-            LBL_Mensajero1.setText("Error al consultar los equipos");
+            LBL_Mensajero2.setText("Error al consultar los equipos");
         }
         mConexion.desconectar();
     }
@@ -459,65 +460,6 @@ public class Concurso extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_BTNaltaActionPerformed
 
-    private void BTNbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNbuscarActionPerformed
-        // TODO add your handling code here:
-        //LimpiarTabla();
-        DefaultTableModel TablaLimpiar = (DefaultTableModel) TBLConcursos.getModel();
-        int a = TBLConcursos.getRowCount() - 1;
-        for (int i = a; i >= 0; i--) {
-            TablaLimpiar.removeRow(TablaLimpiar.getRowCount() - 1);
-        }
-        
-        if (mConexion.conectar()) {
-            ArrayList mArrayListFechasConcursos = new ArrayList();
-            mArrayListFechasConcursos = mConexion.ConsultarConcursos();
-
-            String[] Datos = null;
-            if (mArrayListFechasConcursos != null) {
-                if (ContadorColumna == 1) {
-                    Tabla.addColumn("id");
-                    Tabla.addColumn("Descripcion");
-                    Tabla.addColumn("Fecha");
-                    Tabla.addColumn("Tiempo_Limite");
-                    ContadorColumna = 2;
-                }
-
-                for (int i = 0; i < mArrayListFechasConcursos.size(); i++) {
-                    mDatosConcurso = (DatosConcurso) mArrayListFechasConcursos.get(i);
-                    Datos = new String[4];
-                    Datos[0] = "" + mDatosConcurso.getIdConcurso();
-                    Datos[1] = mDatosConcurso.getDescripcion(); 
-                    Datos[2] = mDatosConcurso.getFecha(); 
-                    Datos[3] = "" + mDatosConcurso.getTiempo();
-                    Tabla.addRow(Datos);
-                }
-
-            } else {
-                LBL_Mensajero1.setText("No hay concursos");
-            }
-            this.TBLConcursos = new javax.swing.JTable();
-            this.TBLConcursos.setModel(Tabla);
-            this.TBLConcursos.getColumnModel().getColumn(0).setPreferredWidth(50);
-            this.TBLConcursos.getColumnModel().getColumn(1).setPreferredWidth(50);
-            this.TBLConcursos.getColumnModel().getColumn(2).setPreferredWidth(100);
-            this.TBLConcursos.getColumnModel().getColumn(2).setPreferredWidth(100);
-            if (this.TBLConcursos.getRowCount() > 0) {
-                this.TBLConcursos.setRowSelectionInterval(0, 0);
-            }
-
-        } else {
-            LBL_Mensajero1.setText("Error al consultar");
-        }
-
-        mConexion.desconectar();
-    }//GEN-LAST:event_BTNbuscarActionPerformed
-
-    private void TBLConcursosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBLConcursosMouseClicked
-        // TODO add your handling code here:
-        Seleccion = TBLConcursos.rowAtPoint(evt.getPoint());
-        ID = Integer.parseInt(TBLConcursos.getModel().getValueAt(Seleccion, 0).toString());
-    }//GEN-LAST:event_TBLConcursosMouseClicked
-
     private void BTNborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNborrarActionPerformed
         // TODO add your handling code here:
         if (Seleccion > 0) {
@@ -546,17 +488,68 @@ public class Concurso extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TBLaltaConcursosMouseClicked
 
+    private void BTNbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNbuscarActionPerformed
+        // TODO add your handling code here:
+        Tabla2 = (DefaultTableModel) TBLConcursos.getModel();
+        int a = Tabla2.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            Tabla2.removeRow(Tabla2.getRowCount() - 1);
+        }
+
+        if (mConexion.conectar()) {
+            ArrayList mArrayListaConcursos = new ArrayList();
+            mArrayListaConcursos = mConexion.ConsultarConcursos();
+
+            String[] Datos = null;
+            if (mArrayListaConcursos != null) {
+                if (ContadorColumna == 1) {
+                    Tabla2.addColumn("id");
+                    Tabla2.addColumn("Descripcion");
+                    Tabla2.addColumn("Fecha");
+                    Tabla2.addColumn("Tiempo_Limite");
+                    ContadorColumna = 2;
+                }
+
+                for (int i = 0; i < mArrayListaConcursos.size(); i++) {
+                    mDatosConcurso = (DatosConcurso) mArrayListaConcursos.get(i);
+                    Datos = new String[4];
+                    Datos[0] = "" + mDatosConcurso.getIdConcurso();
+                    Datos[1] = mDatosConcurso.getDescripcion(); 
+                    Datos[2] = mDatosConcurso.getFecha(); 
+                    Datos[3] = "" + mDatosConcurso.getTiempo();
+                    Tabla2.addRow(Datos);
+                }
+
+            } else {
+                LBL_Mensajero2.setText("No hay concursos");
+            }
+            this.TBLConcursos = new javax.swing.JTable();
+            this.TBLConcursos.setModel(Tabla2);
+            this.TBLConcursos.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.TBLConcursos.getColumnModel().getColumn(1).setPreferredWidth(50);
+            this.TBLConcursos.getColumnModel().getColumn(2).setPreferredWidth(100);
+            this.TBLConcursos.getColumnModel().getColumn(3).setPreferredWidth(100);
+            if (this.TBLConcursos.getRowCount() > 0) {
+                this.TBLConcursos.setRowSelectionInterval(0, 0);
+            }
+        } else {
+            LBL_Mensajero2.setText("Error al consultar los equipos");
+        }
+        mConexion.desconectar();
+    }//GEN-LAST:event_BTNbuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNalta;
     private javax.swing.JButton BTNborrar;
-    private javax.swing.JButton BTNbuscar;
+    private javax.swing.JToggleButton BTNbuscar;
     private javax.swing.JComboBox<String> CBaño;
     private javax.swing.JComboBox<String> CBdia;
     private javax.swing.JComboBox<String> CBhora;
     private javax.swing.JComboBox<String> CBmes;
     private javax.swing.JComboBox<String> CBminutos;
     private javax.swing.JLabel LBL_Mensajero1;
+    private javax.swing.JLabel LBL_Mensajero2;
     private javax.swing.JTable TBLConcursos;
     private javax.swing.JTable TBLaltaConcursos;
     private javax.swing.JTextField TXTdescripcion;
@@ -574,7 +567,7 @@ public class Concurso extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
