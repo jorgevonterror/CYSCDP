@@ -287,10 +287,13 @@ public class Equipos extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jPanel2MousePressed
 
-    public boolean ValidarCajas() {
-        return !(TXT_Nom.getText().equals("") && (TXTnom.getText().equals("")));
+    public boolean ValidarCajasNom() {
+        return !(TXT_Nom.getText().equals(""));
     }
 
+    public boolean ValidarCajasnom() {
+        return !(TXTnom.getText().equals(""));
+    }
     public void ConsultaTabla() {
         Tabla = (DefaultTableModel) tblEQ.getModel();
         int a = Tabla.getRowCount() - 1;
@@ -324,7 +327,7 @@ public class Equipos extends javax.swing.JInternalFrame {
 
     private void BTN_altaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_altaActionPerformed
         DatosEquipo mDatosEquipo = new DatosEquipo();
-        if (ValidarCajas()) {
+        if (ValidarCajasNom()) {
             if (mConexion.conectar()) {
                 mDatosEquipo.setNombre(TXT_Nom.getText());
                 mConexion.AltaEquipos(mDatosEquipo);
@@ -336,6 +339,7 @@ public class Equipos extends javax.swing.JInternalFrame {
         }
         mConexion.desconectar();
         ConsultaTablaAl();
+        TXT_Nom.setText("");
     }//GEN-LAST:event_BTN_altaActionPerformed
 
     private void tblEQMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEQMouseClicked
@@ -349,7 +353,7 @@ public class Equipos extends javax.swing.JInternalFrame {
     private void BTNelimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNelimActionPerformed
         mDatosEquipo.setId(Integer.parseInt(LBLid.getText()));
         if (mConexion.conectar()) {
-            if (ValidarCajas()) {
+            if (ValidarCajasnom()) {
                 if (mConexion.eliminarEquipo(mDatosEquipo)) {
                     LBLmen.setText("Equipo dado de baja exitosamente");
                 } else {
@@ -363,6 +367,7 @@ public class Equipos extends javax.swing.JInternalFrame {
         }
         mConexion.desconectar();
         ConsultaTabla();
+        TXTnom.setText("");
     }//GEN-LAST:event_BTNelimActionPerformed
 
     public void ConsultaTablaAl() {

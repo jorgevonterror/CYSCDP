@@ -590,6 +590,7 @@ public class Participantes extends javax.swing.JInternalFrame {
                 }
                 mConexion.desconectar();
                 ConsultaTablaEquipos();
+                ConsultaTabla();
             } else {
                 LBL_Mensajero.setText("No conectado a la BD");
             }
