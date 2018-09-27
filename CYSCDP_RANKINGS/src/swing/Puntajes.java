@@ -24,9 +24,10 @@ import javax.swing.table.DefaultTableModel;
 public final class Puntajes extends javax.swing.JInternalFrame {
 
     Conexion mConexion = new Conexion();
-    int Complejidad = 0, IDConcursos = 0, IDEquipo = 0, IDConcursos1 = 0, IDConcursos2 = 0, IDEquipo1 = 0, ContadorColumna = 1, idPuntajes = 0 , IDEquipo2 = 0;
+    int Complejidad = 0, IDConcursos = 0, IDEquipo = 0, IDConcursos1 = 0, IDConcursos2 = 0, IDEquipo1 = 0, ContadorColumna = 1, idPuntajes = 0, IDEquipo2 = 0;
     /*Para modificar Datos*/ int idPuntajeViejo = 0, HorasNuevas = 0, HorasViejas = 0, MinutosNuevos = 0, MinutosViejos = 0;
-                                
+    boolean bandera = false;
+
     DatosPuntajes mDatosPuntajes;
     DefaultTableModel Tabla = new DefaultTableModel();
     DefaultTableModel Tabla2 = new DefaultTableModel();
@@ -83,6 +84,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TBPuntajes = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
+        LBL_Mensajero1 = new javax.swing.JLabel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -104,7 +106,6 @@ public final class Puntajes extends javax.swing.JInternalFrame {
         CBConcurso3 = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
         CBEquipo3 = new javax.swing.JComboBox<>();
-        LBL_Mensajero1 = new javax.swing.JLabel();
         LBL_Mensajero2 = new javax.swing.JLabel();
 
         setBorder(null);
@@ -334,30 +335,32 @@ public final class Puntajes extends javax.swing.JInternalFrame {
             }
         });
 
+        LBL_Mensajero1.setText("-");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                            .addGap(133, 133, 133)
-                            .addComponent(jButton2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                            .addGap(141, 141, 141)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel10)
-                                .addComponent(jLabel9))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(CBConcurso1, 0, 177, Short.MAX_VALUE)
-                                .addComponent(CBEquipo1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(42, 42, 42)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton2)
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(LBL_Mensajero1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel9))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(CBConcurso1, 0, 177, Short.MAX_VALUE)
+                                    .addComponent(CBEquipo1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(82, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -374,7 +377,8 @@ public final class Puntajes extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(LBL_Mensajero1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(50, Short.MAX_VALUE))
@@ -447,8 +451,6 @@ public final class Puntajes extends javax.swing.JInternalFrame {
 
         jLabel16.setText("Equipo:");
 
-        LBL_Mensajero1.setText("-");
-
         LBL_Mensajero2.setText("-");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -505,10 +507,8 @@ public final class Puntajes extends javax.swing.JInternalFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(LBL_Mensajero2, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-                    .addComponent(LBL_Mensajero1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(LBL_Mensajero2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -554,8 +554,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
                         .addComponent(jButton5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                         .addComponent(LBL_Mensajero2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(LBL_Mensajero1))
+                        .addGap(22, 22, 22))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(11, 11, 11))
         );
@@ -644,26 +643,12 @@ public final class Puntajes extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:        
-        EliminarPuntaje();
+        BuscarPuntaje();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        try {
-            if (mConexion.conectar()) {
-                mDatosPuntajes = new DatosPuntajes();
-                mDatosPuntajes.setIdPuntajes(idPuntajes);
-                if (mConexion.EliminarPuntajes(mDatosPuntajes)) {
-                    LBL_Mensajero1.setText("Se ha eliminado el registro #" + idPuntajes);
-                    LimpiarTabla();
-                    EliminarPuntaje();
-                }
-            } else {
-                LBL_Mensajero1.setText("No se ha podido conectar a la BD");
-            }
-        } catch (Exception e) {
-
-        }
+        EliminarPuntaje();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void TBPuntajesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBPuntajesMouseClicked
@@ -673,6 +658,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
         //LBL_Mensajero2.setText(String.valueOf(TBPuntajes.getValueAt(Fila,0)));
         idPuntajes = Integer.parseInt(TemporalPuntaje);
         //JOptionPane.showConfirmDialog(null, "Deseas borrar este puntaje", "Confirmar eliminacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        bandera = true;
     }//GEN-LAST:event_TBPuntajesMouseClicked
 
     private void CBConcurso2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBConcurso2ActionPerformed
@@ -695,7 +681,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
         String TemporalPuntaje = String.valueOf(TBPuntajes1.getValueAt(Fila, 0));
         String TemporalHoras = String.valueOf(TBPuntajes1.getValueAt(Fila, 1)).substring(0, 2);
         String TemporalMinutos = String.valueOf(TBPuntajes1.getValueAt(Fila, 1)).substring(3, 5);
-        String Complejidad =  String.valueOf(TBPuntajes1.getValueAt(Fila, 2));
+        String Complejidad = String.valueOf(TBPuntajes1.getValueAt(Fila, 2));
         //LBL_Mensajero2.setText(String.valueOf(TBPuntajes.getValueAt(Fila,0)));
 
         idPuntajeViejo = Integer.parseInt(TemporalPuntaje);
@@ -855,7 +841,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
             TablaLimpiar.removeRow(TablaLimpiar.getRowCount() - 1);
         }
     }
-    
+
     public void LimpiarTabla1() {
         DefaultTableModel TablaLimpiar = (DefaultTableModel) TBPuntajes1.getModel();
         int a = TBPuntajes1.getRowCount() - 1;
@@ -881,7 +867,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
             String[] Datos = null;
             if (mArrayListEliminarPuntajes != null) {
                 if (ContadorColumna == 1) {
-                    
+
                     ContadorColumna = 2;
                 }
 
@@ -915,15 +901,14 @@ public final class Puntajes extends javax.swing.JInternalFrame {
             if (this.TBPuntajes.getRowCount() > 0) {
                 this.TBPuntajes.setRowSelectionInterval(0, 0);
             }
-
+            mConexion.desconectar();
         } else {
             LBL_Mensajero1.setText("Error al consultar");
         }
 
-        mConexion.desconectar();
         ContadorColumna = 1;
     }
-    
+
     public void BuscarPuntajeParaModificar() {
         LimpiarTabla1();
         if (mConexion.conectar()) {
@@ -941,7 +926,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
             String[] Datos = null;
             if (mArrayListEliminarPuntajes != null) {
                 if (ContadorColumna == 1) {
-                    
+
                     ContadorColumna = 2;
                 }
 
@@ -982,16 +967,20 @@ public final class Puntajes extends javax.swing.JInternalFrame {
 
         mConexion.desconectar();
     }
-    
+
     public void EliminarPuntaje() {
         try {
             if (mConexion.conectar()) {
                 mDatosPuntajes = new DatosPuntajes();
                 mDatosPuntajes.setIdPuntajes(idPuntajes);
                 if (mConexion.EliminarPuntajes(mDatosPuntajes)) {
-                    LBL_Mensajero1.setText("Se ha eliminado el registro #" + idPuntajes);
-                    LimpiarTabla();
-                    BuscarPuntaje();
+                    if (idPuntajes != 0) {
+                        LBL_Mensajero1.setText("Se ha eliminado el registro #" + idPuntajes);
+                        LimpiarTabla();
+                        BuscarPuntaje();
+                    } else {
+                        LBL_Mensajero1.setText("No existe ese puntaje o no esta seleccionado");
+                    }
                 }
             } else {
                 LBL_Mensajero1.setText("No se ha podido conectar a la BD");
