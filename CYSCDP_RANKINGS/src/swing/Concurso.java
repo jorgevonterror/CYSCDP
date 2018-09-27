@@ -521,7 +521,11 @@ public class Concurso extends javax.swing.JInternalFrame {
                 mDatosConcurso = new DatosConcurso();
                 mDatosConcurso.setIdConcurso(ID);
                 if (mConexion.EliminarConcurso(mDatosConcurso)) {
+                    if (ID != 0) {
                     LBL_Mensajero1.setText("Concurso eliminado con éxito");
+                    } else {
+                        LBL_Mensajero1.setText("Seleccione un concurso");
+                    }
                 } else {
                     LBL_Mensajero1.setText("Este concurso no se puede eliminar,tiene relacion con otros registros");
                 }
