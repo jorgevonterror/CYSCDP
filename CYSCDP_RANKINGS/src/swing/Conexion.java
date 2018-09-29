@@ -367,4 +367,16 @@ public class Conexion {
         }
         return mListaEquipos;
     }
+    public boolean ModificarPauntajes(String Horas, String Minutos, String Complejidad, String idConcursos, String idEquipos, String idPuntajeM) {
+        Statement consulta;
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("update Puntajes set " +
+                    "Tiempo = '" + Horas + ":" + Minutos + ":00', Complejidad = '" + Complejidad  +  "', Concursos_idConcursos = '" + idConcursos + "', Equipos_idEquipos = '"+ idEquipos + "'" + " where idPuntajes = " + idPuntajeM + ";");
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error " + e);
+            return false;
+        }
+    }
 }

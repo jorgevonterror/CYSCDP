@@ -24,10 +24,11 @@ import javax.swing.table.DefaultTableModel;
 public final class Puntajes extends javax.swing.JInternalFrame {
 
     Conexion mConexion = new Conexion();
-    int Complejidad = 0, IDConcursos = 0, IDEquipo = 0, IDConcursos1 = 0, IDConcursos2 = 0, IDEquipo1 = 0, ContadorColumna = 1, idPuntajes = 0, IDEquipo2 = 0;
+    int Complejidad = 0, IDConcursos = 0, IDEquipo = 0, IDConcursos1 = 0, IDConcursos2 = 0, IDEquipo1 = 0, ContadorColumna = 1, idPuntajes = 0 , IDEquipo2 = 0;
     /*Para modificar Datos*/ int idPuntajeViejo = 0, HorasNuevas = 0, HorasViejas = 0, MinutosNuevos = 0, MinutosViejos = 0;
-    boolean bandera = false;
-
+    String TemporalPuntaje, TemporalHoras, TemporalMinutos, TemporalComplejidad;
+    String HorasV = "", MinutosV = "", ComplejidadV = "", ConcursoM = "", EquipoM = "";
+                                
     DatosPuntajes mDatosPuntajes;
     DefaultTableModel Tabla = new DefaultTableModel();
     DefaultTableModel Tabla2 = new DefaultTableModel();
@@ -658,7 +659,6 @@ public final class Puntajes extends javax.swing.JInternalFrame {
         //LBL_Mensajero2.setText(String.valueOf(TBPuntajes.getValueAt(Fila,0)));
         idPuntajes = Integer.parseInt(TemporalPuntaje);
         //JOptionPane.showConfirmDialog(null, "Deseas borrar este puntaje", "Confirmar eliminacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        bandera = true;
     }//GEN-LAST:event_TBPuntajesMouseClicked
 
     private void CBConcurso2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBConcurso2ActionPerformed
@@ -672,6 +672,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        ModificarPuntaje();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void TBPuntajes1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBPuntajes1MouseClicked
@@ -988,6 +989,49 @@ public final class Puntajes extends javax.swing.JInternalFrame {
         } catch (Exception e) {
 
         }
+    }
+    
+    public void ModificarPuntaje() {
+        HorasV = CBHoras1.getSelectedItem().toString();
+        MinutosV = CBMinutos1.getSelectedItem().toString();
+        ConcursoM = CBConcurso3.getSelectedItem().toString();
+        if (CBComplejidad1.getSelectedItem() == "Ninguna") {
+        } else {
+            if (CBComplejidad1.getSelectedItem() == "Básico") {
+                ComplejidadV = "1"; //Basico
+            } else {
+                if (CBComplejidad1.getSelectedItem() == "Medio") {
+                    ComplejidadV = "2"; //Medio
+                } else {
+                    if (CBComplejidad1.getSelectedItem() == "Avanzado") {
+                        ComplejidadV = "3"; //Avanzado
+                    } else {
+                        LBL_Mensajero2.setText("Selecciona una opcion de Complejidad");
+                    }
+                }
+            }
+        }
+        EquipoM = CBEquipo3.getSelectedItem().toString();
+        
+         if ((CBComplejidad1.getSelectedItem() != "Ninguna") && (CBEquipo3.getSelectedItem() != "Ninguno") && (CBConcurso3.getSelectedItem() != "Ninguno")) {
+             if (mConexion.conectar()) {
+                    int idConcursoM = mConexion.ConsultarIDConcursos(ConcursoM);
+                    int idEquipoM = mConexion.ConsultarIDEquipos(EquipoM);
+                    LBL_Mensajero2.setText(HorasV + " : " + MinutosV + " , " + ComplejidadV + " , " + idConcursoM + " , " + idEquipoM + " , " + idPuntajeViejo);
+                    //boolean bandera = mConexion.ModificarPauntajes(HorasV, MinutosV, ComplejidadV, ConcursoM, EquipoM, String.valueOf(idPuntajeViejo));
+                    String iPV = String.valueOf(idPuntajeViejo);                   
+                    if(mConexion.ModificarPauntajes(HorasV, MinutosV, ComplejidadV, String.valueOf(idConcursoM), String.valueOf(idEquipoM), iPV)) {                      
+                        LBL_Mensajero2.setText("Modificacion realizada");
+                        BuscarPuntajeParaModificar();
+                    } else {
+                        LBL_Mensajero2.setText("Modificacion NO realizada");
+                    }
+                    
+             }
+             
+         } else {
+             LBL_Mensajero2.setText("LLenar bien los campos");
+         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
