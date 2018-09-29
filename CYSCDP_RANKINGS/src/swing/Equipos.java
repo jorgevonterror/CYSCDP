@@ -32,6 +32,8 @@ public class Equipos extends javax.swing.JInternalFrame {
         Tabla.addColumn("Nombre");
         ConsultaTabla();
         ConsultaTablaAl();
+        //TXT_Nom.setEditable(false);
+        TXTnom.setEditable(false);
     }
 
     /**
@@ -288,11 +290,11 @@ public class Equipos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jPanel2MousePressed
 
     public boolean ValidarCajasNom() {
-        return !(TXT_Nom.getText().equals(""));
+        return !TXT_Nom.getText().equals("");
     }
 
     public boolean ValidarCajasnom() {
-        return !(TXTnom.getText().equals(""));
+        return !TXTnom.getText().equals("");
     }
 
     public void ConsultaTabla() {
@@ -328,15 +330,21 @@ public class Equipos extends javax.swing.JInternalFrame {
 
     private void BTN_altaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_altaActionPerformed
         DatosEquipo mDatosEquipo = new DatosEquipo();
-        if (ValidarCajasNom()) {
-            if (mConexion.conectar()) {
-                mDatosEquipo.setNombre(TXT_Nom.getText());
-                mConexion.AltaEquipos(mDatosEquipo);
-                LBL_Men.setText("Equipo agregado exitosamente");
-            }
-            mConexion.desconectar();
+        String text = TXT_Nom.getText();
+        text = text.replaceAll(" ", "");
+        if (text.length() != 0 && text.length() <= 35) {
+            if (ValidarCajasNom()) {
+                if (mConexion.conectar()) {
+                    mDatosEquipo.setNombre(TXT_Nom.getText());
+                    mConexion.AltaEquipos(mDatosEquipo);
+                    LBL_Men.setText("Equipo agregado exitosamente");
+                }
+                mConexion.desconectar();
+            } else {
+                LBL_Men.setText("Escribe un nombre para un equipo");
+            }          
         } else {
-            LBL_Men.setText("Escribe un nombre para un equipo");
+            LBL_Men.setText("Nombre no válido");
         }
         mConexion.desconectar();
         ConsultaTablaAl();

@@ -791,7 +791,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
                     if (CBComplejidad.getSelectedItem() == "Avanzado") {
                         Complejidad = 3; //Avanzado
                     } else {
-                        LBL_Mensajero.setText("Selecciona una opcion de Complejidad");
+                        LBL_Mensajero.setText("Selecciona una opción de Complejidad");
                     }
                 }
             }
@@ -805,7 +805,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
                 IDConcursos = mConexion.ConsultarIDConcursos(CBConcurso.getSelectedItem().toString());
                 IDEquipo = mConexion.ConsultarIDEquipos(CBEquipo.getSelectedItem().toString());
             } else {
-                LBL_Mensajero.setText("Selecciona una opcion de complejidad y/o equipo");
+                LBL_Mensajero.setText("Selecciona una opción de complejidad y/o equipo");
             }
             mConexion.desconectar();
         } else {
@@ -818,7 +818,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
         if (mConexion.conectar()) {
             if ((CBComplejidad.getSelectedItem() != "Ninguna") && (CBEquipo.getSelectedItem() != "Ninguno") && ((CBHoras.getSelectedItem() != "0") || (CBMinutos.getSelectedItem() != "0")) && (CBConcurso.getSelectedItem() != "Ninguno")) {
                 if (mConexion.AltaPuntaje(mDatosPuntajes)) {
-                    LBL_Mensajero.setText("Se guardo el puntaje");
+                    LBL_Mensajero.setText("Se guardó el puntaje");
                     CBHoras.setSelectedIndex(0);
                     CBMinutos.setSelectedIndex(0);
                     CBComplejidad.setSelectedIndex(0);
@@ -858,7 +858,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
                 IDConcursos1 = mConexion.ConsultarIDConcursos(CBConcurso1.getSelectedItem().toString());
                 IDEquipo1 = mConexion.ConsultarIDEquipos(CBEquipo1.getSelectedItem().toString());
             } else {
-                LBL_Mensajero1.setText("Selecciona una opcion de concurso y/o equipo");
+                LBL_Mensajero1.setText("Selecciona una opción de concurso y/o equipo");
             }
 
             ArrayList mArrayListEliminarPuntajes = new ArrayList();
@@ -917,7 +917,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
                 IDConcursos2 = mConexion.ConsultarIDConcursos(CBConcurso2.getSelectedItem().toString());
                 IDEquipo2 = mConexion.ConsultarIDEquipos(CBEquipo2.getSelectedItem().toString());
             } else {
-                LBL_Mensajero2.setText("Selecciona opcion correcta");
+                LBL_Mensajero2.setText("Selecciona opción correcta");
             }
 
             ArrayList mArrayListEliminarPuntajes = new ArrayList();
@@ -979,7 +979,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
                         LimpiarTabla();
                         BuscarPuntaje();
                     } else {
-                        LBL_Mensajero1.setText("No existe ese puntaje o no esta seleccionado");
+                        LBL_Mensajero1.setText("No existe ese puntaje o no está seleccionado");
                     }
                 }
             } else {

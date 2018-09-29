@@ -165,27 +165,26 @@ public class Concurso extends javax.swing.JInternalFrame {
                     .addComponent(CBaño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TXTdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(223, 223, 223)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(BTNalta))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel9))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(LBL_Mensajero2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(LBL_Mensajero2, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(106, 106, 106)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel10)
+                                .addComponent(jLabel3))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(TXTdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(223, 223, 223)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel8)
+                                .addComponent(BTNalta))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel9))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(43, 43, 43)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -391,10 +390,10 @@ public class Concurso extends javax.swing.JInternalFrame {
             String[] Datos = null;
             if (mArrayListaConcursos != null) {
                 if (ContadorColumna == 1) {
-                    Tabla.addColumn("id");
-                    Tabla.addColumn("Descripcion");
+                    Tabla.addColumn("ID");
+                    Tabla.addColumn("Descripción");
                     Tabla.addColumn("Fecha");
-                    Tabla.addColumn("Tiempo_Limite");
+                    Tabla.addColumn("Tiempo_Límite");
                     ContadorColumna = 2;
                 }
 
@@ -443,7 +442,7 @@ public class Concurso extends javax.swing.JInternalFrame {
 
             String texto = TXTdescripcion.getText();
             texto = texto.replaceAll(" ", "");
-            if (texto.length() == 0) {
+            if ((texto.length() == 0) || (texto.length()>=150)) {
                 LBL_Mensajero2.setText("Debe ingresar todos los datos correctamente");
             } else {
                 if (mConexion.conectar()) {
@@ -480,10 +479,10 @@ public class Concurso extends javax.swing.JInternalFrame {
             String[] Datos = null;
             if (mArrayListConcursos != null) {
                 if (ContadorColumna2 == 1) {
-                    Tabla2.addColumn("id");
-                    Tabla2.addColumn("Descripcion");
+                    Tabla2.addColumn("ID");
+                    Tabla2.addColumn("Descripción");
                     Tabla2.addColumn("Fecha");
-                    Tabla2.addColumn("Tiempo_Limite");
+                    Tabla2.addColumn("Tiempo_Límite");
                     ContadorColumna2 = 2;
                 }
 

@@ -447,7 +447,7 @@ public class Participantes extends javax.swing.JInternalFrame {
             String[] Datos = null;
             if (mArrayListaPartic != null) {
                 if (ContadorColumna == 1) {
-                    Tabla.addColumn("id");
+                    Tabla.addColumn("ID");
                     Tabla.addColumn("Nombre");
                     Tabla.addColumn("Carrera");
                     Tabla.addColumn("Semestre");
@@ -579,7 +579,7 @@ public class Participantes extends javax.swing.JInternalFrame {
             if (mConexion.conectar()) {
                 if ((CBcarrera.getSelectedItem() != "Ninguna") && (CBsemestre.getSelectedItem() != "Ninguno") && (CBequipo.getSelectedItem() != "Ninguno")) {
                     if (mConexion.AltaParticipante(mDatosParticipante)) {
-                        LBL_Mensajero.setText("Se guardo el participante");
+                        LBL_Mensajero.setText("Se guardó el participante");
                         TXTnombre.setText("");
                         CBsemestre.setSelectedIndex(0);
                         CBcarrera.setSelectedIndex(0);

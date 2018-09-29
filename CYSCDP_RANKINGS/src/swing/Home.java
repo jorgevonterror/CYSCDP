@@ -32,7 +32,6 @@ public class Home extends javax.swing.JFrame {
         in.show();
         //Acomodamos el formulario en el centro.
         this.setLocationRelativeTo(null);
-
     }
 
     /**
