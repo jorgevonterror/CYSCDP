@@ -335,14 +335,18 @@ public class Equipos extends javax.swing.JInternalFrame {
         if (text.length() != 0 && text.length() <= 35) {
             if (ValidarCajasNom()) {
                 if (mConexion.conectar()) {
-                    mDatosEquipo.setNombre(TXT_Nom.getText());
-                    mConexion.AltaEquipos(mDatosEquipo);
-                    LBL_Men.setText("Equipo agregado exitosamente");
+                    String NombreEq = mConexion.ConsultaNomEquipos(TXT_Nom.getText());
+                    if (!NombreEq.equals(text)) {
+                            mDatosEquipo.setNombre(TXT_Nom.getText());
+                            mConexion.AltaEquipos(mDatosEquipo);
+                            LBL_Men.setText("Equipo agregado exitosamente");
+                    }
+                    LBL_Men.setText("Ya existe un equipo con ese nombre");
                 }
                 mConexion.desconectar();
             } else {
                 LBL_Men.setText("Escribe un nombre para un equipo");
-            }          
+            }
         } else {
             LBL_Men.setText("Nombre no válido");
         }

@@ -323,6 +323,23 @@ public class Conexion {
         }
         return Nombre;
     }
+    
+    public String ConsultaNomEquipos(String nombre) {
+        String Nombre = "";
+        Statement consulta;
+        ResultSet resultado;
+
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from Equipos where NombreEquipo = '" + nombre + "';");
+            while (resultado.next()) {
+                Nombre = resultado.getString("NombreEquipo");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Nombre;
+    }
 
     public ArrayList consultarEquiposFiltro(String Busqueda) { //Se usará despues
         DatosEquipo mEquipo = null;
