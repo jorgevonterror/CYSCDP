@@ -396,4 +396,56 @@ public class Conexion {
             return false;
         }
     }
+    
+    public ArrayList ConsultarTotalPuntajesPorConcurso(int idConcurso, int idConcurso1) {
+        ArrayList mListaConcursantes = new ArrayList();
+
+        Statement consulta;
+        ResultSet resultado;
+        String Datos;
+
+        try {
+            consulta = conexion.createStatement();
+            //SELECT idPuntajes FROM Puntajes WHERE Concursos_idConcursos = '1' and Equipos_idEquipos = '2'
+            resultado = consulta.executeQuery("SELECT Puntajes.Tiempo, Puntajes.Complejidad, Puntajes.Equipos_idEquipos from Puntajes, Concursos where Puntajes.Concursos_idConcursos = '" 
+                    + idConcurso 
+                    + "' and Concursos.idConcursos = '" + idConcurso1 + "';");
+            while (resultado.next()) {
+                Datos = "";
+                Datos = resultado.getString("Tiempo") + resultado.getString("Complejidad") + resultado.getString("Equipos_idEquipos");
+
+                mListaConcursantes.add(Datos);
+                //mListaPuntajesTiempo.add(resultado.getString("Complejidad"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mListaConcursantes;
+    }
+    
+    public ArrayList ConsultarIdConcursantes(int idConcurso, int idConcurso1) {
+        ArrayList mListaConcursantes = new ArrayList();
+
+        Statement consulta;
+        ResultSet resultado;
+        String Datos;
+
+        try {
+            consulta = conexion.createStatement();
+            //SELECT idPuntajes FROM Puntajes WHERE Concursos_idConcursos = '1' and Equipos_idEquipos = '2'
+            resultado = consulta.executeQuery("SELECT Puntajes.Equipos_idEquipos from Puntajes, Concursos where Puntajes.Concursos_idConcursos = '" 
+                    + idConcurso 
+                    + "' and Concursos.idConcursos = '" + idConcurso1 + "' GROUP by Puntajes.Equipos_idEquipos;");
+            while (resultado.next()) {
+                Datos = "";
+                Datos = resultado.getString("Equipos_idEquipos");
+
+                mListaConcursantes.add(Datos);
+                //mListaPuntajesTiempo.add(resultado.getString("Complejidad"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mListaConcursantes;
+    }
 }
