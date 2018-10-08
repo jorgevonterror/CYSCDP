@@ -165,6 +165,20 @@ public class Conexion {
             return false;
         }
     }
+    
+    public boolean ModificarEquipo(DatosEquipo vEquipo, DatosEquipo nEquipo) {
+        Statement consulta;
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("update Equipos set "
+                    + "NombreEquipo = '" + nEquipo.getNombre() + "' "
+                    + " where idEquipos = " + vEquipo.getId() + ";");
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error " + e);
+            return false;
+        }
+    }
 
     public ArrayList ConsultaNombresConcurso() {
         ArrayList mListaNombresConcurso = new ArrayList();
@@ -348,11 +362,11 @@ public class Conexion {
         ArrayList mListaEquipos = new ArrayList();
 
         try {
-            mEquipo = new DatosEquipo();
             consulta = conexion.createStatement();
             resultado = consulta.executeQuery("select * from Equipos where "
                     + "NombreEquipo like '%" + Busqueda + "%';");
-            if (resultado.next()) {
+            while (resultado.next()) {
+                mEquipo = new DatosEquipo();
                 mEquipo.setId(resultado.getInt("idEquipos"));
                 mEquipo.setNombre(resultado.getString("NombreEquipo"));
                 mListaEquipos.add(mEquipo);
@@ -360,7 +374,6 @@ public class Conexion {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return mListaEquipos;
     }
     
