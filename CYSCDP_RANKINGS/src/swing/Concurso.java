@@ -31,8 +31,10 @@ public class Concurso extends javax.swing.JInternalFrame {
     public Concurso() {
         initComponents();
         ConsultaTabla();
+        ConsultaTabla2();
         LBL_Mensajero1.setText("");
         LBL_Mensajero2.setText("");
+        
     }
 
     /**
@@ -71,7 +73,6 @@ public class Concurso extends javax.swing.JInternalFrame {
         LBL_Mensajero1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TBLConcursos = new javax.swing.JTable();
-        BTNbuscar = new javax.swing.JToggleButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -245,14 +246,6 @@ public class Concurso extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(TBLConcursos);
 
-        BTNbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/16 (Search).jpg"))); // NOI18N
-        BTNbuscar.setText("Buscar");
-        BTNbuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTNbuscarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -261,8 +254,7 @@ public class Concurso extends javax.swing.JInternalFrame {
                 .addGap(38, 38, 38)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(BTNbuscar)
-                        .addGap(228, 228, 228)
+                        .addGap(300, 300, 300)
                         .addComponent(BTNborrar))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(LBL_Mensajero1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -273,9 +265,7 @@ public class Concurso extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BTNborrar)
-                    .addComponent(BTNbuscar))
+                .addComponent(BTNborrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
@@ -459,6 +449,7 @@ public class Concurso extends javax.swing.JInternalFrame {
                     }
                     mConexion.desconectar();
                     ConsultaTabla();
+                    ConsultaTabla2();
                 }
             }
         } catch (HeadlessException | NumberFormatException e) {
@@ -529,6 +520,7 @@ public class Concurso extends javax.swing.JInternalFrame {
                     LBL_Mensajero1.setText("Este concurso no se puede eliminar,tiene relacion con otros registros");
                 }
                 mConexion.desconectar();
+                ConsultaTabla();
                 ConsultaTabla2();
             }
 
@@ -541,11 +533,6 @@ public class Concurso extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_TBLaltaConcursosMouseClicked
-
-    private void BTNbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNbuscarActionPerformed
-        // TODO add your handling code here:
-        ConsultaTabla2();
-    }//GEN-LAST:event_BTNbuscarActionPerformed
 
     private void TBLConcursosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBLConcursosMouseClicked
         // TODO add your handling code here:
@@ -560,7 +547,6 @@ public class Concurso extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNalta;
     private javax.swing.JButton BTNborrar;
-    private javax.swing.JToggleButton BTNbuscar;
     private javax.swing.JComboBox<String> CBaño;
     private javax.swing.JComboBox<String> CBdia;
     private javax.swing.JComboBox<String> CBhora;
