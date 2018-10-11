@@ -349,7 +349,7 @@ public class Home extends javax.swing.JFrame {
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Gráficas");
+        jLabel13.setText("Estadísticas");
 
         javax.swing.GroupLayout btn_7Layout = new javax.swing.GroupLayout(btn_7);
         btn_7.setLayout(btn_7Layout);
@@ -359,7 +359,7 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(ind_7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(jLabel13)
-                .addGap(0, 35, Short.MAX_VALUE))
+                .addGap(0, 15, Short.MAX_VALUE))
         );
         btn_7Layout.setVerticalGroup(
             btn_7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
