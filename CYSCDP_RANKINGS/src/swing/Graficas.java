@@ -14,6 +14,10 @@ import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -24,14 +28,14 @@ public class Graficas extends javax.swing.JInternalFrame {
     /**
      * Creates new form Graficas
      */
-    
     Conexion mConexion = new Conexion();
     DatosPuntajes mDatosPuntajes;
     DefaultTableModel Tabla = new DefaultTableModel();
     DefaultTableModel Tabla2 = new DefaultTableModel();
-    
-    int IDConcurso = 0; int ContadorColumna = 1;
-    
+
+    int IDConcurso = 0;
+    int ContadorColumna = 1;
+
     public Graficas() {
         initComponents();
         LlenarComboConcurso();
@@ -69,11 +73,30 @@ public class Graficas extends javax.swing.JInternalFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Tabla_Nombre_Resultados = new javax.swing.JTable();
+        Panel_Oculto = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
 
         setBorder(null);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(71, 120, 197));
         jPanel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -111,16 +134,16 @@ public class Graficas extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(116, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(115, 115, 115)
+                .addGap(120, 120, 120)
                 .addComponent(jLabel5)
-                .addGap(38, 38, 38))
+                .addGap(14, 14, 14))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -160,7 +183,9 @@ public class Graficas extends javax.swing.JInternalFrame {
 
         jRadioButton3.setText("Pastel");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jPanel6.setBackground(new java.awt.Color(204, 204, 255));
+
+        Tabla_Nombre_Resultados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -171,27 +196,52 @@ public class Graficas extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(Tabla_Nombre_Resultados);
+
+        jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/Eclipse-1s-200px.gif"))); // NOI18N
+
+        javax.swing.GroupLayout Panel_OcultoLayout = new javax.swing.GroupLayout(Panel_Oculto);
+        Panel_Oculto.setLayout(Panel_OcultoLayout);
+        Panel_OcultoLayout.setHorizontalGroup(
+            Panel_OcultoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_OcultoLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel6)
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+        Panel_OcultoLayout.setVerticalGroup(
+            Panel_OcultoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_OcultoLayout.createSequentialGroup()
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 215, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Panel_Oculto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 245, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Panel_Oculto, javax.swing.GroupLayout.PREFERRED_SIZE, 203, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel6Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-                    .addContainerGap()))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -204,17 +254,16 @@ public class Graficas extends javax.swing.JInternalFrame {
                         .addComponent(jRadioButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jRadioButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(29, 29, 29)
                         .addComponent(jRadioButton3))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator3)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addComponent(jLabel3)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -231,7 +280,7 @@ public class Graficas extends javax.swing.JInternalFrame {
                     .addComponent(jRadioButton3))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(276, Short.MAX_VALUE))
+                .addContainerGap(419, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 255));
@@ -246,7 +295,7 @@ public class Graficas extends javax.swing.JInternalFrame {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 322, Short.MAX_VALUE)
+            .addGap(0, 286, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -262,8 +311,8 @@ public class Graficas extends javax.swing.JInternalFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -302,7 +351,7 @@ public class Graficas extends javax.swing.JInternalFrame {
                         .addComponent(CBNumProg, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,8 +397,7 @@ public class Graficas extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 530, Short.MAX_VALUE))
         );
 
         pack();
@@ -374,8 +422,13 @@ public class Graficas extends javax.swing.JInternalFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+       
         MostrarGanadores();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        
+    }//GEN-LAST:event_formInternalFrameOpened
 
     public void LlenarComboConcurso() {
         CBConcurso.addItem("Ninguno");
@@ -397,25 +450,27 @@ public class Graficas extends javax.swing.JInternalFrame {
             LBL_Mensajero.setText("No conectado a la BD");
         }
     }
-    
-    public void MostrarGanadores() {       
+
+ 
+
+    public void MostrarGanadores() {
         CBResultados.removeAllItems();
         ArrayList mArrayListEquipo = new ArrayList();
-              
+
         if (mConexion.conectar()) {
-            
+
             //toma el id del concurso
-            IDConcurso = mConexion.ConsultarIDConcursos(CBConcurso.getSelectedItem().toString());           
+            IDConcurso = mConexion.ConsultarIDConcursos(CBConcurso.getSelectedItem().toString());
             //tomamos los puntajes de dicho concurso
             ArrayList mArrayList = new ArrayList();
             mArrayList = mConexion.ConsultarTotalPuntajesPorConcurso(IDConcurso, IDConcurso);
-            mArrayListEquipo = mConexion.ConsultarIdConcursantes(IDConcurso, IDConcurso);           
-            String[][] ArrayPuntajesConID = new String[mArrayList.size()][2];            
+            mArrayListEquipo = mConexion.ConsultarIdConcursantes(IDConcurso, IDConcurso);
+            String[][] ArrayPuntajesConID = new String[mArrayList.size()][2];
             String[] Datos = null;
-                      
+
             if (mArrayList != null) {
                 for (int i = 0; i < mArrayList.size(); i++) {
-                    
+
                     Datos = new String[3];
                     Datos[0] = mArrayList.get(i).toString().substring(9); //ID                    
                     ArrayPuntajesConID[i][0] = mArrayList.get(i).toString().substring(9);  //Id del equipo
@@ -426,97 +481,111 @@ public class Graficas extends javax.swing.JInternalFrame {
                     float TiempoXPrograma = HorasPuntajeActualConvertidas + MinutosPuntajeActual;
                     String TiempoActual = String.valueOf(TiempoXPrograma);  //tiempo del programa actual en minutos                   
                     String ComplejidadActual = mArrayList.get(i).toString().substring(8, 9);    //complejidad del programa atual                   
-                    float ComplejidadEntreTiempo = Float.parseFloat(ComplejidadActual) / Float.parseFloat(TiempoActual);                   
+                    float ComplejidadEntreTiempo = Float.parseFloat(ComplejidadActual) / Float.parseFloat(TiempoActual);
                     ArrayPuntajesConID[i][1] = String.valueOf(ComplejidadEntreTiempo);
                 }
-                
+
                 String[][] ArrayPuntajesCalculadosNombres = new String[mArrayListEquipo.size()][2];
-                
+
                 for (int i = 0; i < mArrayListEquipo.size(); i++) {
 
                     float ComplejidadEntreTiempo_Equipo = 0;
-                    
-                    for (int j = 0; j < mArrayList.size(); j ++) {
-                        
-                            if (Integer.parseInt(ArrayPuntajesConID[j][0]) == Integer.parseInt(mArrayListEquipo.get(i).toString())) {
-                                float ComplejidadEntreTiempo_Entrante = Float.parseFloat(ArrayPuntajesConID[j][1]);
-                                ComplejidadEntreTiempo_Equipo = ComplejidadEntreTiempo_Equipo + ComplejidadEntreTiempo_Entrante;
-                            }          
+
+                    for (int j = 0; j < mArrayList.size(); j++) {
+
+                        if (Integer.parseInt(ArrayPuntajesConID[j][0]) == Integer.parseInt(mArrayListEquipo.get(i).toString())) {
+                            float ComplejidadEntreTiempo_Entrante = Float.parseFloat(ArrayPuntajesConID[j][1]);
+                            ComplejidadEntreTiempo_Equipo = ComplejidadEntreTiempo_Equipo + ComplejidadEntreTiempo_Entrante;
+                        }
                     }
                     //Comprobamos que exista algún límite de programa y sacamos el cálculo total                    
                     if ("0".equals(CBNumProg.getSelectedItem().toString())) {
                         LBL_Mensajero.setText("No puedes hacer el cálculo con el número de concursos siendo 0");
                     } else {
-                        float Resultado = ((ComplejidadEntreTiempo_Equipo)/(Float.parseFloat(CBNumProg.getSelectedItem().toString()))) * 100;
+                        float Resultado = ((ComplejidadEntreTiempo_Equipo) / (Float.parseFloat(CBNumProg.getSelectedItem().toString()))) * 100;
                         ArrayPuntajesCalculadosNombres[i][0] = mArrayListEquipo.get(i).toString();
-                        ArrayPuntajesCalculadosNombres[i][1] = String.valueOf(Resultado);                        
+                        ArrayPuntajesCalculadosNombres[i][1] = String.valueOf(Resultado);
                         LBL_Mensajero.setText("");
                     }
-                }               
+                }
                 //LLenamos el arreglo con su respectivo nombre, y su puntaje total
                 if (mConexion.conectar()) {
                     if ("0".equals(CBNumProg.getSelectedItem().toString())) {
                         LBL_Mensajero.setText("No puedes hacer el cálculo con el número de concursos siendo 0");
                     } else {
                         for (int i = 0; i < mArrayListEquipo.size(); i++) {
-                            
+
                             String NombreTemporal = mConexion.ConsultaNombresEquipos(Integer.parseInt(ArrayPuntajesCalculadosNombres[i][0]));
                             ArrayPuntajesCalculadosNombres[i][0] = NombreTemporal;
-                            
+
                         }
                         mConexion.desconectar();
                         LBL_Mensajero.setText("");
-                    }                   
+                    }
                 } else {
 
                 }
                 //Mostramos equipos con puntajes
-                for (int i = 0; i < mArrayListEquipo.size(); i++) { 
+                for (int i = 0; i < mArrayListEquipo.size(); i++) {
                     if ((ArrayPuntajesCalculadosNombres[i][0] == null) && (ArrayPuntajesCalculadosNombres[i][1] == null)) {
-                        
+
                     } else {
-                        CBResultados.addItem(ArrayPuntajesCalculadosNombres[i][0] + " " +  ArrayPuntajesCalculadosNombres[i][1]);
+                        CBResultados.addItem(ArrayPuntajesCalculadosNombres[i][0] + " " + ArrayPuntajesCalculadosNombres[i][1]);
                         //DONDE:
-                            //ArrayPuntajesCalculadosNombres[i][0] tiene el nombre del equipo
-                            //ArrayPuntajesCalculadosNombres[i][1] tiene el puntaje
-                            //i representa el numero de equipos.
-                            
-                            //A partir de aquí va la gráfica.
-                            
-                            DefaultCategoryDataset dtsc = new DefaultCategoryDataset();
-                            
-                            dtsc.setValue(10.1, "", "");
-                            dtsc.setValue(11.1, "", "");
-                            dtsc.setValue(12.1, "", "");
-                            dtsc.setValue(13.1, "", "");
-                            dtsc.setValue(14.1, "", "");
-                            
-                            JFreeChart grafico = ChartFactory.createLineChart("ESTADÍSTICAS",
-                                    "Concurso", "Puntaje", dtsc, PlotOrientation.VERTICAL, true, true, false);
-                            
-                            try{
-                                OutputStream png = new FileOutputStream("Gráfico.png");
-                                ChartUtilities.writeBufferedImageAsPNG(png, grafico.createBufferedImage(400, 500));
-                                png.close();
-                            }catch(Exception e){
-                            
-                            }
-                    }                   
+                        //ArrayPuntajesCalculadosNombres[i][0] tiene el nombre del equipo
+                        //ArrayPuntajesCalculadosNombres[i][1] tiene el puntaje
+                        //i representa el numero de equipos.
+
+                        //A partir de aquí va la gráfica.
+                        //Se llena la tabla para que cuando se seleccione la tabla 
+                        Panel_Oculto.hide();
+
+                        String nombreColumnas[] = {"Nom. Equipo", "Puntuación"};
+                        String data[][] = new String[50][50];
+
+                        for (int j = 0; j < ArrayPuntajesCalculadosNombres.length; j++) {
+                            data[j][0] = ArrayPuntajesCalculadosNombres[i][0];
+                            data[j][1] = ArrayPuntajesCalculadosNombres[i][1];
+                        }
+
+                        this.Tabla_Nombre_Resultados.setModel(new DefaultTableModel(data, nombreColumnas));
+
+//                            DefaultCategoryDataset dtsc = new DefaultCategoryDataset();
+//                            
+//                            dtsc.setValue(10.1, "", "");
+//                            dtsc.setValue(11.1, "", "");
+//                            dtsc.setValue(12.1, "", "");
+//                            dtsc.setValue(13.1, "", "");
+//                            dtsc.setValue(14.1, "", "");
+//                            
+//                            JFreeChart grafico = ChartFactory.createLineChart("ESTADÍSTICAS",
+//                                    "Concurso", "Puntaje", dtsc, PlotOrientation.VERTICAL, true, true, false);
+//                            
+//                            try{
+//                                OutputStream png = new FileOutputStream("Gráfico.png");
+//                                ChartUtilities.writeBufferedImageAsPNG(png, grafico.createBufferedImage(400, 500));
+//                                png.close();
+//                            }catch(Exception e){
+//                            
+//                            }
+                    }
                 }
             } else {
                 LBL_Mensajero.setText("No hay puntajes");
-            }           
-            mConexion.desconectar();           
+            }
+            mConexion.desconectar();
         } else {
             LBL_Mensajero.setText("No estas conectado a la BD");
         }
     }
-
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> CBConcurso;
     private javax.swing.JComboBox<String> CBNumProg;
     private javax.swing.JComboBox<String> CBResultados;
     private javax.swing.JLabel LBL_Mensajero;
+    private javax.swing.JPanel Panel_Oculto;
+    private javax.swing.JTable Tabla_Nombre_Resultados;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -524,6 +593,7 @@ public class Graficas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -538,6 +608,5 @@ public class Graficas extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

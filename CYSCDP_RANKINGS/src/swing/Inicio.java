@@ -29,7 +29,7 @@ public class Inicio extends javax.swing.JInternalFrame  {
         int dia = calendario.get(Calendar.DAY_OF_MONTH);
         LBL_DIA.setText(Integer.toString(dia));
         int mes = calendario.get(Calendar.MONTH);
-        LBL_MES.setText(Integer.toString(mes));
+        LBL_MES.setText(Integer.toString(mes+1));
         int anyo = calendario.get(Calendar.YEAR);
         LBL_ANYO.setText(Integer.toString(anyo));
     }
