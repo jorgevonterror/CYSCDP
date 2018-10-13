@@ -6,7 +6,13 @@
 package swing;
 
 import java.awt.HeadlessException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,6 +32,8 @@ public class Concurso extends javax.swing.JInternalFrame {
     DefaultTableModel Tabla2 = new DefaultTableModel();
     DefaultTableModel Tabla3 = new DefaultTableModel();
     DefaultTableModel Tabla4 = new DefaultTableModel();
+    
+    DateFormat df = DateFormat.getDateInstance();
     /**
      * Creates new form Concurso
      */
@@ -57,18 +65,13 @@ public class Concurso extends javax.swing.JInternalFrame {
         BTNalta = new javax.swing.JButton();
         CBhora = new javax.swing.JComboBox<>();
         CBminutos = new javax.swing.JComboBox<>();
-        CBdia = new javax.swing.JComboBox<>();
-        CBmes = new javax.swing.JComboBox<>();
-        CBaño = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         TXTdescripcion = new javax.swing.JTextField();
         jScrollPane6 = new javax.swing.JScrollPane();
         TBLaltaConcursos = new javax.swing.JTable();
         LBL_Mensajero2 = new javax.swing.JLabel();
+        DCfechaAlta = new com.toedter.calendar.JDateChooser();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         BTNborrar = new javax.swing.JButton();
@@ -91,6 +94,8 @@ public class Concurso extends javax.swing.JInternalFrame {
         CBminCambios = new javax.swing.JComboBox<>();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
+        DCfechaCambios = new com.toedter.calendar.JDateChooser();
+        LBLidCambios = new javax.swing.JLabel();
         jTabbedPane4 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -118,25 +123,13 @@ public class Concurso extends javax.swing.JInternalFrame {
             }
         });
 
-        CBhora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24" }));
+        CBhora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24" }));
 
         CBminutos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
-
-        CBdia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-
-        CBmes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-
-        CBaño.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025" }));
 
         jLabel8.setText("Horas");
 
         jLabel9.setText("Minutos");
-
-        jLabel10.setText("Día");
-
-        jLabel11.setText("Mes");
-
-        jLabel12.setText("Año");
 
         TBLaltaConcursos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -168,35 +161,9 @@ public class Concurso extends javax.swing.JInternalFrame {
                 .addComponent(CBminutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(158, 158, 158))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(263, 263, 263)
-                        .addComponent(jLabel11)
-                        .addGap(47, 47, 47))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(CBdia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CBmes, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel12))
-                    .addComponent(CBaño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(LBL_Mensajero2, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(106, 106, 106)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel10)
-                                .addComponent(jLabel3))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(TXTdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(223, 223, 223)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,24 +173,26 @@ public class Concurso extends javax.swing.JInternalFrame {
                             .addComponent(jLabel9))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(43, 43, 43)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(106, 106, 106)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel2))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(TXTdescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                                .addComponent(DCfechaAlta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
-                    .addComponent(CBmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CBaño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CBdia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(DCfechaAlta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(TXTdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -243,7 +212,7 @@ public class Concurso extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LBL_Mensajero2)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Alta", jPanel1);
@@ -347,6 +316,8 @@ public class Concurso extends javax.swing.JInternalFrame {
 
         jLabel18.setText("Minutos");
 
+        LBLidCambios.setText("ID");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -354,19 +325,14 @@ public class Concurso extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(LBL_Mensajero3, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addContainerGap()
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(LBL_Mensajero3, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel4Layout.createSequentialGroup()
                             .addGap(30, 30, 30)
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel15)
-                                .addGroup(jPanel4Layout.createSequentialGroup()
-                                    .addComponent(jLabel13)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(TXTnombreCambios, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanel4Layout.createSequentialGroup()
                                     .addComponent(jLabel16)
                                     .addGap(18, 18, 18)
@@ -376,19 +342,31 @@ public class Concurso extends javax.swing.JInternalFrame {
                                         .addGroup(jPanel4Layout.createSequentialGroup()
                                             .addGap(6, 6, 6)
                                             .addComponent(jLabel18))
-                                        .addComponent(CBminCambios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(CBminCambios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel13)
+                                        .addComponent(jLabel15))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(TXTnombreCambios, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                                        .addComponent(DCfechaCambios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(161, 161, 161)
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BTNmodificar)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BTNmodificar)
+                            .addComponent(LBLidCambios, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel15)
+                .addGap(17, 17, 17)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel15)
+                    .addComponent(DCfechaCambios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
@@ -397,7 +375,8 @@ public class Concurso extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(CBhorasCambios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CBminCambios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CBminCambios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LBLidCambios))
                 .addGap(3, 3, 3)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTNmodificar)
@@ -606,10 +585,9 @@ public class Concurso extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             //if (TXTdescripcion.getText() != null) { 
-            String Anyo = (String) CBaño.getSelectedItem();
-            String Mes = (String) CBmes.getSelectedItem();
-            String Dia = (String) CBdia.getSelectedItem();
-            String Fecha1 = Anyo + "-" + Mes + "-" + Dia;
+            String Fecha1 = "";
+            Fecha1 = new SimpleDateFormat("yyyy-MM-dd").format(DCfechaAlta.getDate());
+            
             int HoraLim = Integer.parseInt(CBhora.getSelectedItem().toString());
             int MinLim = Integer.parseInt(CBminutos.getSelectedItem().toString());
             String Tiempo1 = HoraLim + ":" + MinLim + ":00";
@@ -619,15 +597,12 @@ public class Concurso extends javax.swing.JInternalFrame {
 
             String texto = TXTdescripcion.getText();
             texto = texto.replaceAll(" ", "");
-            if ((texto.length() == 0) || (texto.length()>=150)) {
+            if ((texto.length() == 0) || (texto.length()>=150) || ((CBhora.getSelectedItem() == "00") && (CBminutos.getSelectedItem() == "00")) ) {
                 LBL_Mensajero2.setText("Debe ingresar todos los datos correctamente");
             } else {
                 if (mConexion.conectar()) {
                     if (mConexion.AltaConcurso(mDatosConcurso)) {
                         LBL_Mensajero2.setText("El concurso fue guardado con éxito");
-                        CBdia.setSelectedIndex(0);
-                        CBmes.setSelectedIndex(0);
-                        CBaño.setSelectedIndex(0);
                         TXTdescripcion.setText("");
                         CBhora.setSelectedIndex(0);
                         CBminutos.setSelectedIndex(0);
@@ -640,6 +615,7 @@ public class Concurso extends javax.swing.JInternalFrame {
                     ConsultaTabla3();
                 }
             }
+            DCfechaAlta.setCalendar(null);
         } catch (HeadlessException | NumberFormatException e) {
             LBL_Mensajero2.setText("POR FAVOR, LLENE BIEN LOS DATOS");
         }
@@ -712,8 +688,9 @@ public class Concurso extends javax.swing.JInternalFrame {
                 ConsultaTabla();
                 ConsultaTabla2();
                 ConsultaTabla3();
+                
             }
-
+            TXTnombreBaja.setText("");
         } catch (Exception e) {
             LBL_Mensajero1.setText("ERROR, Seleccione un concurso");
         }
@@ -777,7 +754,7 @@ public class Concurso extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         Seleccion = TBLConcursos.rowAtPoint(evt.getPoint());
         String TempC = String.valueOf(TBLConcursos.getValueAt(Seleccion, 0));
-        //LBL_Mensajero2.setText(String.valueOf(TBPuntajes.getValueAt(Fila,0)));
+        TXTnombreBaja.setText(TBLConcursos.getModel().getValueAt(Seleccion, 1).toString());
         ID = Integer.parseInt(TempC);
 
     }//GEN-LAST:event_TBLConcursosMouseClicked
@@ -790,11 +767,11 @@ public class Concurso extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         TXTnombreCambios.setText("");
         Seleccion2 = TBLcambios.rowAtPoint(evt.getPoint());
+        LBLidCambios.setText(TBLcambios.getModel().getValueAt(Seleccion2, 0).toString());
         TXTnombreCambios.setText(TBLcambios.getModel().getValueAt(Seleccion2, 1).toString());
         String TemporalHoras = String.valueOf(TBLcambios.getValueAt(Seleccion2, 3)).substring(0, 2);
         String TemporalMinutos = String.valueOf(TBLcambios.getValueAt(Seleccion2, 3)).substring(3, 5);
-        
-        //idViejo = Integer.parseInt(TemporalPuntaje);
+
         HorasViejas = Integer.parseInt(TemporalHoras);
         MinViejos = Integer.parseInt(TemporalMinutos);
 
@@ -817,18 +794,22 @@ public class Concurso extends javax.swing.JInternalFrame {
         int HoraLim = Integer.parseInt(CBhorasCambios.getSelectedItem().toString());
         int MinLim = Integer.parseInt(CBminCambios.getSelectedItem().toString());
         String Tiempo1 = HoraLim + ":" + MinLim + ":00";
-
+        String fecha = "";
+        fecha = new SimpleDateFormat("yyyy-MM-dd").format(DCfechaCambios.getDate());
+        
         String texto = TXTnombreCambios.getText();
         texto = texto.replaceAll(" ", "");
-        if ((texto.length() == 0) || (texto.length()>=150)) {
+        if ((texto.length() == 0) || (texto.length()>=150) || ((CBhorasCambios.getSelectedItem() == "00") && (CBminCambios.getSelectedItem() == "00"))) {
             LBL_Mensajero3.setText("Debe ingresar todos los datos correctamente");
         } else {
                 if (mConexion.conectar()) {
+                    ID2 = Integer.parseInt(LBLidCambios.getText());
                     mDatosConcurso.setIdConcurso(ID2);
                     nDatosConcurso.setDescripcion(TXTnombreCambios.getText());
+                    nDatosConcurso.setFecha(fecha);
                     nDatosConcurso.setTiempo(Tiempo1);
                     if (mConexion.ModificarConcurso(mDatosConcurso, nDatosConcurso)) {
-                        LBL_Mensajero3.setText("Equipo modificado exitosamente");
+                        LBL_Mensajero3.setText("Concurso modificado exitosamente");
                     } else {
                         LBL_Mensajero3.setText("Error al modificar");
                     }
@@ -843,6 +824,7 @@ public class Concurso extends javax.swing.JInternalFrame {
         TXTnombreCambios.setText("");
         CBhorasCambios.setSelectedIndex(0);
         CBminCambios.setSelectedIndex(0);
+        DCfechaCambios.setCalendar(null);
     }//GEN-LAST:event_BTNmodificarActionPerformed
 
     private void TXTnombreConsultaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXTnombreConsultaKeyReleased
@@ -900,17 +882,17 @@ public class Concurso extends javax.swing.JInternalFrame {
     private javax.swing.JButton BTNalta;
     private javax.swing.JButton BTNborrar;
     private javax.swing.JButton BTNmodificar;
-    private javax.swing.JComboBox<String> CBaño;
-    private javax.swing.JComboBox<String> CBdia;
     private javax.swing.JComboBox<String> CBhora;
     private javax.swing.JComboBox<String> CBhorasCambios;
-    private javax.swing.JComboBox<String> CBmes;
     private javax.swing.JComboBox<String> CBminCambios;
     private javax.swing.JComboBox<String> CBminutos;
+    private com.toedter.calendar.JDateChooser DCfechaAlta;
+    private com.toedter.calendar.JDateChooser DCfechaCambios;
     private javax.swing.JLabel LBL_Mensajero1;
     private javax.swing.JLabel LBL_Mensajero2;
     private javax.swing.JLabel LBL_Mensajero3;
     private javax.swing.JLabel LBL_Mensajero4;
+    private javax.swing.JLabel LBLidCambios;
     private javax.swing.JTable TBLConcursos;
     private javax.swing.JTable TBLaltaConcursos;
     private javax.swing.JTable TBLcambios;
@@ -920,9 +902,6 @@ public class Concurso extends javax.swing.JInternalFrame {
     private javax.swing.JTextField TXTnombreCambios;
     private javax.swing.JTextField TXTnombreConsulta;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
