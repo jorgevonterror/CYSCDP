@@ -179,6 +179,22 @@ public class Conexion {
             return false;
         }
     }
+    
+    public boolean ModificarConcurso(DatosConcurso mDatosConcurso, DatosConcurso nDatosConcurso) {
+        Statement consulta;
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("update Concursos set "
+                    + "Descripcion = '" + nDatosConcurso.getDescripcion()+ "', "
+                    + "Fecha = '" + nDatosConcurso.getFecha()+ "', "
+                    + "Tiempo_Limite = '" + nDatosConcurso.getTiempo()+ "' "
+                    + " where idConcursos = " + mDatosConcurso.getIdConcurso()+ ";");
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error " + e);
+            return false;
+        }
+    }
 
     public ArrayList ConsultaNombresConcurso() {
         ArrayList mListaNombresConcurso = new ArrayList();
@@ -375,6 +391,30 @@ public class Conexion {
             e.printStackTrace();
         }
         return mListaEquipos;
+    }
+    
+    public ArrayList consultarConcursoFiltro(String Busqueda) { //Se usará despues
+        DatosConcurso mDatosConcurso = null;
+        Statement consulta;
+        ResultSet resultado;
+        ArrayList mListaConcursos = new ArrayList();
+
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from Concursos where "
+                    + "Descripcion like '%" + Busqueda + "%';");
+            while (resultado.next()) {
+                mDatosConcurso = new DatosConcurso();
+                mDatosConcurso.setIdConcurso(resultado.getInt("idConcursos"));
+                mDatosConcurso.setDescripcion(resultado.getString("Descripcion"));
+                mDatosConcurso.setFecha(resultado.getString("Fecha"));
+                mDatosConcurso.setTiempo(resultado.getString("Tiempo_Limite"));
+                mListaConcursos.add(mDatosConcurso);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mListaConcursos;
     }
     
     public ArrayList consultaEquipos() {
