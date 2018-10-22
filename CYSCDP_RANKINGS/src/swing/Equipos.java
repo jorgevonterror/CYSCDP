@@ -512,8 +512,9 @@ public class Equipos extends javax.swing.JInternalFrame {
                         mDatosEquipo.setNombre(TXT_Nom.getText());
                         mConexion.AltaEquipos(mDatosEquipo);
                         LBL_Men.setText("Equipo agregado exitosamente");
+                    } else {
+                        LBL_Men.setText("Ya existe un equipo con ese nombre");
                     }
-                    LBL_Men.setText("Ya existe un equipo con ese nombre");
                 }
                 mConexion.desconectar();
             } else {
