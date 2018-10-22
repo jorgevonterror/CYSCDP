@@ -420,8 +420,8 @@
             <Container class="javax.swing.JPanel" name="jPanel3">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="Borrar">
-                    <Property name="tabTitle" type="java.lang.String" value="Borrar"/>
+                  <JTabbedPaneConstraints tabName="Dar de baja un puntaje">
+                    <Property name="tabTitle" type="java.lang.String" value="Dar de baja un puntaje"/>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>
@@ -585,8 +585,8 @@
             <Container class="javax.swing.JPanel" name="jPanel5">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="Cambiar">
-                    <Property name="tabTitle" type="java.lang.String" value="Cambiar"/>
+                  <JTabbedPaneConstraints tabName="Cambiar datos de un puntaje">
+                    <Property name="tabTitle" type="java.lang.String" value="Cambiar datos de un puntaje"/>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>

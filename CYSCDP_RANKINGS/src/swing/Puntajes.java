@@ -385,7 +385,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
                 .addContainerGap(50, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Borrar", jPanel3);
+        jTabbedPane2.addTab("Dar de baja un puntaje", jPanel3);
 
         jTabbedPane1.addTab("Baja", jTabbedPane2);
 
@@ -560,7 +560,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
                 .addGap(11, 11, 11))
         );
 
-        jTabbedPane3.addTab("Cambiar", jPanel5);
+        jTabbedPane3.addTab("Cambiar datos de un puntaje", jPanel5);
 
         jTabbedPane1.addTab("Cambios", jTabbedPane3);
 
