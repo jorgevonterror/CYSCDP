@@ -7,36 +7,22 @@ package swing;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Image;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.*;
-import org.jfree.chart.renderer.xy.XYAreaRenderer;
-import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.axis.*;
-import org.jfree.data.xy.*;
 
 import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.general.DefaultKeyedValueDataset;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Arrays;
-import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import javax.swing.Timer;
-import org.jfree.chart.renderer.xy.XYSplineRenderer;
 
 /**
  *
@@ -405,17 +391,7 @@ public class Graficas extends javax.swing.JInternalFrame {
         }
 
         ChartDes.setBackground(new java.awt.Color(204, 204, 255));
-
-        javax.swing.GroupLayout ChartDesLayout = new javax.swing.GroupLayout(ChartDes);
-        ChartDes.setLayout(ChartDesLayout);
-        ChartDesLayout.setHorizontalGroup(
-            ChartDesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 539, Short.MAX_VALUE)
-        );
-        ChartDesLayout.setVerticalGroup(
-            ChartDesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 377, Short.MAX_VALUE)
-        );
+        ChartDes.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -423,9 +399,8 @@ public class Graficas extends javax.swing.JInternalFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ChartDes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
@@ -446,7 +421,8 @@ public class Graficas extends javax.swing.JInternalFrame {
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(CBeq2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BTNgraficar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(BTNgraficar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(ChartDes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(89, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -467,7 +443,8 @@ public class Graficas extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ChartDes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(ChartDes, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Reporte de Desviación", jPanel5);
@@ -522,31 +499,21 @@ public class Graficas extends javax.swing.JInternalFrame {
 
     private void BTNgraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNgraficarActionPerformed
         DefaultCategoryDataset Datos = new DefaultCategoryDataset();
-        Datos.addValue(1, "Negocio 1", "Lunes");
-        Datos.addValue(2, "Negocio 1", "Martes");
-        Datos.addValue(3, "Negocio 1", "Miércoles");
-        Datos.addValue(4, "Negocio 1", "Jueves");
-        Datos.addValue(5, "Negocio 1", "Viernes");
-        Datos.addValue(6, "Negocio 1", "Sábado");
-        Datos.addValue(7, "Negocio 1", "Domingo");
+        
+        Datos.addValue(1, "Equipo 1", "1");
+        Datos.addValue(2, "Equipo 1", "2");
+        Datos.addValue(3, "Equipo 1", "3");
 
-        Datos.addValue(2, "Negocio 2", "Lunes");
-        Datos.addValue(4, "Negocio 2", "Martes");
-        Datos.addValue(6, "Negocio 2", "Miércoles");
-        Datos.addValue(8, "Negocio 2", "Jueves");
-        Datos.addValue(10, "Negocio 2", "Viernes");
-        Datos.addValue(12, "Negocio 2", "Sábado");
-        Datos.addValue(14, "Negocio 2", "Domingo");
+        Datos.addValue(1, "Equipo 2", "1");
+        Datos.addValue(2, "Equipo 2", "2");
+        Datos.addValue(2, "Equipo 2", "3");
 
         // Creando el Grafico
-        JFreeChart Grafica = ChartFactory.createLineChart("Visitas diarias", "Días", 
-                "Visitas", Datos, PlotOrientation.HORIZONTAL, true, true, false);
+        JFreeChart Grafica = ChartFactory.createLineChart("Desviación", "Tiempo", 
+                "Complejidad", Datos, PlotOrientation.VERTICAL, true, true, false);
         // Mostrar Grafico
-        CategoryPlot barchrt = Grafica.getCategoryPlot();
-        barchrt.setRangeGridlinePaint(Color.BLACK);
         ChartPanel Panel = new ChartPanel(Grafica);
         
-        ChartDes.removeAll();
         ChartDes.add(Panel, BorderLayout.CENTER);
         ChartDes.validate();
      }//GEN-LAST:event_BTNgraficarActionPerformed
