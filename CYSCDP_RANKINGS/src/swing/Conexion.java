@@ -404,7 +404,33 @@ public class Conexion {
         }
         return mListaEquipos;
     }
-    
+    public ArrayList consultarParticipantesFiltro(String Busqueda) { //Se usará despues
+        DatosParticipante mParticipante = null;
+
+        Statement consulta;
+        ResultSet resultado;
+        ArrayList mListaParticipante = new ArrayList();
+        ArrayList mListaEquipos = new ArrayList();
+
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from Participantes where "
+                    + "NombreParticipante like '%" + Busqueda + "%';");
+            while (resultado.next()) {
+                
+                mParticipante = new DatosParticipante();
+                mParticipante.setIdParticipante(resultado.getInt("idParticipantes"));
+                mParticipante.setNombreParticipante(resultado.getString("NombreParticipante"));
+                mParticipante.setCarrera(resultado.getString("Carrera"));
+                mParticipante.setSemestre(resultado.getInt("Semestre"));
+                mParticipante.setEquipos_idEquipos(resultado.getShort("Equipos_idEquipos"));
+                mListaParticipante.add(mParticipante);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mListaParticipante;
+    }
     public ArrayList consultarConcursoFiltro(String Busqueda) { //Se usará despues
         DatosConcurso mDatosConcurso = null;
         Statement consulta;

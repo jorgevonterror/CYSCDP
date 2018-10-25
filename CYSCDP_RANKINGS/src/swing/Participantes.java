@@ -38,7 +38,10 @@ public class Participantes extends javax.swing.JInternalFrame {
         LBLid.setVisible(false);
         TXT_NombreP.enable(false);
         lbl_id.setVisible(false);
+        LBL_IndicadorConsulta.setVisible(false);
+         
         ConsultaTablaEquipos();
+        
         //ConsultaTabla2();
     }
 
@@ -96,6 +99,14 @@ public class Participantes extends javax.swing.JInternalFrame {
         BTNmod = new javax.swing.JButton();
         LBLid = new javax.swing.JLabel();
         CBsem = new javax.swing.JComboBox<>();
+        jTabbedPane4 = new javax.swing.JTabbedPane();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        TXT_Nom_P = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TBL_Consultas = new javax.swing.JTable();
+        LBL_IndicadorConsulta = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -467,6 +478,71 @@ public class Participantes extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Cambios", jTabbedPane3);
 
+        jLabel10.setText("Nombre participante:");
+
+        TXT_Nom_P.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TXT_Nom_PKeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(TXT_Nom_P, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(TXT_Nom_P, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        TBL_Consultas.setModel(Tabla);
+        jScrollPane3.setViewportView(TBL_Consultas);
+
+        LBL_IndicadorConsulta.setText("-");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LBL_IndicadorConsulta))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(LBL_IndicadorConsulta)
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+
+        jTabbedPane4.addTab("Consulta de Participantes.", jPanel7);
+
+        jTabbedPane1.addTab("Consulta", jTabbedPane4);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -837,7 +913,8 @@ public class Participantes extends javax.swing.JInternalFrame {
                 //mDatosEquipo.setId(Integer.parseInt(LBLid.getText()));
                 if (mConexion.eliminarParticipantes(mDatosParticipante)) {
                 //if (mConexion.eliminarEquipo(mDatosEquipo)) {
-                    LBL_Indicador.setText("Equipo dado de baja exitosamente");
+                    LBL_Indicador.setText("Participante dado de baja exitosamente");
+                    TXT_NombreP.setText("");
                 } else {
                     LBL_Indicador.setText("Este participante esta en un concurso, no se puede eliminar");
                 }
@@ -864,6 +941,47 @@ public class Participantes extends javax.swing.JInternalFrame {
       
     }//GEN-LAST:event_TBL_BajaParticipantesMouseClicked
 
+    private void TXT_Nom_PKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_Nom_PKeyReleased
+        Tabla = (DefaultTableModel) TBL_Consultas.getModel();
+        int a = Tabla.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            Tabla.removeRow(Tabla.getRowCount() - 1);
+        }
+
+        if (mConexion.conectar()) {
+            ArrayList mListaParticipante = mConexion.consultarParticipantesFiltro(TXT_Nom_P.getText());
+            //ArrayList mListaEquipos = mConexion.consultarEquiposFiltro(TXTcon.getText());
+            String[] datos;
+
+            for (Object mListaParticipantes : mListaParticipante) {
+                datos = new String[5];
+               
+                mDatosParticipante = (DatosParticipante) mListaParticipantes;
+                datos[0] = "" + mDatosParticipante.getIdParticipante();
+                datos[1] = mDatosParticipante.getNombreParticipante();
+                datos[2] = mDatosParticipante.getCarrera();
+                datos[3] = "" + mDatosParticipante.getSemestre();
+                datos[4] = "" + mDatosParticipante.getEquipos_idEquipos();
+                Tabla.addRow(datos);
+            }
+            this.TBL_Consultas = new javax.swing.JTable();
+            this.TBL_Consultas.setModel(Tabla);
+            this.TBL_Consultas.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.TBL_Consultas.getColumnModel().getColumn(1).setPreferredWidth(250);
+            this.TBL_Consultas.getColumnModel().getColumn(2).setPreferredWidth(250);
+            this.TBL_Consultas.getColumnModel().getColumn(3).setPreferredWidth(250);
+            this.TBL_Consultas.getColumnModel().getColumn(4).setPreferredWidth(250);
+            
+            if (this.TBL_Consultas.getRowCount() > 0) {
+                this.TBL_Consultas.setRowSelectionInterval(0, 0);
+            }
+        } else {
+            LBL_IndicadorConsulta.setText("Error al consultar Participantes");
+        }
+        mConexion.desconectar();
+        
+    }//GEN-LAST:event_TXT_Nom_PKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNelim;
@@ -876,15 +994,19 @@ public class Participantes extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> CBsem;
     private javax.swing.JComboBox<String> CBsemestre;
     private javax.swing.JLabel LBL_Indicador;
+    private javax.swing.JLabel LBL_IndicadorConsulta;
     private javax.swing.JLabel LBL_Mensajero;
     private javax.swing.JLabel LBLid;
     private javax.swing.JLabel LBLmen;
     private javax.swing.JTable TBL_BajaParticipantes;
+    private javax.swing.JTable TBL_Consultas;
     private javax.swing.JTable TBLaltaParticipante;
+    private javax.swing.JTextField TXT_Nom_P;
     private javax.swing.JTextField TXT_NombreP;
     private javax.swing.JTextField TXTnom;
     private javax.swing.JTextPane TXTnombre;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
@@ -902,13 +1024,17 @@ public class Participantes extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JLabel lbl_id;
     private javax.swing.JTable tbl_Participantes;
     // End of variables declaration//GEN-END:variables
