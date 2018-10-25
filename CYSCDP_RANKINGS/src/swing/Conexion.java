@@ -150,7 +150,19 @@ public class Conexion {
             return false;
         }
     }
+    public boolean eliminarParticipantes(DatosParticipante mParticipantes) {
+        Statement consulta;
 
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("delete from Participantes "
+                    + " where idParticipantes = " + mParticipantes.getIdParticipante() + ";");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     public boolean ModificarParticipantes(DatosParticipante vParticipante, DatosParticipante nParticipante) {
         Statement consulta;
         try {
