@@ -38,6 +38,7 @@ public class Participantes extends javax.swing.JInternalFrame {
         LBLid.setVisible(false);
         TXT_NombreP.enable(false);
         lbl_id.setVisible(false);
+        LBL_Indicador.setVisible(false);
         LBL_IndicadorConsulta.setVisible(false);
          
         ConsultaTablaEquipos();
