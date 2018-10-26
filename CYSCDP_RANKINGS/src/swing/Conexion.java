@@ -301,6 +301,32 @@ public class Conexion {
         }
         return mListaPuntajes;
     }
+    
+    public ArrayList ConsultarIDPuntajes2(int idConcurso, int idEquipo) {
+        ArrayList mListaPuntajes = new ArrayList();
+
+        DatosPuntajes mDatosPuntajes = null;
+        Statement consulta;
+        ResultSet resultado;
+        String Datos;
+        int IDEquipo = 0;
+
+        try {
+            consulta = conexion.createStatement();
+            //SELECT idPuntajes FROM Puntajes WHERE Concursos_idConcursos = '1' and Equipos_idEquipos = '2'
+            resultado = consulta.executeQuery("SELECT Tiempo, Complejidad, NombreEquipo FROM Puntajes inner join Equipos ON Equipos.idEquipos = Puntajes.Equipos_idEquipos WHERE Concursos_idConcursos = '" + idConcurso + "' and Equipos_idEquipos = '" + idEquipo + "';");
+            while (resultado.next()) {
+                Datos = "";
+                Datos = resultado.getString("Tiempo") + resultado.getString("Complejidad") + resultado.getString("NombreEquipo");
+
+                mListaPuntajes.add(Datos);
+                //mListaPuntajesTiempo.add(resultado.getString("Complejidad"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mListaPuntajes;
+    }
 
     public ArrayList ConsultarConcursos() {
         ArrayList mListaConcursos = new ArrayList();
