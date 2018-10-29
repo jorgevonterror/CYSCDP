@@ -314,7 +314,9 @@ public class Conexion {
         try {
             consulta = conexion.createStatement();
             //SELECT idPuntajes FROM Puntajes WHERE Concursos_idConcursos = '1' and Equipos_idEquipos = '2'
-            resultado = consulta.executeQuery("SELECT Tiempo, Complejidad, NombreEquipo FROM Puntajes inner join Equipos ON Equipos.idEquipos = Puntajes.Equipos_idEquipos WHERE Concursos_idConcursos = '" + idConcurso + "' and Equipos_idEquipos = '" + idEquipo + "';");
+            resultado = consulta.executeQuery("SELECT Tiempo, Complejidad, NombreEquipo FROM Puntajes inner join "
+                    + "Equipos ON Equipos.idEquipos = Puntajes.Equipos_idEquipos WHERE Concursos_idConcursos = '" + 
+                    idConcurso + "' and Equipos_idEquipos = '" + idEquipo + "';");
             while (resultado.next()) {
                 Datos = "";
                 Datos = resultado.getString("Tiempo") + resultado.getString("Complejidad") + resultado.getString("NombreEquipo");

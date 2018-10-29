@@ -23,6 +23,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -38,13 +39,13 @@ public class Graficas extends javax.swing.JInternalFrame {
     DefaultTableModel Tabla = new DefaultTableModel();
     DefaultTableModel Tabla2 = new DefaultTableModel();
     DefaultTableModel Tabla3 = new DefaultTableModel();
-    
+
     int IDConcurso = 0;
     int ContadorColumna = 1;
     int ContadorColumna2 = 1;
-    int IDConcursos1=0;
-    int IDEquipo1=0;
-    int IDEquipo2=0;
+    int IDConcursos1 = 0;
+    int IDEquipo1 = 0;
+    int IDEquipo2 = 0;
 
     ArrayList mArrayListEquipo = new ArrayList();
 
@@ -90,19 +91,18 @@ public class Graficas extends javax.swing.JInternalFrame {
         Panel_Oculto = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        CBcon = new javax.swing.JComboBox<>();
-        CBprg = new javax.swing.JComboBox<>();
-        CBeq1 = new javax.swing.JComboBox<>();
-        CBeq2 = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        BTNgraficar = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        Tabla_Des = new javax.swing.JTable();
         ChartDes = new javax.swing.JPanel();
         LBL_Mensajero2 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Tabla_Des = new javax.swing.JTable();
+        BTNgraficar = new javax.swing.JButton();
+        CBeq2 = new javax.swing.JComboBox<>();
+        jLabel12 = new javax.swing.JLabel();
+        CBeq1 = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        CBcon = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
 
         setBorder(null);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -159,11 +159,11 @@ public class Graficas extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(143, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(79, 79, 79)
+                .addGap(71, 71, 71)
                 .addComponent(jLabel5)
-                .addGap(62, 62, 62))
+                .addGap(61, 61, 61))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,7 +328,7 @@ public class Graficas extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(195, 195, 195)
                         .addComponent(jLabel1)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,22 +360,10 @@ public class Graficas extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Gráfica de Puntajes", jPanel1);
 
-        CBprg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
+        ChartDes.setBackground(new java.awt.Color(204, 204, 255));
+        ChartDes.setLayout(new java.awt.BorderLayout());
 
-        jLabel7.setText("Concurso:");
-
-        jLabel8.setText("Programa:");
-
-        jLabel11.setText("Equipo 1:");
-
-        jLabel12.setText("Equipo 2:");
-
-        BTNgraficar.setText("Graficar");
-        BTNgraficar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTNgraficarActionPerformed(evt);
-            }
-        });
+        LBL_Mensajero2.setText("jLabel13");
 
         Tabla_Des.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -401,10 +389,62 @@ public class Graficas extends javax.swing.JInternalFrame {
             Tabla_Des.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        ChartDes.setBackground(new java.awt.Color(204, 204, 255));
-        ChartDes.setLayout(new java.awt.BorderLayout());
+        BTNgraficar.setText("Graficar");
+        BTNgraficar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNgraficarActionPerformed(evt);
+            }
+        });
 
-        LBL_Mensajero2.setText("jLabel13");
+        jLabel12.setText("Equipo 2:");
+
+        jLabel11.setText("Equipo 1:");
+
+        jLabel7.setText("Concurso:");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(CBcon, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(CBeq1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(CBeq2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(BTNgraficar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CBcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CBeq1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CBeq2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BTNgraficar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -413,55 +453,20 @@ public class Graficas extends javax.swing.JInternalFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LBL_Mensajero2)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel5Layout.createSequentialGroup()
-                                    .addComponent(CBcon, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(CBprg, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(CBeq1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel5Layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addGap(46, 46, 46)
-                                    .addComponent(jLabel8)
-                                    .addGap(40, 40, 40)
-                                    .addComponent(jLabel11)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel12)
-                                .addGroup(jPanel5Layout.createSequentialGroup()
-                                    .addComponent(CBeq2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(BTNgraficar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addComponent(ChartDes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(89, Short.MAX_VALUE))
+                    .addComponent(ChartDes, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12))
-                .addGap(11, 11, 11)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CBcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CBprg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CBeq1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CBeq2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BTNgraficar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ChartDes, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ChartDes, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LBL_Mensajero2)
-                .addGap(20, 20, 20))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Reporte de Desviación", jPanel5);
@@ -470,10 +475,10 @@ public class Graficas extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -517,25 +522,49 @@ public class Graficas extends javax.swing.JInternalFrame {
     private void BTNgraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNgraficarActionPerformed
         ConsultaTablaDesv();
         DefaultCategoryDataset Datos = new DefaultCategoryDataset();
-        
-        Datos.addValue(1, "Equipo 1", "1");
-        Datos.addValue(2, "Equipo 1", "2");
-        Datos.addValue(3, "Equipo 1", "3");
-
-        Datos.addValue(1, "Equipo 2", "1");
-        Datos.addValue(2, "Equipo 2", "2");
-        Datos.addValue(2, "Equipo 2", "3");
-
+        //Primer parámetro es complejidad
+        //Último parámetro es tiempo
+        if (CBeq1.getSelectedItem() != CBeq2.getSelectedItem()) {
+            if (mConexion.conectar()) {
+                int IDequipo1 = mConexion.ConsultarIDEquipos(CBeq1.getSelectedItem().toString());
+                int IDequipo2 = mConexion.ConsultarIDEquipos(CBeq2.getSelectedItem().toString());
+                int Id = mConexion.ConsultarIDConcursos((String) CBcon.getSelectedItem());
+                int horas = 0, minutos = 0, horasT = 0, complejidad = 0;
+                String equipo = "";
+                int horas2 = 0, minutos2 = 0, horasT2 = 0, complejidad2 = 0;
+                String equipo2 = "";
+                ArrayList mListaPuntajes = mConexion.ConsultarIDPuntajes2(Id, IDequipo1);
+                for (int i = 0; i < mListaPuntajes.size(); i++) {
+                    horas = Integer.parseInt(mListaPuntajes.get(i).toString().substring(0, 2));
+                    minutos = Integer.parseInt(mListaPuntajes.get(i).toString().substring(3, 5));
+                    horasT = (horas * 60) + minutos;
+                    complejidad = Integer.parseInt(mListaPuntajes.get(i).toString().substring(8, 9));
+                    equipo = mListaPuntajes.get(i).toString().substring(9);
+                    Datos.setValue(horasT, equipo, String.valueOf(complejidad));
+                }
+                ArrayList mListaPuntajes2 = mConexion.ConsultarIDPuntajes2(Id, IDequipo2);
+                for (int i = 0; i < mListaPuntajes2.size(); i++) {
+                    horas2 = Integer.parseInt(mListaPuntajes2.get(i).toString().substring(0, 2));
+                    minutos2 = Integer.parseInt(mListaPuntajes2.get(i).toString().substring(3, 5));
+                    horasT2 = (horas2 * 60) + minutos2;
+                    complejidad2 = Integer.parseInt(mListaPuntajes2.get(i).toString().substring(8, 9));
+                    equipo2 = mListaPuntajes2.get(i).toString().substring(9);
+                    Datos.setValue(horasT2, equipo2, String.valueOf(complejidad2));
+                }
+            }
+            LBL_Mensajero2.setText("");
+        } else {
+            LBL_Mensajero2.setText("Selecciona diferentes equipos");
+        }
+//        Datos.addValue(0.5, "Equipo 1", "1");
         // Creando el Grafico
-        JFreeChart Grafica = ChartFactory.createLineChart("Desviación", "Tiempo", 
-                "Complejidad", Datos, PlotOrientation.VERTICAL, true, true, false);
+        JFreeChart Grafica = ChartFactory.createBarChart3D("Desviación de Equipos", "Complejidad",
+                "Tiempo", Datos, PlotOrientation.VERTICAL, true, true, false);
         // Mostrar Grafico
         ChartPanel Panel = new ChartPanel(Grafica);
-        
+        ChartDes.removeAll();
         ChartDes.add(Panel, BorderLayout.CENTER);
         ChartDes.validate();
-        
-        
      }//GEN-LAST:event_BTNgraficarActionPerformed
 
     private void reporteDes() {
@@ -562,7 +591,7 @@ public class Graficas extends javax.swing.JInternalFrame {
             LBL_Mensajero.setText("No conectado a la BD");
         }
     }
-    
+
     public void LlenarComboCon() {
         CBcon.addItem("Ninguno");
         if (mConexion.conectar()) {
@@ -581,7 +610,7 @@ public class Graficas extends javax.swing.JInternalFrame {
         }
     }
 
-     public void LlenarComboEq() {
+    public void LlenarComboEq() {
         CBeq1.addItem("Ninguno");
         CBeq2.addItem("Ninguno");
         if (mConexion.conectar()) {
@@ -600,13 +629,14 @@ public class Graficas extends javax.swing.JInternalFrame {
             LBL_Mensajero2.setText("No conectado a la BD");
         }
     }
-     public void ConsultaTablaDesv() {
+
+    public void ConsultaTablaDesv() {
         Tabla3 = (DefaultTableModel) Tabla_Des.getModel();
         int a = Tabla3.getRowCount() - 1;
         for (int i = a; i >= 0; i--) {
             Tabla3.removeRow(Tabla3.getRowCount() - 1);
         }
-        
+        if (CBeq1.getSelectedItem() != CBeq2.getSelectedItem()) {
         if (mConexion.conectar()) {
 
             if ((CBcon.getSelectedItem() != "Ninguna") && (CBeq1.getSelectedItem() != "Ninguno") && (CBeq2.getSelectedItem() != "Ninguno")) {
@@ -647,7 +677,7 @@ public class Graficas extends javax.swing.JInternalFrame {
                     Tabla3.addRow(Datos);
                 }
 
-            } else{
+            } else {
                 LBL_Mensajero2.setText("No hay puntajes");
             }
             if (mArrayListPuntajesDesv2 != null) {
@@ -672,8 +702,8 @@ public class Graficas extends javax.swing.JInternalFrame {
                     Datos[2] = mArrayListPuntajesDesv2.get(i).toString().substring(9); //Nombre equipo
                     Tabla3.addRow(Datos);
                 }
-            
-            }else{
+
+            } else {
                 LBL_Mensajero2.setText("No hay puntajes");
             }
             this.Tabla_Des = new javax.swing.JTable();
@@ -688,10 +718,13 @@ public class Graficas extends javax.swing.JInternalFrame {
         } else {
             LBL_Mensajero2.setText("Error al consultar");
         }
+        }else{
+            LBL_Mensajero2.setText("Seleccione dos equipos diferentes");
+        }
 
         ContadorColumna = 1;
     }
-     
+
     public void MostrarGanadores() {
         //CBResultados.removeAllItems();
 
@@ -789,7 +822,7 @@ public class Graficas extends javax.swing.JInternalFrame {
 
                         this.Tabla_Nombre_Resultados.setModel(new DefaultTableModel(data, nombreColumnas));
 
-                        JFreeChart grafico = ChartFactory.createLineChart("ESTADÍSTICA DE CONCURSO",
+                        JFreeChart grafico = ChartFactory.createBarChart("ESTADÍSTICA DE CONCURSO",
                                 "Resultados", "Rango", dtsc, PlotOrientation.VERTICAL, true, true, false);
 
                         try {
@@ -832,7 +865,6 @@ public class Graficas extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> CBcon;
     private javax.swing.JComboBox<String> CBeq1;
     private javax.swing.JComboBox<String> CBeq2;
-    private javax.swing.JComboBox<String> CBprg;
     private javax.swing.JPanel ChartDes;
     private javax.swing.JLabel LBL_Mensajero;
     private javax.swing.JLabel LBL_Mensajero2;
@@ -850,11 +882,11 @@ public class Graficas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
