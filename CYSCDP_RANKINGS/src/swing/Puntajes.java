@@ -25,7 +25,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
 
     Conexion mConexion = new Conexion();
     int Complejidad = 0, IDConcursos = 0, IDEquipo = 0, IDConcursos1 = 0, IDConcursos2 = 0, IDEquipo1 = 0, ContadorColumna = 1, idPuntajes = 0 , IDEquipo2 = 0;
-    /*Para modificar Datos*/ int idPuntajeViejo = 0, HorasNuevas = 0, HorasViejas = 0, MinutosNuevos = 0, MinutosViejos = 0;
+    /*Para modificar Datos*/ int idPuntajeViejo = 0, HorasNuevas = 0, HorasViejas = 0, MinutosNuevos = 0, MinutosViejos = 0; int ConcursoSeleccionadoCambio = 0, ConcursoSeleccionadoBaja = 0;
     String TemporalPuntaje, TemporalHoras, TemporalMinutos, TemporalComplejidad;
     String HorasV = "", MinutosV = "", ComplejidadV = "", ConcursoM = "", EquipoM = "";
                                 
@@ -46,6 +46,8 @@ public final class Puntajes extends javax.swing.JInternalFrame {
         Tabla2.addColumn("ID");
         Tabla2.addColumn("Tiempo");
         Tabla2.addColumn("Complejidad");
+        CBEquipo2.addItem("Ninguno");
+        CBEquipo1.addItem("Ninguno");
     }
 
     /**
@@ -306,6 +308,11 @@ public final class Puntajes extends javax.swing.JInternalFrame {
 
         jLabel10.setText("Equipo:");
 
+        CBConcurso1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CBConcurso1ItemStateChanged(evt);
+            }
+        });
         CBConcurso1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CBConcurso1ActionPerformed(evt);
@@ -391,6 +398,11 @@ public final class Puntajes extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Concurso:");
 
+        CBConcurso2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CBConcurso2ItemStateChanged(evt);
+            }
+        });
         CBConcurso2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CBConcurso2ActionPerformed(evt);
@@ -725,6 +737,30 @@ public final class Puntajes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_CBConcurso3ActionPerformed
 
+    private void CBConcurso2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBConcurso2ItemStateChanged
+        // TODO add your handling code here:
+        if (mConexion.conectar()) {
+            ConcursoSeleccionadoCambio = mConexion.ConsultarIDConcursos(CBConcurso2.getSelectedItem().toString());
+            CBEquipo2.removeAllItems();
+            LlenarComboEqCambio();
+            mConexion.desconectar();
+        } else {
+            
+        }
+    }//GEN-LAST:event_CBConcurso2ItemStateChanged
+
+    private void CBConcurso1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBConcurso1ItemStateChanged
+        // TODO add your handling code here:
+        if (mConexion.conectar()) {
+            ConcursoSeleccionadoBaja = mConexion.ConsultarIDConcursos(CBConcurso1.getSelectedItem().toString());
+            CBEquipo1.removeAllItems();
+            LlenarComboEqBaja();
+            mConexion.desconectar();
+        } else {
+            
+        }
+    }//GEN-LAST:event_CBConcurso1ItemStateChanged
+
     public void LlenarComboConcurso() {
         CBConcurso.addItem("Ninguno");
         CBConcurso1.addItem("Ninguno");
@@ -754,8 +790,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
 
     public void LlenarComboEquipo() {
         CBEquipo.addItem("Ninguno");
-        CBEquipo1.addItem("Ninguno");
-        CBEquipo2.addItem("Ninguno");
+        //CBEquipo1.addItem("Ninguno");
         CBEquipo3.addItem("Ninguno");
         if (mConexion.conectar()) {
             ArrayList mArrayList = new ArrayList();
@@ -765,9 +800,55 @@ public final class Puntajes extends javax.swing.JInternalFrame {
 
                 for (int i = 0; i < mArrayList.size(); i++) {
                     CBEquipo.addItem(mArrayList.get(i).toString());
-                    CBEquipo1.addItem(mArrayList.get(i).toString()); //Para Baja
-                    CBEquipo2.addItem(mArrayList.get(i).toString()); //Para consultar el que se va a Modificar
+                    //CBEquipo1.addItem(mArrayList.get(i).toString()); //Para Baja
                     CBEquipo3.addItem(mArrayList.get(i).toString()); //Para el que se va a cambiar
+                }
+
+            } else {
+                LBL_Mensajero.setText("No tiene Equipos Dados de Alta");
+            }
+            mConexion.desconectar();
+        } else {
+            LBL_Mensajero.setText("No conectado a la BD");
+        }
+    }
+    
+    public void LlenarComboEqCambio() {
+        
+        if (mConexion.conectar()) {
+            ArrayList mArrayList = new ArrayList();
+            mArrayList = mConexion.ConsultaNombresEquiposPorConcurso(ConcursoSeleccionadoCambio);
+            
+            
+            //LDBLPrueba.setText(mArrayList.get(0).toString());
+            if (mArrayList != null) {
+
+                for (int i = 0; i < mArrayList.size(); i++) {
+                    
+                    CBEquipo2.addItem(mArrayList.get(i).toString()); //Para consultar el que se va a Modificar
+                }
+
+            } else {
+                LBL_Mensajero.setText("No tiene Equipos Dados de Alta");
+            }
+            mConexion.desconectar();
+        } else {
+            LBL_Mensajero.setText("No conectado a la BD");
+        }
+    }
+    
+    public void LlenarComboEqBaja() {
+        if (mConexion.conectar()) {
+            ArrayList mArrayList = new ArrayList();
+            mArrayList = mConexion.ConsultaNombresEquiposPorConcurso(ConcursoSeleccionadoBaja);
+            
+            
+            //LDBLPrueba.setText(mArrayList.get(0).toString());
+            if (mArrayList != null) {
+
+                for (int i = 0; i < mArrayList.size(); i++) {
+                    
+                    CBEquipo1.addItem(mArrayList.get(i).toString()); //Para consultar el que se va a Modificar
                 }
 
             } else {

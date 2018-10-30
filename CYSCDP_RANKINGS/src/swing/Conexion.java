@@ -241,6 +241,23 @@ public class Conexion {
         }
         return mListaNombreEquipo;
     }
+    
+    public ArrayList ConsultaNombresEquiposPorConcurso(int Concurso) {
+        ArrayList mListaNombreEquipo = new ArrayList();
+        Statement consulta;
+        ResultSet resultado;
+
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select NombreEquipo from Equipos,Puntajes where Puntajes.Concursos_idConcursos = '" + Concurso +"' and Puntajes.Equipos_idEquipos = Equipos.idEquipos GROUP by NombreEquipo;");
+            while (resultado.next()) {
+                mListaNombreEquipo.add(resultado.getString("NombreEquipo"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mListaNombreEquipo;
+    }
 
     public int ConsultarIDConcursos(String NombreConcurso) {
         Statement consulta;
@@ -288,7 +305,7 @@ public class Conexion {
         try {
             consulta = conexion.createStatement();
             //SELECT idPuntajes FROM Puntajes WHERE Concursos_idConcursos = '1' and Equipos_idEquipos = '2'
-            resultado = consulta.executeQuery("SELECT idPuntajes, Tiempo, Complejidad FROM Puntajes WHERE Concursos_idConcursos = '" + idConcurso + "' and Equipos_idEquipos = '" + idEquipo + "';");
+            resultado = consulta.executeQuery("SELECT idPuntajes, Tiempo, Complejidad FROM Puntajes WHERE Concursos_idConcursos = '" + idConcurso + "' and Equipos_idEquipos = '" + idEquipo + "' order by Complejidad ASC;");
             while (resultado.next()) {
                 Datos = "";
                 Datos = resultado.getString("Tiempo") + resultado.getString("Complejidad") + resultado.getString("idPuntajes");
@@ -316,7 +333,7 @@ public class Conexion {
             //SELECT idPuntajes FROM Puntajes WHERE Concursos_idConcursos = '1' and Equipos_idEquipos = '2'
             resultado = consulta.executeQuery("SELECT Tiempo, Complejidad, NombreEquipo FROM Puntajes inner join "
                     + "Equipos ON Equipos.idEquipos = Puntajes.Equipos_idEquipos WHERE Concursos_idConcursos = '" + 
-                    idConcurso + "' and Equipos_idEquipos = '" + idEquipo + "';");
+                    idConcurso + "' and Equipos_idEquipos = '" + idEquipo + "' order by Complejidad ASC;");
             while (resultado.next()) {
                 Datos = "";
                 Datos = resultado.getString("Tiempo") + resultado.getString("Complejidad") + resultado.getString("NombreEquipo");
