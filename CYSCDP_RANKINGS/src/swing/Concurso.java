@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javax.print.attribute.Size2DSyntax.MM;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -779,6 +780,7 @@ public class Concurso extends javax.swing.JInternalFrame {
         Seleccion2 = TBLcambios.rowAtPoint(evt.getPoint());
         LBLidCambios.setText(TBLcambios.getModel().getValueAt(Seleccion2, 0).toString());
         TXTnombreCambios.setText(TBLcambios.getModel().getValueAt(Seleccion2, 1).toString());
+        String FechaT = String.valueOf(TBLcambios.getValueAt(Seleccion2, 2)).toString();
         String TemporalHoras = String.valueOf(TBLcambios.getValueAt(Seleccion2, 3)).substring(0, 2);
         String TemporalMinutos = String.valueOf(TBLcambios.getValueAt(Seleccion2, 3)).substring(3, 5);
 
@@ -794,6 +796,14 @@ public class Concurso extends javax.swing.JInternalFrame {
             if (MinViejos == Integer.parseInt(CBminCambios.getItemAt(i))) {
                 CBminCambios.setSelectedIndex(i); //LLENAMOS MINUTOS
             }
+        }   
+        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yy-MM-dd");
+        Date fecha = null;
+        try {
+            fecha = formatoDelTexto.parse(FechaT);
+            DCfechaCambios.setDate(fecha);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
         }
     }//GEN-LAST:event_TBLcambiosMouseClicked
 
