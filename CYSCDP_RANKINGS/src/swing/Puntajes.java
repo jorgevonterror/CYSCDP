@@ -28,6 +28,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
     /*Para modificar Datos*/ int idPuntajeViejo = 0, HorasNuevas = 0, HorasViejas = 0, MinutosNuevos = 0, MinutosViejos = 0; int ConcursoSeleccionadoCambio = 0, ConcursoSeleccionadoBaja = 0;
     String TemporalPuntaje, TemporalHoras, TemporalMinutos, TemporalComplejidad;
     String HorasV = "", MinutosV = "", ComplejidadV = "", ConcursoM = "", EquipoM = "";
+    boolean bandera;
                                 
     DatosPuntajes mDatosPuntajes;
     DefaultTableModel Tabla = new DefaultTableModel();
@@ -356,9 +357,8 @@ public final class Puntajes extends javax.swing.JInternalFrame {
                         .addComponent(jButton2)
                         .addGap(27, 27, 27)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(LBL_Mensajero1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -368,7 +368,8 @@ public final class Puntajes extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(CBConcurso1, 0, 177, Short.MAX_VALUE)
                                     .addComponent(CBEquipo1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LBL_Mensajero1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(82, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -385,11 +386,12 @@ public final class Puntajes extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(LBL_Mensajero1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jButton3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(LBL_Mensajero1)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         jTabbedPane2.addTab("Dar de baja un puntaje", jPanel3);
@@ -662,6 +664,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         EliminarPuntaje();
+        BuscarPuntaje();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void TBPuntajesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBPuntajesMouseClicked
@@ -684,12 +687,18 @@ public final class Puntajes extends javax.swing.JInternalFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        ModificarPuntaje();
+        if (bandera == true) {
+           ModificarPuntaje(); 
+        } else {
+            LBL_Mensajero2.setText("Selecciona un puntaje");
+        }
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void TBPuntajes1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBPuntajes1MouseClicked
         // TODO add your handling code here:
         //Para llenado
+        bandera = true;
         int Fila = TBPuntajes1.rowAtPoint(evt.getPoint());
         String TemporalPuntaje = String.valueOf(TBPuntajes1.getValueAt(Fila, 0));
         String TemporalHoras = String.valueOf(TBPuntajes1.getValueAt(Fila, 1)).substring(0, 2);
@@ -936,11 +945,11 @@ public final class Puntajes extends javax.swing.JInternalFrame {
         LimpiarTabla();
         if (mConexion.conectar()) {
 
-            if ((CBConcurso1.getSelectedItem() != "Ninguna") && (CBEquipo1.getSelectedItem() != "Ninguno")) {
+            if ((CBConcurso1.getSelectedItem() != "Ninguna") && ((CBEquipo1.getSelectedItem() != "Ninguno") && CBEquipo1.getItemCount()>0)) {
                 IDConcursos1 = mConexion.ConsultarIDConcursos(CBConcurso1.getSelectedItem().toString());
                 IDEquipo1 = mConexion.ConsultarIDEquipos(CBEquipo1.getSelectedItem().toString());
             } else {
-                LBL_Mensajero1.setText("Selecciona una opción de concurso y/o equipo");
+                LBL_Mensajero1.setText("Selecciona una opción de concurso y/o equipo correctamente");
             }
 
             ArrayList mArrayListEliminarPuntajes = new ArrayList();
@@ -995,7 +1004,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
         LimpiarTabla1();
         if (mConexion.conectar()) {
 
-            if ((CBConcurso2.getSelectedItem() != "Ninguna") && (CBEquipo2.getSelectedItem() != "Ninguno")) {
+            if ((CBConcurso2.getSelectedItem() != "Ninguna") && ((CBEquipo2.getSelectedItem() != "Ninguno") && (CBEquipo2.getItemCount()>0))) {
                 IDConcursos2 = mConexion.ConsultarIDConcursos(CBConcurso2.getSelectedItem().toString());
                 IDEquipo2 = mConexion.ConsultarIDEquipos(CBEquipo2.getSelectedItem().toString());
             } else {
