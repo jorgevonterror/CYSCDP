@@ -40,9 +40,9 @@ public class Participantes extends javax.swing.JInternalFrame {
         lbl_id.setVisible(false);
         LBL_Indicador.setVisible(false);
         LBL_IndicadorConsulta.setVisible(false);
-         
+
         ConsultaTablaEquipos();
-        
+
         //ConsultaTabla2();
     }
 
@@ -438,8 +438,8 @@ public class Participantes extends javax.swing.JInternalFrame {
                                         .addComponent(LBLid))
                                     .addComponent(CBeq, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(LBLmen, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(40, 40, 40)
+                        .addComponent(LBLmen, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(64, 64, 64))
         );
         jPanel4Layout.setVerticalGroup(
@@ -612,7 +612,7 @@ public class Participantes extends javax.swing.JInternalFrame {
         }
 
         if (mConexion.conectar()) {
-         ArrayList mArrayListaPartic = new ArrayList();
+            ArrayList mArrayListaPartic = new ArrayList();
             mArrayListaPartic = mConexion.consultarParticipantes();
 
             String[] Datos = null;
@@ -630,8 +630,8 @@ public class Participantes extends javax.swing.JInternalFrame {
                     mDatosParticipante = (DatosParticipante) mArrayListaPartic.get(i);
                     Datos = new String[5];
                     Datos[0] = "" + mDatosParticipante.getIdParticipante();
-                    Datos[1] = mDatosParticipante.getNombreParticipante(); 
-                    Datos[2] = mDatosParticipante.getCarrera(); 
+                    Datos[1] = mDatosParticipante.getNombreParticipante();
+                    Datos[2] = mDatosParticipante.getCarrera();
                     Datos[3] = "" + mDatosParticipante.getSemestre();
                     Datos[4] = "" + mDatosParticipante.getEquipos_idEquipos();
                     ID = Integer.parseInt(Datos[4]);
@@ -656,7 +656,7 @@ public class Participantes extends javax.swing.JInternalFrame {
         }
         mConexion.desconectar();
     }
-    
+
     private void BTNguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNguardarActionPerformed
         // TODO add your handling code here:
         if (CBcarrera.getSelectedItem() == "Ninguna") {
@@ -744,7 +744,7 @@ public class Participantes extends javax.swing.JInternalFrame {
         mDatosParticipante.setCarrera(Carrera);
         mDatosParticipante.setSemestre(Semestre);
         mDatosParticipante.setEquipos_idEquipos(IDEquipo);
-        if ((texto.length() == 0) || (texto.length() > 150) ) {
+        if ((texto.length() == 0) || (texto.length() > 150)) {
             LBL_Mensajero.setText("Debe ingresar todos los datos correctamente");
         } else {
             if (mConexion.conectar()) {
@@ -839,16 +839,20 @@ public class Participantes extends javax.swing.JInternalFrame {
 
         if (Validarcajas()) {
             if (mConexion.conectar()) {
-                ID = mConexion.ConsultarIDEquipos(CBeq.getSelectedItem().toString());
-                vParticipante.setIdParticipante(Integer.parseInt(LBLid.getText()));
-                nParticipante.setNombreParticipante(this.TXTnom.getText());
-                nParticipante.setCarrera((String) CBcar.getSelectedItem());
-                nParticipante.setSemestre(Integer.parseInt((String) CBsem.getSelectedItem()));
-                nParticipante.setEquipos_idEquipos(ID);
-                if (mConexion.ModificarParticipantes(vParticipante, nParticipante)) {
-                    LBLmen.setText("Participante modificado exitosamente");
+                if (!"ID".equals(LBLid.getText())) {
+                    ID = mConexion.ConsultarIDEquipos(CBeq.getSelectedItem().toString());
+                    vParticipante.setIdParticipante(Integer.parseInt(LBLid.getText()));
+                    nParticipante.setNombreParticipante(this.TXTnom.getText());
+                    nParticipante.setCarrera((String) CBcar.getSelectedItem());
+                    nParticipante.setSemestre(Integer.parseInt((String) CBsem.getSelectedItem()));
+                    nParticipante.setEquipos_idEquipos(ID);
+                    if (mConexion.ModificarParticipantes(vParticipante, nParticipante)) {
+                        LBLmen.setText("Participante modificado exitosamente");
+                    } else {
+                        LBLmen.setText("Error al modificar");
+                    }
                 } else {
-                    LBLmen.setText("Error al modificar");
+                    LBLmen.setText("Por favor selecciona un participante de la tabla");
                 }
             } else {
                 LBLmen.setText("Error al conectar con la Base de Datos");
@@ -867,6 +871,7 @@ public class Participantes extends javax.swing.JInternalFrame {
     public boolean ValidarBaja() {
         return !TXT_NombreP.getText().equals("");
     }
+
     public void ConsultaTabla2() {
         Tabla = (DefaultTableModel) TBL_BajaParticipantes.getModel();
         int a = Tabla.getRowCount() - 1;
@@ -907,13 +912,13 @@ public class Participantes extends javax.swing.JInternalFrame {
     }
     private void BTNelimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNelimActionPerformed
         if (mConexion.conectar()) {
-            
+
             if (ValidarBaja()) {
                 mDatosParticipante.setIdParticipante(Integer.parseInt(lbl_id.getText()));
-                
+
                 //mDatosEquipo.setId(Integer.parseInt(LBLid.getText()));
                 if (mConexion.eliminarParticipantes(mDatosParticipante)) {
-                //if (mConexion.eliminarEquipo(mDatosEquipo)) {
+                    //if (mConexion.eliminarEquipo(mDatosEquipo)) {
                     LBL_Indicador.setText("Participante dado de baja exitosamente");
                     TXT_NombreP.setText("");
                 } else {
@@ -933,13 +938,13 @@ public class Participantes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BTNelimActionPerformed
 
     private void TBL_BajaParticipantesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBL_BajaParticipantesMouseClicked
-                                
+
         TXT_NombreP.setText("");
 
         Selec = TBL_BajaParticipantes.rowAtPoint(evt.getPoint());
         lbl_id.setText(TBL_BajaParticipantes.getModel().getValueAt(Selec, 0).toString());
         TXT_NombreP.setText(TBL_BajaParticipantes.getModel().getValueAt(Selec, 1).toString());
-      
+
     }//GEN-LAST:event_TBL_BajaParticipantesMouseClicked
 
     private void TXT_Nom_PKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_Nom_PKeyReleased
@@ -956,7 +961,7 @@ public class Participantes extends javax.swing.JInternalFrame {
 
             for (Object mListaParticipantes : mListaParticipante) {
                 datos = new String[5];
-               
+
                 mDatosParticipante = (DatosParticipante) mListaParticipantes;
                 datos[0] = "" + mDatosParticipante.getIdParticipante();
                 datos[1] = mDatosParticipante.getNombreParticipante();
@@ -972,7 +977,7 @@ public class Participantes extends javax.swing.JInternalFrame {
             this.TBL_Consultas.getColumnModel().getColumn(2).setPreferredWidth(250);
             this.TBL_Consultas.getColumnModel().getColumn(3).setPreferredWidth(250);
             this.TBL_Consultas.getColumnModel().getColumn(4).setPreferredWidth(250);
-            
+
             if (this.TBL_Consultas.getRowCount() > 0) {
                 this.TBL_Consultas.setRowSelectionInterval(0, 0);
             }
@@ -980,7 +985,7 @@ public class Participantes extends javax.swing.JInternalFrame {
             LBL_IndicadorConsulta.setText("Error al consultar Participantes");
         }
         mConexion.desconectar();
-        
+
     }//GEN-LAST:event_TXT_Nom_PKeyReleased
 
 

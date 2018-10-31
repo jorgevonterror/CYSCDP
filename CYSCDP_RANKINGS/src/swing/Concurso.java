@@ -24,17 +24,18 @@ public class Concurso extends javax.swing.JInternalFrame {
 
     Conexion mConexion = new Conexion();
     DatosConcurso mDatosConcurso = new DatosConcurso();
-    public int idConcurso = 0, HoraLimite = 0, MinutoLimite = 0, Dia = 0, Mes = 0, Año = 0, ContadorColumna = 1, ContadorColumna2 = 1,ContadorColumna3 = 1, ContadorColumna4 = 1,  IDconcurso;
+    public int idConcurso = 0, HoraLimite = 0, MinutoLimite = 0, Dia = 0, Mes = 0, Año = 0, ContadorColumna = 1, ContadorColumna2 = 1, ContadorColumna3 = 1, ContadorColumna4 = 1, IDconcurso;
     public String Descripcion;
-    int Seleccion = 0, Seleccion2 = 0, idViejo=0, HorasViejas=0, MinViejos=0;
+    int Seleccion = 0, Seleccion2 = 0, idViejo = 0, HorasViejas = 0, MinViejos = 0;
     int ID = 0, ID2 = 0;
     //DatosConcurso mDatosConcurso;
     DefaultTableModel Tabla = new DefaultTableModel();
     DefaultTableModel Tabla2 = new DefaultTableModel();
     DefaultTableModel Tabla3 = new DefaultTableModel();
     DefaultTableModel Tabla4 = new DefaultTableModel();
-    
+
     DateFormat df = DateFormat.getDateInstance();
+
     /**
      * Creates new form Concurso
      */
@@ -47,6 +48,8 @@ public class Concurso extends javax.swing.JInternalFrame {
         LBL_Mensajero2.setText("");
         LBL_Mensajero3.setText("");
         LBL_Mensajero4.setText("");
+        TXTnombreBaja.setEditable(false);
+        LBLidCambios.setVisible(false);
     }
 
     /**
@@ -594,18 +597,18 @@ public class Concurso extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             //if (TXTdescripcion.getText() != null) { 
-            
-            Date d1=DCfechaAlta.getDate();
+
+            Date d1 = DCfechaAlta.getDate();
             int HoraLim = Integer.parseInt(CBhora.getSelectedItem().toString());
             int MinLim = Integer.parseInt(CBminutos.getSelectedItem().toString());
             String Tiempo1 = HoraLim + ":" + MinLim + ":00";
-            
+
             mDatosConcurso.setDescripcion(this.TXTdescripcion.getText());
             mDatosConcurso.setTiempo(Tiempo1);
 
             String texto = TXTdescripcion.getText();
             texto = texto.replaceAll(" ", "");
-            if ((texto.length() == 0) || (texto.length()>=150) || ((CBhora.getSelectedItem() == "00") && (CBminutos.getSelectedItem() == "00")) || (d1==null)) {
+            if ((texto.length() == 0) || (texto.length() >= 150) || ((CBhora.getSelectedItem() == "00") && (CBminutos.getSelectedItem() == "00")) || (d1 == null)) {
                 LBL_Mensajero2.setText("Debe ingresar todos los datos correctamente");
             } else {
                 String Fecha1 = "";
@@ -679,7 +682,7 @@ public class Concurso extends javax.swing.JInternalFrame {
         }
         mConexion.desconectar();
     }
-    
+
     private void BTNborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNborrarActionPerformed
         // TODO add your handling code here:
         try {
@@ -688,7 +691,7 @@ public class Concurso extends javax.swing.JInternalFrame {
                 mDatosConcurso.setIdConcurso(ID);
                 if (mConexion.EliminarConcurso(mDatosConcurso)) {
                     if (ID != 0) {
-                    LBL_Mensajero1.setText("Concurso eliminado con éxito");
+                        LBL_Mensajero1.setText("Concurso eliminado con éxito");
                     } else {
                         LBL_Mensajero1.setText("Seleccione un concurso");
                     }
@@ -699,7 +702,7 @@ public class Concurso extends javax.swing.JInternalFrame {
                 ConsultaTabla();
                 ConsultaTabla2();
                 ConsultaTabla3();
-                
+
             }
             TXTnombreBaja.setText("");
         } catch (Exception e) {
@@ -755,7 +758,7 @@ public class Concurso extends javax.swing.JInternalFrame {
         }
         mConexion.desconectar();
     }
-    
+
     private void TBLaltaConcursosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBLaltaConcursosMouseClicked
         // TODO add your handling code here:
 
@@ -796,7 +799,7 @@ public class Concurso extends javax.swing.JInternalFrame {
             if (MinViejos == Integer.parseInt(CBminCambios.getItemAt(i))) {
                 CBminCambios.setSelectedIndex(i); //LLENAMOS MINUTOS
             }
-        }   
+        }
         SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yy-MM-dd");
         Date fecha = null;
         try {
@@ -814,35 +817,41 @@ public class Concurso extends javax.swing.JInternalFrame {
         int HoraLim = Integer.parseInt(CBhorasCambios.getSelectedItem().toString());
         int MinLim = Integer.parseInt(CBminCambios.getSelectedItem().toString());
         String Tiempo1 = HoraLim + ":" + MinLim + ":00";
-        Date d=DCfechaCambios.getDate();
-        
+        Date d = DCfechaCambios.getDate();
+
         String texto = TXTnombreCambios.getText();
         texto = texto.replaceAll(" ", "");
-        if ((texto.length() == 0) || (texto.length()>=150) || ((CBhorasCambios.getSelectedItem() == "00") && (CBminCambios.getSelectedItem() == "00")) || (d==null)) {
+        if ((texto.length() == 0) || (texto.length() >= 150) || ((CBhorasCambios.getSelectedItem() == "00") && (CBminCambios.getSelectedItem() == "00")) || (d == null)) {
             LBL_Mensajero3.setText("Debe ingresar todos los datos correctamente");
         } else {
-                String fecha = "";
-                fecha = new SimpleDateFormat("yyyy-MM-dd").format(DCfechaCambios.getDate());
-                if (mConexion.conectar()) {
+            String fecha = "";
+            fecha = new SimpleDateFormat("yyyy-MM-dd").format(DCfechaCambios.getDate());
+            if (mConexion.conectar()) {
+                if (!"ID".equals(LBLidCambios.getText())) {
                     ID2 = Integer.parseInt(LBLidCambios.getText());
                     mDatosConcurso.setIdConcurso(ID2);
                     nDatosConcurso.setDescripcion(TXTnombreCambios.getText());
                     nDatosConcurso.setFecha(fecha);
                     nDatosConcurso.setTiempo(Tiempo1);
+
                     if (mConexion.ModificarConcurso(mDatosConcurso, nDatosConcurso)) {
                         LBL_Mensajero3.setText("Concurso modificado exitosamente");
                     } else {
                         LBL_Mensajero3.setText("Error al modificar");
                     }
                 } else {
-                    LBL_Mensajero3.setText("Error al conectar con la Base de Datos");
+                    LBL_Mensajero3.setText("Selecciona un concurso de la tabla");
                 }
+
+            } else {
+                LBL_Mensajero3.setText("Error al conectar con la Base de Datos");
+            }
             mConexion.desconectar();
             ConsultaTabla();
             ConsultaTabla2();
             ConsultaTabla3();
         }
-        
+
         TXTnombreCambios.setText("");
         CBhorasCambios.setSelectedIndex(0);
         CBminCambios.setSelectedIndex(0);

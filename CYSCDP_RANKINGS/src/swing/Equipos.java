@@ -499,7 +499,7 @@ public class Equipos extends javax.swing.JInternalFrame {
         }
         mConexion.desconectar();
     }
-    
+
     private void BTN_altaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_altaActionPerformed
         DatosEquipo mDatosEquipo = new DatosEquipo();
         String text = TXT_Nom.getText();
@@ -604,13 +604,17 @@ public class Equipos extends javax.swing.JInternalFrame {
             text = text.replaceAll(" ", "");
             if (text.length() != 0 && text.length() <= 35) {
                 if (mConexion.conectar()) {
-                    ID = Integer.parseInt(LBLid1.getText());
-                    vEquipo.setId(ID);
-                    nEquipo.setNombre(TXTnom1.getText());
-                    if (mConexion.ModificarEquipo(vEquipo, nEquipo)) {
-                        LBLmen1.setText("Equipo modificado exitosamente");
+                    if (!"ID".equals(LBLid1.getText())) {
+                        ID = Integer.parseInt(LBLid1.getText());
+                        vEquipo.setId(ID);
+                        nEquipo.setNombre(TXTnom1.getText());
+                        if (mConexion.ModificarEquipo(vEquipo, nEquipo)) {
+                            LBLmen1.setText("Equipo modificado exitosamente");
+                        } else {
+                            LBLmen1.setText("Error al modificar");
+                        }
                     } else {
-                        LBLmen1.setText("Error al modificar");
+                        LBLmen1.setText("Por favor selecciona un equipo de la tabla");
                     }
                 } else {
                     LBLmen1.setText("Error al conectar con la Base de Datos");
@@ -665,7 +669,7 @@ public class Equipos extends javax.swing.JInternalFrame {
             LBLMen.setText("Error al consultar los equipos");
         }
         mConexion.desconectar();
-        
+
     }//GEN-LAST:event_TXTconKeyReleased
 
 
