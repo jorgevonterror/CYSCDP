@@ -46,6 +46,7 @@ public class Graficas extends javax.swing.JInternalFrame {
     int IDConcursos1 = 0;
     int IDEquipo1 = 0;
     int IDEquipo2 = 0;
+    int ConcursoSeleccionadoCambio = 0, ConcursoSeleccionadoBaja = 0;
 
     ArrayList mArrayListEquipo = new ArrayList();
 
@@ -400,6 +401,12 @@ public class Graficas extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Equipo 1:");
 
+        CBcon.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CBconItemStateChanged(evt);
+            }
+        });
+
         jLabel7.setText("Concurso:");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -567,6 +574,44 @@ public class Graficas extends javax.swing.JInternalFrame {
         ChartDes.validate();
      }//GEN-LAST:event_BTNgraficarActionPerformed
 
+    private void CBconItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBconItemStateChanged
+        // TODO add your handling code here:
+        if (mConexion.conectar()) {
+            ConcursoSeleccionadoCambio = mConexion.ConsultarIDConcursos(CBcon.getSelectedItem().toString());
+            CBeq1.removeAllItems();
+            CBeq2.removeAllItems();
+            LlenarComboEq();
+            mConexion.desconectar();
+        } else {
+            
+        }
+    }//GEN-LAST:event_CBconItemStateChanged
+
+    public void LlenarComboEq() {
+        
+        if (mConexion.conectar()) {
+            ArrayList mArrayList = new ArrayList();
+            mArrayList = mConexion.ConsultaNombresEquiposPorConcurso(ConcursoSeleccionadoCambio);
+            
+            
+            //LDBLPrueba.setText(mArrayList.get(0).toString());
+            if (mArrayList != null) {
+
+                for (int i = 0; i < mArrayList.size(); i++) {
+                    
+                    CBeq1.addItem(mArrayList.get(i).toString()); 
+                    CBeq2.addItem(mArrayList.get(i).toString());
+                }
+
+            } else {
+                LBL_Mensajero2.setText("No tiene Equipos Dados de Alta");
+            }
+            mConexion.desconectar();
+        } else {
+            LBL_Mensajero2.setText("No conectado a la BD");
+        }
+    }
+    
     private void reporteDes() {
 
     }
@@ -610,25 +655,25 @@ public class Graficas extends javax.swing.JInternalFrame {
         }
     }
 
-    public void LlenarComboEq() {
-        CBeq1.addItem("Ninguno");
-        CBeq2.addItem("Ninguno");
-        if (mConexion.conectar()) {
-            ArrayList mArrayList = new ArrayList();
-            mArrayList = mConexion.ConsultaNombresEquipos();
-            if (mArrayList != null) {
-                for (int i = 0; i < mArrayList.size(); i++) {
-                    CBeq1.addItem(mArrayList.get(i).toString());
-                    CBeq2.addItem(mArrayList.get(i).toString());
-                }
-            } else {
-                LBL_Mensajero2.setText("No tiene Equipos Dados de Alta");
-            }
-            mConexion.desconectar();
-        } else {
-            LBL_Mensajero2.setText("No conectado a la BD");
-        }
-    }
+//    public void LlenarComboEq() {
+//        CBeq1.addItem("Ninguno");
+//        CBeq2.addItem("Ninguno");
+//        if (mConexion.conectar()) {
+//            ArrayList mArrayList = new ArrayList();
+//            mArrayList = mConexion.ConsultaNombresEquipos();
+//            if (mArrayList != null) {
+//                for (int i = 0; i < mArrayList.size(); i++) {
+//                    CBeq1.addItem(mArrayList.get(i).toString());
+//                    CBeq2.addItem(mArrayList.get(i).toString());
+//                }
+//            } else {
+//                LBL_Mensajero2.setText("No tiene Equipos Dados de Alta");
+//            }
+//            mConexion.desconectar();
+//        } else {
+//            LBL_Mensajero2.setText("No conectado a la BD");
+//        }
+//    }
 
     public void ConsultaTablaDesv() {
         Tabla3 = (DefaultTableModel) Tabla_Des.getModel();
