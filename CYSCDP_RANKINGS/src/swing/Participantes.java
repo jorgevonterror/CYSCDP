@@ -887,7 +887,7 @@ public class Participantes extends javax.swing.JInternalFrame {
                 datos[3] = "" + mDatosParticipante.getSemestre();
                 datos[4] = "" + mDatosParticipante.getEquipos_idEquipos();
                 ID = Integer.parseInt(datos[4]);
-                datos[5] = mConexion.ConsultaNombresEquipos(ID);
+                datos[4] = mConexion.ConsultaNombresEquipos(ID);
                 Tabla.addRow(datos);
             }
             this.TBL_BajaParticipantes.setModel(Tabla);
@@ -896,7 +896,7 @@ public class Participantes extends javax.swing.JInternalFrame {
             this.TBL_BajaParticipantes.getColumnModel().getColumn(2).setPreferredWidth(250);
             this.TBL_BajaParticipantes.getColumnModel().getColumn(3).setPreferredWidth(250);
             this.TBL_BajaParticipantes.getColumnModel().getColumn(4).setPreferredWidth(250);
-            this.TBL_BajaParticipantes.getColumnModel().getColumn(5).setPreferredWidth(250);
+            //this.TBL_BajaParticipantes.getColumnModel().getColumn(5).setPreferredWidth(250);
             if (this.TBL_BajaParticipantes.getRowCount() > 0) {
                 this.TBL_BajaParticipantes.setRowSelectionInterval(0, 0);
             }
