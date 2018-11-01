@@ -605,13 +605,24 @@ public class Equipos extends javax.swing.JInternalFrame {
             if (text.length() != 0 && text.length() <= 35) {
                 if (mConexion.conectar()) {
                     if (!"ID".equals(LBLid1.getText())) {
-                        ID = Integer.parseInt(LBLid1.getText());
-                        vEquipo.setId(ID);
-                        nEquipo.setNombre(TXTnom1.getText());
-                        if (mConexion.ModificarEquipo(vEquipo, nEquipo)) {
-                            LBLmen1.setText("Equipo modificado exitosamente");
+                        String NombreEq = mConexion.ConsultaNomEquipos(TXTnom1.getText());
+                        if (!LBLid1.getText().equals("0")) {
+                            if (!NombreEq.equals(text)) {
+                                ID = Integer.parseInt(LBLid1.getText());
+                                vEquipo.setId(ID);
+                                nEquipo.setNombre(TXTnom1.getText());
+                                if (mConexion.ModificarEquipo(vEquipo, nEquipo) && !LBLid1.getText().equals("0")) {
+                                    LBLmen1.setText("Equipo modificado exitosamente");
+                                    LBLid1.setText("0");
+                                } else {
+                                    LBLmen1.setText("Error al modificar");
+                                    LBLid1.setText("0");
+                                }
+                            } else {
+                                LBLmen1.setText("Ya existe un equipo con ese nombre");
+                            }
                         } else {
-                            LBLmen1.setText("Error al modificar");
+                            LBLmen1.setText("Por favor selecciona un equipo de la tabla");
                         }
                     } else {
                         LBLmen1.setText("Por favor selecciona un equipo de la tabla");
@@ -622,6 +633,7 @@ public class Equipos extends javax.swing.JInternalFrame {
                 mConexion.desconectar();
             } else {
                 LBLmen1.setText("Nombre no válido");
+                LBLid1.setText("0");
             }
         } else {
             LBLmen1.setText("Por favor completa los campos");
@@ -630,6 +642,7 @@ public class Equipos extends javax.swing.JInternalFrame {
         ConsultaTablaAl();
         consultaTablaMod();
         TXTnom1.setText("");
+        LBLid1.setText("0");
     }//GEN-LAST:event_BTNmodActionPerformed
 
     private void tbl_ModMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_ModMouseClicked

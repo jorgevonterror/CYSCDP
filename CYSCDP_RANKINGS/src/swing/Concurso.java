@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  * @author jorgeantoniogarciagomez
  */
 public class Concurso extends javax.swing.JInternalFrame {
-
+    
     Conexion mConexion = new Conexion();
     DatosConcurso mDatosConcurso = new DatosConcurso();
     public int idConcurso = 0, HoraLimite = 0, MinutoLimite = 0, Dia = 0, Mes = 0, Año = 0, ContadorColumna = 1, ContadorColumna2 = 1, ContadorColumna3 = 1, ContadorColumna4 = 1, IDconcurso;
@@ -33,7 +33,7 @@ public class Concurso extends javax.swing.JInternalFrame {
     DefaultTableModel Tabla2 = new DefaultTableModel();
     DefaultTableModel Tabla3 = new DefaultTableModel();
     DefaultTableModel Tabla4 = new DefaultTableModel();
-
+    
     DateFormat df = DateFormat.getDateInstance();
 
     /**
@@ -44,6 +44,7 @@ public class Concurso extends javax.swing.JInternalFrame {
         ConsultaTabla();
         ConsultaTabla2();
         ConsultaTabla3();
+        consultaCon();
         LBL_Mensajero1.setText("");
         LBL_Mensajero2.setText("");
         LBL_Mensajero3.setText("");
@@ -550,11 +551,11 @@ public class Concurso extends javax.swing.JInternalFrame {
         for (int i = a; i >= 0; i--) {
             Tabla.removeRow(Tabla.getRowCount() - 1);
         }
-
+        
         if (mConexion.conectar()) {
             ArrayList mArrayListaConcursos = new ArrayList();
             mArrayListaConcursos = mConexion.ConsultarConcursos();
-
+            
             String[] Datos = null;
             if (mArrayListaConcursos != null) {
                 if (ContadorColumna == 1) {
@@ -564,7 +565,7 @@ public class Concurso extends javax.swing.JInternalFrame {
                     Tabla.addColumn("Tiempo_Límite");
                     ContadorColumna = 2;
                 }
-
+                
                 for (int i = 0; i < mArrayListaConcursos.size(); i++) {
                     mDatosConcurso = (DatosConcurso) mArrayListaConcursos.get(i);
                     Datos = new String[4];
@@ -574,7 +575,7 @@ public class Concurso extends javax.swing.JInternalFrame {
                     Datos[3] = "" + mDatosConcurso.getTiempo();
                     Tabla.addRow(Datos);
                 }
-
+                
             } else {
                 LBL_Mensajero2.setText("No hay concursos");
             }
@@ -602,10 +603,10 @@ public class Concurso extends javax.swing.JInternalFrame {
             int HoraLim = Integer.parseInt(CBhora.getSelectedItem().toString());
             int MinLim = Integer.parseInt(CBminutos.getSelectedItem().toString());
             String Tiempo1 = HoraLim + ":" + MinLim + ":00";
-
+            
             mDatosConcurso.setDescripcion(this.TXTdescripcion.getText());
             mDatosConcurso.setTiempo(Tiempo1);
-
+            
             String texto = TXTdescripcion.getText();
             texto = texto.replaceAll(" ", "");
             if ((texto.length() == 0) || (texto.length() >= 150) || ((CBhora.getSelectedItem() == "00") && (CBminutos.getSelectedItem() == "00")) || (d1 == null)) {
@@ -615,18 +616,24 @@ public class Concurso extends javax.swing.JInternalFrame {
                 Fecha1 = new SimpleDateFormat("yyyy-MM-dd").format(DCfechaAlta.getDate());
                 mDatosConcurso.setFecha(Fecha1);
                 if (mConexion.conectar()) {
-                    if (mConexion.AltaConcurso(mDatosConcurso)) {
-                        LBL_Mensajero2.setText("El concurso fue guardado con éxito");
-                        TXTdescripcion.setText("");
-                        CBhora.setSelectedIndex(0);
-                        CBminutos.setSelectedIndex(0);
+                    String NombreEq = mConexion.ConsultaNomConcursos(TXTdescripcion.getText());
+                    if (!NombreEq.equals(texto)) {
+                        if (mConexion.AltaConcurso(mDatosConcurso)) {
+                            LBL_Mensajero2.setText("El concurso fue guardado con éxito");
+                            TXTdescripcion.setText("");
+                            CBhora.setSelectedIndex(0);
+                            CBminutos.setSelectedIndex(0);
+                        } else {
+                            LBL_Mensajero2.setText("Error al guardar el concurso");
+                        }
                     } else {
-                        LBL_Mensajero2.setText("Error al guardar el concurso");
+                        LBL_Mensajero2.setText("Ya existe un concurso con ese nombre");
                     }
                     mConexion.desconectar();
                     ConsultaTabla();
                     ConsultaTabla2();
                     ConsultaTabla3();
+                    consultaCon();
                 }
             }
             DCfechaAlta.setCalendar(null);
@@ -640,11 +647,11 @@ public class Concurso extends javax.swing.JInternalFrame {
         for (int i = a; i >= 0; i--) {
             Tabla2.removeRow(Tabla2.getRowCount() - 1);
         }
-
+        
         if (mConexion.conectar()) {
             ArrayList mArrayListConcursos = new ArrayList();
             mArrayListConcursos = mConexion.ConsultarConcursos();
-
+            
             String[] Datos = null;
             if (mArrayListConcursos != null) {
                 if (ContadorColumna2 == 1) {
@@ -654,7 +661,7 @@ public class Concurso extends javax.swing.JInternalFrame {
                     Tabla2.addColumn("Tiempo_Límite");
                     ContadorColumna2 = 2;
                 }
-
+                
                 for (int i = 0; i < mArrayListConcursos.size(); i++) {
                     mDatosConcurso = (DatosConcurso) mArrayListConcursos.get(i);
                     Datos = new String[4];
@@ -664,7 +671,7 @@ public class Concurso extends javax.swing.JInternalFrame {
                     Datos[3] = "" + mDatosConcurso.getTiempo();
                     Tabla2.addRow(Datos);
                 }
-
+                
             } else {
                 LBL_Mensajero2.setText("No hay concursos");
             }
@@ -702,25 +709,25 @@ public class Concurso extends javax.swing.JInternalFrame {
                 ConsultaTabla();
                 ConsultaTabla2();
                 ConsultaTabla3();
-
+                consultaCon();
             }
             TXTnombreBaja.setText("");
         } catch (Exception e) {
             LBL_Mensajero1.setText("ERROR, Seleccione un concurso");
         }
     }//GEN-LAST:event_BTNborrarActionPerformed
-
+    
     public void ConsultaTabla3() {
         Tabla3 = (DefaultTableModel) TBLcambios.getModel();
         int a = Tabla3.getRowCount() - 1;
         for (int i = a; i >= 0; i--) {
             Tabla3.removeRow(Tabla3.getRowCount() - 1);
         }
-
+        
         if (mConexion.conectar()) {
             ArrayList mArrayListConcursos = new ArrayList();
             mArrayListConcursos = mConexion.ConsultarConcursos();
-
+            
             String[] Datos = null;
             if (mArrayListConcursos != null) {
                 if (ContadorColumna3 == 1) {
@@ -730,7 +737,7 @@ public class Concurso extends javax.swing.JInternalFrame {
                     Tabla3.addColumn("Tiempo_Límite");
                     ContadorColumna3 = 2;
                 }
-
+                
                 for (int i = 0; i < mArrayListConcursos.size(); i++) {
                     mDatosConcurso = (DatosConcurso) mArrayListConcursos.get(i);
                     Datos = new String[4];
@@ -740,7 +747,7 @@ public class Concurso extends javax.swing.JInternalFrame {
                     Datos[3] = "" + mDatosConcurso.getTiempo();
                     Tabla3.addRow(Datos);
                 }
-
+                
             } else {
                 LBL_Mensajero3.setText("No hay concursos");
             }
@@ -786,10 +793,10 @@ public class Concurso extends javax.swing.JInternalFrame {
         String FechaT = String.valueOf(TBLcambios.getValueAt(Seleccion2, 2)).toString();
         String TemporalHoras = String.valueOf(TBLcambios.getValueAt(Seleccion2, 3)).substring(0, 2);
         String TemporalMinutos = String.valueOf(TBLcambios.getValueAt(Seleccion2, 3)).substring(3, 5);
-
+        
         HorasViejas = Integer.parseInt(TemporalHoras);
         MinViejos = Integer.parseInt(TemporalMinutos);
-
+        
         for (int i = 0; i < CBhorasCambios.getItemCount(); i++) {
             if (HorasViejas == Integer.parseInt(CBhorasCambios.getItemAt(i))) {
                 CBhorasCambios.setSelectedIndex(i); //LLENAMOS HORAS
@@ -818,31 +825,41 @@ public class Concurso extends javax.swing.JInternalFrame {
         int MinLim = Integer.parseInt(CBminCambios.getSelectedItem().toString());
         String Tiempo1 = HoraLim + ":" + MinLim + ":00";
         Date d = DCfechaCambios.getDate();
-
+        
         String texto = TXTnombreCambios.getText();
         texto = texto.replaceAll(" ", "");
         if ((texto.length() == 0) || (texto.length() >= 150) || ((CBhorasCambios.getSelectedItem() == "00") && (CBminCambios.getSelectedItem() == "00")) || (d == null)) {
             LBL_Mensajero3.setText("Debe ingresar todos los datos correctamente");
+            LBLidCambios.setText("0");
         } else {
             String fecha = "";
             fecha = new SimpleDateFormat("yyyy-MM-dd").format(DCfechaCambios.getDate());
             if (mConexion.conectar()) {
                 if (!"ID".equals(LBLidCambios.getText())) {
-                    ID2 = Integer.parseInt(LBLidCambios.getText());
-                    mDatosConcurso.setIdConcurso(ID2);
-                    nDatosConcurso.setDescripcion(TXTnombreCambios.getText());
-                    nDatosConcurso.setFecha(fecha);
-                    nDatosConcurso.setTiempo(Tiempo1);
-
-                    if (mConexion.ModificarConcurso(mDatosConcurso, nDatosConcurso)) {
-                        LBL_Mensajero3.setText("Concurso modificado exitosamente");
+                    String NombreEq = mConexion.ConsultaNomConcursos(TXTnombreCambios.getText());
+                    if (!LBLidCambios.getText().equals("0")) {
+                        if (!NombreEq.equals(texto)) {
+                            ID2 = Integer.parseInt(LBLidCambios.getText());
+                            mDatosConcurso.setIdConcurso(ID2);
+                            nDatosConcurso.setDescripcion(TXTnombreCambios.getText());
+                            nDatosConcurso.setFecha(fecha);
+                            nDatosConcurso.setTiempo(Tiempo1);
+                            if (mConexion.ModificarConcurso(mDatosConcurso, nDatosConcurso) && !LBLidCambios.getText().equals("0")) {
+                                LBL_Mensajero3.setText("Concurso modificado exitosamente");
+                                LBLidCambios.setText("0");
+                            } else {
+                                LBL_Mensajero3.setText("Error al modificar");
+                                LBLidCambios.setText("0");
+                            }
+                        } else {
+                            LBL_Mensajero3.setText("Ya existe un concurso con ese nombre");
+                        }
                     } else {
-                        LBL_Mensajero3.setText("Error al modificar");
+                        LBL_Mensajero3.setText("Selecciona un concurso de la tabla");
                     }
                 } else {
                     LBL_Mensajero3.setText("Selecciona un concurso de la tabla");
                 }
-
             } else {
                 LBL_Mensajero3.setText("Error al conectar con la Base de Datos");
             }
@@ -850,26 +867,27 @@ public class Concurso extends javax.swing.JInternalFrame {
             ConsultaTabla();
             ConsultaTabla2();
             ConsultaTabla3();
+            consultaCon();
         }
-
+        
         TXTnombreCambios.setText("");
         CBhorasCambios.setSelectedIndex(0);
         CBminCambios.setSelectedIndex(0);
         DCfechaCambios.setCalendar(null);
+        LBLidCambios.setText("0");
     }//GEN-LAST:event_BTNmodificarActionPerformed
-
-    private void TXTnombreConsultaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXTnombreConsultaKeyReleased
-        // TODO add your handling code here:
+    
+    private void consultaCon() {
         Tabla4 = (DefaultTableModel) TBLconsulta.getModel();
         int a = Tabla4.getRowCount() - 1;
         for (int i = a; i >= 0; i--) {
             Tabla4.removeRow(Tabla4.getRowCount() - 1);
         }
-
+        
         if (mConexion.conectar()) {
             ArrayList mArrayListaConcursos = new ArrayList();
-            mArrayListaConcursos = mConexion.consultarConcursoFiltro(TXTnombreConsulta.getText());
-
+            mArrayListaConcursos = mConexion.ConsultarConcursos();
+            
             String[] Datos = null;
             if (mArrayListaConcursos != null) {
                 if (ContadorColumna4 == 1) {
@@ -879,7 +897,7 @@ public class Concurso extends javax.swing.JInternalFrame {
                     Tabla4.addColumn("Tiempo_Límite");
                     ContadorColumna4 = 2;
                 }
-
+                
                 for (int i = 0; i < mArrayListaConcursos.size(); i++) {
                     mDatosConcurso = (DatosConcurso) mArrayListaConcursos.get(i);
                     Datos = new String[4];
@@ -889,7 +907,56 @@ public class Concurso extends javax.swing.JInternalFrame {
                     Datos[3] = "" + mDatosConcurso.getTiempo();
                     Tabla4.addRow(Datos);
                 }
-
+                
+            } else {
+                LBL_Mensajero4.setText("No hay concursos");
+            }
+            this.TBLconsulta = new javax.swing.JTable();
+            this.TBLconsulta.setModel(Tabla4);
+            this.TBLconsulta.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.TBLconsulta.getColumnModel().getColumn(1).setPreferredWidth(50);
+            this.TBLconsulta.getColumnModel().getColumn(2).setPreferredWidth(100);
+            this.TBLconsulta.getColumnModel().getColumn(3).setPreferredWidth(100);
+            if (this.TBLconsulta.getRowCount() > 0) {
+                this.TBLconsulta.setRowSelectionInterval(0, 0);
+            }
+        } else {
+            LBL_Mensajero4.setText("Error al consultar los equipos");
+        }
+        mConexion.desconectar();
+    }
+    private void TXTnombreConsultaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXTnombreConsultaKeyReleased
+        // TODO add your handling code here:
+        Tabla4 = (DefaultTableModel) TBLconsulta.getModel();
+        int a = Tabla4.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            Tabla4.removeRow(Tabla4.getRowCount() - 1);
+        }
+        
+        if (mConexion.conectar()) {
+            ArrayList mArrayListaConcursos = new ArrayList();
+            mArrayListaConcursos = mConexion.consultarConcursoFiltro(TXTnombreConsulta.getText());
+            
+            String[] Datos = null;
+            if (mArrayListaConcursos != null) {
+                if (ContadorColumna4 == 1) {
+                    Tabla4.addColumn("ID");
+                    Tabla4.addColumn("Descripción");
+                    Tabla4.addColumn("Fecha");
+                    Tabla4.addColumn("Tiempo_Límite");
+                    ContadorColumna4 = 2;
+                }
+                
+                for (int i = 0; i < mArrayListaConcursos.size(); i++) {
+                    mDatosConcurso = (DatosConcurso) mArrayListaConcursos.get(i);
+                    Datos = new String[4];
+                    Datos[0] = "" + mDatosConcurso.getIdConcurso();
+                    Datos[1] = mDatosConcurso.getDescripcion();
+                    Datos[2] = mDatosConcurso.getFecha();
+                    Datos[3] = "" + mDatosConcurso.getTiempo();
+                    Tabla4.addRow(Datos);
+                }
+                
             } else {
                 LBL_Mensajero4.setText("No hay concursos");
             }

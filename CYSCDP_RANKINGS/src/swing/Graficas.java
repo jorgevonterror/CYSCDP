@@ -93,6 +93,8 @@ public class Graficas extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         ChartDes = new javax.swing.JPanel();
+        Pnloculto = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
         LBL_Mensajero2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -364,6 +366,27 @@ public class Graficas extends javax.swing.JInternalFrame {
         ChartDes.setBackground(new java.awt.Color(204, 204, 255));
         ChartDes.setLayout(new java.awt.BorderLayout());
 
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/Eclipse-1s-200px.gif"))); // NOI18N
+
+        javax.swing.GroupLayout PnlocultoLayout = new javax.swing.GroupLayout(Pnloculto);
+        Pnloculto.setLayout(PnlocultoLayout);
+        PnlocultoLayout.setHorizontalGroup(
+            PnlocultoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PnlocultoLayout.createSequentialGroup()
+                .addGap(156, 156, 156)
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(168, Short.MAX_VALUE))
+        );
+        PnlocultoLayout.setVerticalGroup(
+            PnlocultoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PnlocultoLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
+        );
+
+        ChartDes.add(Pnloculto, java.awt.BorderLayout.CENTER);
+
         LBL_Mensajero2.setText("jLabel13");
 
         Tabla_Des.setModel(new javax.swing.table.DefaultTableModel(
@@ -461,9 +484,9 @@ public class Graficas extends javax.swing.JInternalFrame {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LBL_Mensajero2)
-                    .addComponent(ChartDes, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(LBL_Mensajero2, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ChartDes, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -471,9 +494,9 @@ public class Graficas extends javax.swing.JInternalFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ChartDes, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(LBL_Mensajero2)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Reporte de Desviación", jPanel5);
@@ -527,12 +550,12 @@ public class Graficas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void BTNgraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNgraficarActionPerformed
-        ConsultaTablaDesv();
-        DefaultCategoryDataset Datos = new DefaultCategoryDataset();
+          DefaultCategoryDataset Datos = new DefaultCategoryDataset();
         //Primer parámetro es complejidad
         //Último parámetro es tiempo
         if (CBeq1.getSelectedItem() != CBeq2.getSelectedItem()) {
             if (mConexion.conectar()) {
+                Pnloculto.setVisible(false);
                 int IDequipo1 = mConexion.ConsultarIDEquipos(CBeq1.getSelectedItem().toString());
                 int IDequipo2 = mConexion.ConsultarIDEquipos(CBeq2.getSelectedItem().toString());
                 int Id = mConexion.ConsultarIDConcursos((String) CBcon.getSelectedItem());
@@ -560,18 +583,19 @@ public class Graficas extends javax.swing.JInternalFrame {
                 }
             }
             LBL_Mensajero2.setText("");
+            JFreeChart Grafica = ChartFactory.createBarChart3D("Desviación de Equipos", "Complejidad",
+                    "Tiempo en minutos", Datos, PlotOrientation.VERTICAL, true, true, false);
+            // Mostrar Grafico
+            ChartPanel Panel = new ChartPanel(Grafica);
+            ChartDes.removeAll();
+            ChartDes.add(Panel, BorderLayout.CENTER);
+            ChartDes.validate();
+            ConsultaTablaDesv();
         } else {
-            LBL_Mensajero2.setText("Selecciona diferentes equipos");
+            LBL_Mensajero2.setText("Selecciona diferentes equipos / Selecciona un concurso con equipos");
         }
-//        Datos.addValue(0.5, "Equipo 1", "1");
+        //Datos.addValue(0.5, "Equipo 1", "1");
         // Creando el Grafico
-        JFreeChart Grafica = ChartFactory.createBarChart3D("Desviación de Equipos", "Complejidad",
-                "Tiempo", Datos, PlotOrientation.VERTICAL, true, true, false);
-        // Mostrar Grafico
-        ChartPanel Panel = new ChartPanel(Grafica);
-        ChartDes.removeAll();
-        ChartDes.add(Panel, BorderLayout.CENTER);
-        ChartDes.validate();
      }//GEN-LAST:event_BTNgraficarActionPerformed
 
     private void CBconItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBconItemStateChanged
@@ -583,23 +607,22 @@ public class Graficas extends javax.swing.JInternalFrame {
             LlenarComboEq();
             mConexion.desconectar();
         } else {
-            
+
         }
     }//GEN-LAST:event_CBconItemStateChanged
 
     public void LlenarComboEq() {
-        
+
         if (mConexion.conectar()) {
             ArrayList mArrayList = new ArrayList();
             mArrayList = mConexion.ConsultaNombresEquiposPorConcurso(ConcursoSeleccionadoCambio);
-            
-            
+
             //LDBLPrueba.setText(mArrayList.get(0).toString());
             if (mArrayList != null) {
 
                 for (int i = 0; i < mArrayList.size(); i++) {
-                    
-                    CBeq1.addItem(mArrayList.get(i).toString()); 
+
+                    CBeq1.addItem(mArrayList.get(i).toString());
                     CBeq2.addItem(mArrayList.get(i).toString());
                 }
 
@@ -611,7 +634,7 @@ public class Graficas extends javax.swing.JInternalFrame {
             LBL_Mensajero2.setText("No conectado a la BD");
         }
     }
-    
+
     private void reporteDes() {
 
     }
@@ -655,26 +678,6 @@ public class Graficas extends javax.swing.JInternalFrame {
         }
     }
 
-//    public void LlenarComboEq() {
-//        CBeq1.addItem("Ninguno");
-//        CBeq2.addItem("Ninguno");
-//        if (mConexion.conectar()) {
-//            ArrayList mArrayList = new ArrayList();
-//            mArrayList = mConexion.ConsultaNombresEquipos();
-//            if (mArrayList != null) {
-//                for (int i = 0; i < mArrayList.size(); i++) {
-//                    CBeq1.addItem(mArrayList.get(i).toString());
-//                    CBeq2.addItem(mArrayList.get(i).toString());
-//                }
-//            } else {
-//                LBL_Mensajero2.setText("No tiene Equipos Dados de Alta");
-//            }
-//            mConexion.desconectar();
-//        } else {
-//            LBL_Mensajero2.setText("No conectado a la BD");
-//        }
-//    }
-
     public void ConsultaTablaDesv() {
         Tabla3 = (DefaultTableModel) Tabla_Des.getModel();
         int a = Tabla3.getRowCount() - 1;
@@ -682,88 +685,88 @@ public class Graficas extends javax.swing.JInternalFrame {
             Tabla3.removeRow(Tabla3.getRowCount() - 1);
         }
         if (CBeq1.getSelectedItem() != CBeq2.getSelectedItem()) {
-        if (mConexion.conectar()) {
+            if (mConexion.conectar()) {
 
-            if ((CBcon.getSelectedItem() != "Ninguna") && (CBeq1.getSelectedItem() != "Ninguno") && (CBeq2.getSelectedItem() != "Ninguno")) {
-                IDConcursos1 = mConexion.ConsultarIDConcursos(CBcon.getSelectedItem().toString());
-                IDEquipo1 = mConexion.ConsultarIDEquipos(CBeq1.getSelectedItem().toString());
-                IDEquipo2 = mConexion.ConsultarIDEquipos(CBeq2.getSelectedItem().toString());
-            } else {
-                LBL_Mensajero2.setText("Selecciona una opción de concurso y/o equipo");
-            }
-
-            ArrayList mArrayListPuntajesDesv = new ArrayList();
-            mArrayListPuntajesDesv = mConexion.ConsultarIDPuntajes2(IDConcursos1, IDEquipo1);
-
-            ArrayList mArrayListPuntajesDesv2 = new ArrayList();
-            mArrayListPuntajesDesv2 = mConexion.ConsultarIDPuntajes2(IDConcursos1, IDEquipo2);
-
-            String[] Datos = null;
-            if (mArrayListPuntajesDesv != null) {
-                if (ContadorColumna == 1) {
-                    ContadorColumna = 2;
+                if ((CBcon.getSelectedItem() != "Ninguna") && (CBeq1.getSelectedItem() != "Ninguno") && (CBeq2.getSelectedItem() != "Ninguno")) {
+                    IDConcursos1 = mConexion.ConsultarIDConcursos(CBcon.getSelectedItem().toString());
+                    IDEquipo1 = mConexion.ConsultarIDEquipos(CBeq1.getSelectedItem().toString());
+                    IDEquipo2 = mConexion.ConsultarIDEquipos(CBeq2.getSelectedItem().toString());
+                } else {
+                    LBL_Mensajero2.setText("Selecciona una opción de concurso y/o equipo");
                 }
 
-                for (int i = 0; i < mArrayListPuntajesDesv.size(); i++) {
-                    Datos = new String[3];
-                    Datos[0] = mArrayListPuntajesDesv.get(i).toString().substring(0, 8); //Tiempo
-                    switch (Integer.parseInt(mArrayListPuntajesDesv.get(i).toString().substring(8, 9))) {
-                        case 1:
-                            Datos[1] = "Básico";
-                            break;
-                        case 2:
-                            Datos[1] = "Medio";
-                            break;
-                        case 3:
-                            Datos[1] = "Avanzado";
-                            break;
+                ArrayList mArrayListPuntajesDesv = new ArrayList();
+                mArrayListPuntajesDesv = mConexion.ConsultarIDPuntajes2(IDConcursos1, IDEquipo1);
+
+                ArrayList mArrayListPuntajesDesv2 = new ArrayList();
+                mArrayListPuntajesDesv2 = mConexion.ConsultarIDPuntajes2(IDConcursos1, IDEquipo2);
+
+                String[] Datos = null;
+                if (mArrayListPuntajesDesv != null) {
+                    if (ContadorColumna == 1) {
+                        ContadorColumna = 2;
                     }
-                    Datos[2] = mArrayListPuntajesDesv.get(i).toString().substring(9); //Nombre equipo
-                    Tabla3.addRow(Datos);
-                }
 
-            } else {
-                LBL_Mensajero2.setText("No hay puntajes");
-            }
-            if (mArrayListPuntajesDesv2 != null) {
-                if (ContadorColumna2 == 1) {
-                    ContadorColumna2 = 2;
-                }
-
-                for (int i = 0; i < mArrayListPuntajesDesv2.size(); i++) {
-                    Datos = new String[3];
-                    Datos[0] = mArrayListPuntajesDesv2.get(i).toString().substring(0, 8); //Tiempo
-                    switch (Integer.parseInt(mArrayListPuntajesDesv2.get(i).toString().substring(8, 9))) {
-                        case 1:
-                            Datos[1] = "Básico";
-                            break;
-                        case 2:
-                            Datos[1] = "Medio";
-                            break;
-                        case 3:
-                            Datos[1] = "Avanzado";
-                            break;
+                    for (int i = 0; i < mArrayListPuntajesDesv.size(); i++) {
+                        Datos = new String[3];
+                        Datos[0] = mArrayListPuntajesDesv.get(i).toString().substring(0, 8); //Tiempo
+                        switch (Integer.parseInt(mArrayListPuntajesDesv.get(i).toString().substring(8, 9))) {
+                            case 1:
+                                Datos[1] = "Básico";
+                                break;
+                            case 2:
+                                Datos[1] = "Medio";
+                                break;
+                            case 3:
+                                Datos[1] = "Avanzado";
+                                break;
+                        }
+                        Datos[2] = mArrayListPuntajesDesv.get(i).toString().substring(9); //Nombre equipo
+                        Tabla3.addRow(Datos);
                     }
-                    Datos[2] = mArrayListPuntajesDesv2.get(i).toString().substring(9); //Nombre equipo
-                    Tabla3.addRow(Datos);
-                }
 
+                } else {
+                    LBL_Mensajero2.setText("No hay puntajes");
+                }
+                if (mArrayListPuntajesDesv2 != null) {
+                    if (ContadorColumna2 == 1) {
+                        ContadorColumna2 = 2;
+                    }
+
+                    for (int i = 0; i < mArrayListPuntajesDesv2.size(); i++) {
+                        Datos = new String[3];
+                        Datos[0] = mArrayListPuntajesDesv2.get(i).toString().substring(0, 8); //Tiempo
+                        switch (Integer.parseInt(mArrayListPuntajesDesv2.get(i).toString().substring(8, 9))) {
+                            case 1:
+                                Datos[1] = "Básico";
+                                break;
+                            case 2:
+                                Datos[1] = "Medio";
+                                break;
+                            case 3:
+                                Datos[1] = "Avanzado";
+                                break;
+                        }
+                        Datos[2] = mArrayListPuntajesDesv2.get(i).toString().substring(9); //Nombre equipo
+                        Tabla3.addRow(Datos);
+                    }
+
+                } else {
+                    LBL_Mensajero2.setText("No hay puntajes");
+                }
+                this.Tabla_Des = new javax.swing.JTable();
+                this.Tabla_Des.setModel(Tabla3);
+                this.Tabla_Des.getColumnModel().getColumn(0).setPreferredWidth(50);
+                this.Tabla_Des.getColumnModel().getColumn(1).setPreferredWidth(50);
+                this.Tabla_Des.getColumnModel().getColumn(2).setPreferredWidth(100);
+                if (this.Tabla_Des.getRowCount() > 0) {
+                    this.Tabla_Des.setRowSelectionInterval(0, 0);
+                }
+                mConexion.desconectar();
             } else {
-                LBL_Mensajero2.setText("No hay puntajes");
+                LBL_Mensajero2.setText("Error al consultar");
             }
-            this.Tabla_Des = new javax.swing.JTable();
-            this.Tabla_Des.setModel(Tabla3);
-            this.Tabla_Des.getColumnModel().getColumn(0).setPreferredWidth(50);
-            this.Tabla_Des.getColumnModel().getColumn(1).setPreferredWidth(50);
-            this.Tabla_Des.getColumnModel().getColumn(2).setPreferredWidth(100);
-            if (this.Tabla_Des.getRowCount() > 0) {
-                this.Tabla_Des.setRowSelectionInterval(0, 0);
-            }
-            mConexion.desconectar();
         } else {
-            LBL_Mensajero2.setText("Error al consultar");
-        }
-        }else{
             LBL_Mensajero2.setText("Seleccione dos equipos diferentes");
         }
 
@@ -914,6 +917,7 @@ public class Graficas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel LBL_Mensajero;
     private javax.swing.JLabel LBL_Mensajero2;
     private javax.swing.JPanel Panel_Oculto;
+    private javax.swing.JPanel Pnloculto;
     private javax.swing.JTable Tabla_Des;
     private javax.swing.JTable Tabla_Nombre_Resultados;
     private javax.swing.JButton jButton4;
@@ -921,6 +925,7 @@ public class Graficas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

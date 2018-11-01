@@ -40,10 +40,8 @@ public class Participantes extends javax.swing.JInternalFrame {
         lbl_id.setVisible(false);
         LBL_Indicador.setVisible(false);
         LBL_IndicadorConsulta.setVisible(false);
-
         ConsultaTablaEquipos();
-
-        //ConsultaTabla2();
+        ConsultaTabla2();
     }
 
     /**
@@ -838,31 +836,38 @@ public class Participantes extends javax.swing.JInternalFrame {
         DatosParticipante nParticipante = new DatosParticipante();
 
         if (Validarcajas()) {
-            if (mConexion.conectar()) {
-                if (!"ID".equals(LBLid.getText())) {
-                    ID = mConexion.ConsultarIDEquipos(CBeq.getSelectedItem().toString());
-                    vParticipante.setIdParticipante(Integer.parseInt(LBLid.getText()));
-                    nParticipante.setNombreParticipante(this.TXTnom.getText());
-                    nParticipante.setCarrera((String) CBcar.getSelectedItem());
-                    nParticipante.setSemestre(Integer.parseInt((String) CBsem.getSelectedItem()));
-                    nParticipante.setEquipos_idEquipos(ID);
-                    if (mConexion.ModificarParticipantes(vParticipante, nParticipante)) {
-                        LBLmen.setText("Participante modificado exitosamente");
+            String text = TXTnom.getText();
+            text = text.replaceAll(" ", "");
+            if (text.length() != 0 && text.length() <= 35) {
+                if (mConexion.conectar()) {
+                    if (!"ID".equals(LBLid.getText())) {
+                        ID = mConexion.ConsultarIDEquipos(CBeq.getSelectedItem().toString());
+                        vParticipante.setIdParticipante(Integer.parseInt(LBLid.getText()));
+                        nParticipante.setNombreParticipante(this.TXTnom.getText());
+                        nParticipante.setCarrera((String) CBcar.getSelectedItem());
+                        nParticipante.setSemestre(Integer.parseInt((String) CBsem.getSelectedItem()));
+                        nParticipante.setEquipos_idEquipos(ID);
+                        if (mConexion.ModificarParticipantes(vParticipante, nParticipante)) {
+                            LBLmen.setText("Participante modificado exitosamente");
+                        } else {
+                            LBLmen.setText("Error al modificar");
+                        }
                     } else {
-                        LBLmen.setText("Error al modificar");
+                        LBLmen.setText("Por favor selecciona un participante de la tabla");
                     }
                 } else {
-                    LBLmen.setText("Por favor selecciona un participante de la tabla");
+                    LBLmen.setText("Error al conectar con la Base de Datos");
                 }
+                mConexion.desconectar();
             } else {
-                LBLmen.setText("Error al conectar con la Base de Datos");
+                LBLmen.setText("Escribe correctamente el nombre");
             }
-            mConexion.desconectar();
         } else {
             LBLmen.setText("Por favor completa los campos");
         }
         ConsultaTabla();
         ConsultaTablaEquipos();
+        ConsultaTabla2();
     }//GEN-LAST:event_BTNmodActionPerformed
 
     private void TBLaltaParticipanteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBLaltaParticipanteMouseClicked
@@ -932,9 +937,7 @@ public class Participantes extends javax.swing.JInternalFrame {
         }
         mConexion.desconectar();
         ConsultaTabla2();
-//        ConsultaTablaAl();
-//        consultaTablaMod();
-        //TXTnom.setText("");
+        ConsultaTablaEquipos();
     }//GEN-LAST:event_BTNelimActionPerformed
 
     private void TBL_BajaParticipantesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBL_BajaParticipantesMouseClicked

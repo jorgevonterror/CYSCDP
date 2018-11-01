@@ -1066,7 +1066,7 @@ public final class Puntajes extends javax.swing.JInternalFrame {
                 mDatosPuntajes.setIdPuntajes(idPuntajes);
                 if (mConexion.EliminarPuntajes(mDatosPuntajes)) {
                     if (idPuntajes != 0) {
-                        LBL_Mensajero1.setText("Se ha eliminado el registro #" + idPuntajes);
+                        LBL_Mensajero1.setText("Se ha eliminado el puntaje #" + idPuntajes);
                         LimpiarTabla();
                         BuscarPuntaje();
                     } else {
