@@ -6,6 +6,7 @@
 package swing;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -68,10 +69,10 @@ public class Participantes extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         CBequipo = new javax.swing.JComboBox<>();
         LBL_Mensajero = new javax.swing.JLabel();
-        CBcarrera = new javax.swing.JComboBox<>();
         CBsemestre = new javax.swing.JComboBox<>();
         jScrollPane6 = new javax.swing.JScrollPane();
         TBLaltaParticipante = new javax.swing.JTable();
+        CBcarrera = new javax.swing.JTextField();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -190,9 +191,7 @@ public class Participantes extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Equipo:");
 
-        CBcarrera.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguna", "II", "ISC", "ITICS", "IS", "IC" }));
-
-        CBsemestre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
+        CBsemestre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
 
         TBLaltaParticipante.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -216,12 +215,13 @@ public class Participantes extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(103, 103, 103)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(CBsemestre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(CBequipo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -230,19 +230,14 @@ public class Participantes extends javax.swing.JInternalFrame {
                         .addComponent(BTNguardar)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(31, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(LBL_Mensajero, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40))))
+                    .addComponent(LBL_Mensajero, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,7 +250,7 @@ public class Participantes extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(CBcarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
+                .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CBsemestre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
@@ -268,7 +263,7 @@ public class Participantes extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LBL_Mensajero, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Alta", jPanel1);
@@ -337,8 +332,6 @@ public class Participantes extends javax.swing.JInternalFrame {
                 .addGap(188, 188, 188))
         );
 
-        LBL_Indicador.setText("-");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -348,10 +341,9 @@ public class Participantes extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LBL_Indicador))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(LBL_Indicador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -360,10 +352,10 @@ public class Participantes extends javax.swing.JInternalFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LBL_Indicador)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(LBL_Indicador, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Dar de baja un participante.", jPanel3);
@@ -477,7 +469,7 @@ public class Participantes extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Cambios", jTabbedPane3);
 
-        jLabel10.setText("Nombre participante:");
+        jLabel10.setText("Nombre del participante:");
 
         TXT_Nom_P.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -493,7 +485,7 @@ public class Participantes extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TXT_Nom_P, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TXT_Nom_P, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
@@ -657,31 +649,6 @@ public class Participantes extends javax.swing.JInternalFrame {
 
     private void BTNguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNguardarActionPerformed
         // TODO add your handling code here:
-        if (CBcarrera.getSelectedItem() == "Ninguna") {
-
-        } else {
-            if (CBcarrera.getSelectedItem() == "II") {
-                Carrera = "II"; //Basico
-            } else {
-                if (CBcarrera.getSelectedItem() == "ISC") {
-                    Carrera = "ISC"; //Medio
-                } else {
-                    if (CBcarrera.getSelectedItem() == "ITICS") {
-                        Carrera = "ITICS"; //Avanzado
-                    } else {
-                        if (CBcarrera.getSelectedItem() == "IS") {
-                            Carrera = "IS"; //Avanzado
-                        } else {
-                            if (CBcarrera.getSelectedItem() == "IC") {
-                                Carrera = "IC"; //Avanzado
-                            } else {
-                                LBL_Mensajero.setText("Selecciona una Carrera");
-                            }
-                        }
-                    }
-                }
-            }
-        }
         if (CBsemestre.getSelectedItem() == "Ninguno") {
 
         } else {
@@ -712,7 +679,20 @@ public class Participantes extends javax.swing.JInternalFrame {
                                             if (CBsemestre.getSelectedItem() == "9") {
                                                 Semestre = 9; //Avanzado
                                             } else {
-                                                LBL_Mensajero.setText("Selecciona un Semestre");
+                                                if (CBsemestre.getSelectedItem() == "10") {
+                                                    Semestre = 10; //Avanzado
+                                                } else {
+                                                    if (CBsemestre.getSelectedItem() == "11") {
+                                                        Semestre = 11;
+                                                    } else {
+                                                        if (CBsemestre.getSelectedItem() == "12") {
+                                                            Semestre = 12;
+                                                        } else {
+                                                            LBL_Mensajero.setText("Selecciona un Semestre");
+                                                        }
+
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -728,9 +708,11 @@ public class Participantes extends javax.swing.JInternalFrame {
         mDatosParticipante.setNombreParticipante(TXTnombre.getText());
 
         String texto = TXTnombre.getText();
+        String texto2 = CBcarrera.getText();
         texto = texto.replaceAll(" ", "");
+        texto2 = texto2.replaceAll(" ", "");
         if (mConexion.conectar()) {
-            if ((CBcarrera.getSelectedItem() != "Ninguna") && (CBsemestre.getSelectedItem() != "Ninguno") && (CBequipo.getSelectedItem() != "Ninguno")) {
+            if ((!CBcarrera.getText().equals("")) && (CBsemestre.getSelectedItem() != "Ninguno") && (CBequipo.getSelectedItem() != "Ninguno")) {
                 IDEquipo = mConexion.ConsultarIDEquipos(CBequipo.getSelectedItem().toString());
             } else {
                 LBL_Mensajero.setText("Selecciona un equipo");
@@ -739,19 +721,25 @@ public class Participantes extends javax.swing.JInternalFrame {
         } else {
             LBL_Mensajero.setText("No conectado a la BD");
         }
-        mDatosParticipante.setCarrera(Carrera);
+        mDatosParticipante.setCarrera(CBcarrera.getText());
         mDatosParticipante.setSemestre(Semestre);
         mDatosParticipante.setEquipos_idEquipos(IDEquipo);
-        if ((texto.length() == 0) || (texto.length() > 150)) {
+        String T2 = "";
+        if(((texto2.length() == 0) || (texto2.length() > 150))) {
+            T2="Mal";
+        } else {
+            T2="Bien";
+        }
+        if ((texto.length() == 0) || (texto.length() > 150) || (T2=="Mal")) {
             LBL_Mensajero.setText("Debe ingresar todos los datos correctamente");
         } else {
             if (mConexion.conectar()) {
-                if ((CBcarrera.getSelectedItem() != "Ninguna") && (CBsemestre.getSelectedItem() != "Ninguno") && (CBequipo.getSelectedItem() != "Ninguno")) {
+                if ((!CBcarrera.getText().equals("")) && (CBsemestre.getSelectedItem() != "Ninguno") && (CBequipo.getSelectedItem() != "Ninguno")) {
                     if (mConexion.AltaParticipante(mDatosParticipante)) {
                         LBL_Mensajero.setText("Se guardó el participante");
                         TXTnombre.setText("");
                         CBsemestre.setSelectedIndex(0);
-                        CBcarrera.setSelectedIndex(0);
+                        CBcarrera.setText("");
                         CBequipo.setSelectedIndex(0);
                     }
                 } else {
@@ -876,6 +864,9 @@ public class Participantes extends javax.swing.JInternalFrame {
     public boolean ValidarBaja() {
         return !TXT_NombreP.getText().equals("");
     }
+    public boolean ValidarBajaCarrera() {
+        return !CBcarrera.getText().equals("");
+    }
 
     public void ConsultaTabla2() {
         Tabla = (DefaultTableModel) TBL_BajaParticipantes.getModel();
@@ -924,15 +915,19 @@ public class Participantes extends javax.swing.JInternalFrame {
                 //mDatosEquipo.setId(Integer.parseInt(LBLid.getText()));
                 if (mConexion.eliminarParticipantes(mDatosParticipante)) {
                     //if (mConexion.eliminarEquipo(mDatosEquipo)) {
+                    LBL_Indicador.setVisible(true);
                     LBL_Indicador.setText("Participante dado de baja exitosamente");
                     TXT_NombreP.setText("");
                 } else {
-                    LBL_Indicador.setText("Este participante esta en un concurso, no se puede eliminar");
+                    LBL_Indicador.setVisible(true);
+                    LBL_Indicador.setText("Este participante está en un concurso, no se puede eliminar");
                 }
             } else {
+                LBL_Indicador.setVisible(true);
                 LBL_Indicador.setText("Selecciona al participante que deseas eliminar");
             }
         } else {
+            LBL_Indicador.setVisible(true);
             LBL_Indicador.setText("Error al conectar");
         }
         mConexion.desconectar();
@@ -997,7 +992,7 @@ public class Participantes extends javax.swing.JInternalFrame {
     private javax.swing.JButton BTNguardar;
     private javax.swing.JButton BTNmod;
     private javax.swing.JComboBox<String> CBcar;
-    private javax.swing.JComboBox<String> CBcarrera;
+    private javax.swing.JTextField CBcarrera;
     private javax.swing.JComboBox<String> CBeq;
     private javax.swing.JComboBox<String> CBequipo;
     private javax.swing.JComboBox<String> CBsem;

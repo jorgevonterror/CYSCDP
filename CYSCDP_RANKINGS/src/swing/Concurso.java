@@ -291,7 +291,7 @@ public class Concurso extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Baja", jTabbedPane2);
 
-        jLabel13.setText("Descripcion:");
+        jLabel13.setText("Descripción:");
 
         BTNmodificar.setText("Modificar");
         BTNmodificar.addActionListener(new java.awt.event.ActionListener() {
@@ -319,7 +319,7 @@ public class Concurso extends javax.swing.JInternalFrame {
 
         jLabel15.setText("Fecha:");
 
-        jLabel16.setText("Tiempo Limite:");
+        jLabel16.setText("Tiempo Límite:");
 
         CBhorasCambios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24" }));
 
@@ -406,7 +406,7 @@ public class Concurso extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Cambios", jTabbedPane3);
 
-        jLabel14.setText("Nombre del concurso:");
+        jLabel14.setText("Descripción:");
 
         TXTnombreConsulta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -426,13 +426,13 @@ public class Concurso extends javax.swing.JInternalFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane3))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(jLabel14)
                         .addGap(18, 18, 18)
-                        .addComponent(TXTnombreConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 31, Short.MAX_VALUE))
+                        .addComponent(TXTnombreConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(LBL_Mensajero4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))

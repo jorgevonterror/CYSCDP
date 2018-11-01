@@ -1111,10 +1111,10 @@ public final class Puntajes extends javax.swing.JInternalFrame {
                     //boolean bandera = mConexion.ModificarPauntajes(HorasV, MinutosV, ComplejidadV, ConcursoM, EquipoM, String.valueOf(idPuntajeViejo));
                     String iPV = String.valueOf(idPuntajeViejo);                   
                     if(mConexion.ModificarPauntajes(HorasV, MinutosV, ComplejidadV, String.valueOf(idConcursoM), String.valueOf(idEquipoM), iPV)) {                      
-                        LBL_Mensajero2.setText("Modificacion realizada");
+                        LBL_Mensajero2.setText("Modificación realizada");
                         BuscarPuntajeParaModificar();
                     } else {
-                        LBL_Mensajero2.setText("Modificacion NO realizada");
+                        LBL_Mensajero2.setText("Modificación NO realizada");
                     }
                     
              }

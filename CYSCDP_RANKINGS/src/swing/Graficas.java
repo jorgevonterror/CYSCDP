@@ -567,7 +567,7 @@ public class Graficas extends javax.swing.JInternalFrame {
                 for (int i = 0; i < mListaPuntajes.size(); i++) {
                     horas = Integer.parseInt(mListaPuntajes.get(i).toString().substring(0, 2));
                     minutos = Integer.parseInt(mListaPuntajes.get(i).toString().substring(3, 5));
-                    horasT = (horas * 60) + minutos;
+                    horasT = horasT + (horas * 60) + minutos;
                     complejidad = Integer.parseInt(mListaPuntajes.get(i).toString().substring(8, 9));
                     equipo = mListaPuntajes.get(i).toString().substring(9);
                     Datos.setValue(horasT, equipo, String.valueOf(complejidad));
@@ -576,7 +576,7 @@ public class Graficas extends javax.swing.JInternalFrame {
                 for (int i = 0; i < mListaPuntajes2.size(); i++) {
                     horas2 = Integer.parseInt(mListaPuntajes2.get(i).toString().substring(0, 2));
                     minutos2 = Integer.parseInt(mListaPuntajes2.get(i).toString().substring(3, 5));
-                    horasT2 = (horas2 * 60) + minutos2;
+                    horasT2 = horasT2 + (horas2 * 60) + minutos2;
                     complejidad2 = Integer.parseInt(mListaPuntajes2.get(i).toString().substring(8, 9));
                     equipo2 = mListaPuntajes2.get(i).toString().substring(9);
                     Datos.setValue(horasT2, equipo2, String.valueOf(complejidad2));
@@ -902,7 +902,7 @@ public class Graficas extends javax.swing.JInternalFrame {
             }
             mConexion.desconectar();
         } else {
-            LBL_Mensajero.setText("No estas conectado a la BD");
+            LBL_Mensajero.setText("No estás conectado a la BD");
         }
     }
 
