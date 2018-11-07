@@ -184,7 +184,7 @@ public class Graficas extends javax.swing.JInternalFrame {
 
         jLabel10.setText("No. Programas:");
 
-        CBNumProg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50" }));
+        CBNumProg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50" }));
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/16 (Search).jpg"))); // NOI18N
         jButton4.setText("Buscar");
@@ -559,27 +559,69 @@ public class Graficas extends javax.swing.JInternalFrame {
                 int IDequipo1 = mConexion.ConsultarIDEquipos(CBeq1.getSelectedItem().toString());
                 int IDequipo2 = mConexion.ConsultarIDEquipos(CBeq2.getSelectedItem().toString());
                 int Id = mConexion.ConsultarIDConcursos((String) CBcon.getSelectedItem());
-                int horas = 0, minutos = 0, horasT = 0, complejidad = 0;
+                int horasA1 = 0, minutosA1 = 0, horasTA1 = 0, complejidad = 0;
+                int horasB1 = 0, minutosB1 = 0, horasTB1 = 0;
+                int horasM1 = 0, minutosM1 = 0, horasTM1 = 0;
                 String equipo = "";
-                int horas2 = 0, minutos2 = 0, horasT2 = 0, complejidad2 = 0;
+                int horasA2 = 0, minutosA2 = 0, horasTA2 = 0, complejidad2 = 0;
+                int horasB2 = 0, minutosB2 = 0, horasTB2 = 0;
+                int horasM2 = 0, minutosM2 = 0, horasTM2 = 0;
+                
                 String equipo2 = "";
                 ArrayList mListaPuntajes = mConexion.ConsultarIDPuntajes2(Id, IDequipo1);
-                for (int i = 0; i < mListaPuntajes.size(); i++) {
-                    horas = Integer.parseInt(mListaPuntajes.get(i).toString().substring(0, 2));
-                    minutos = Integer.parseInt(mListaPuntajes.get(i).toString().substring(3, 5));
-                    horasT = horasT + (horas * 60) + minutos;
+                for (int i = 0; i < mListaPuntajes.size(); i++) {                  
                     complejidad = Integer.parseInt(mListaPuntajes.get(i).toString().substring(8, 9));
-                    equipo = mListaPuntajes.get(i).toString().substring(9);
-                    Datos.setValue(horasT, equipo, String.valueOf(complejidad));
+                    switch(complejidad) {
+                        case 1:
+                            horasB1 = Integer.parseInt(mListaPuntajes.get(i).toString().substring(0, 2));
+                            minutosB1 = Integer.parseInt(mListaPuntajes.get(i).toString().substring(3, 5));
+                            horasTB1 = horasTB1 + (horasB1 * 60) + minutosB1;
+                            equipo = mListaPuntajes.get(i).toString().substring(9);
+                            Datos.setValue(horasTB1, equipo, String.valueOf(complejidad));
+                            break;
+                        case 2:
+                            horasM1 = Integer.parseInt(mListaPuntajes.get(i).toString().substring(0, 2));
+                            minutosM1 = Integer.parseInt(mListaPuntajes.get(i).toString().substring(3, 5));
+                            horasTM1 = horasTM1 + (horasM1 * 60) + minutosM1;
+                            equipo = mListaPuntajes.get(i).toString().substring(9);
+                            Datos.setValue(horasTM1, equipo, String.valueOf(complejidad));
+                            break;
+                        case 3:
+                            horasA1 = Integer.parseInt(mListaPuntajes.get(i).toString().substring(0, 2));
+                            minutosA1 = Integer.parseInt(mListaPuntajes.get(i).toString().substring(3, 5));
+                            horasTA1 = horasTA1 + (horasA1 * 60) + minutosA1;
+                            equipo = mListaPuntajes.get(i).toString().substring(9);
+                            Datos.setValue(horasTA1, equipo, String.valueOf(complejidad));
+                            break;
+                    }
+                    
                 }
                 ArrayList mListaPuntajes2 = mConexion.ConsultarIDPuntajes2(Id, IDequipo2);
                 for (int i = 0; i < mListaPuntajes2.size(); i++) {
-                    horas2 = Integer.parseInt(mListaPuntajes2.get(i).toString().substring(0, 2));
-                    minutos2 = Integer.parseInt(mListaPuntajes2.get(i).toString().substring(3, 5));
-                    horasT2 = horasT2 + (horas2 * 60) + minutos2;
                     complejidad2 = Integer.parseInt(mListaPuntajes2.get(i).toString().substring(8, 9));
-                    equipo2 = mListaPuntajes2.get(i).toString().substring(9);
-                    Datos.setValue(horasT2, equipo2, String.valueOf(complejidad2));
+                    switch(complejidad2) {
+                        case 1:
+                            horasB2 = Integer.parseInt(mListaPuntajes2.get(i).toString().substring(0, 2));
+                            minutosB2 = Integer.parseInt(mListaPuntajes2.get(i).toString().substring(3, 5));
+                            horasTB2 = horasTB2 + (horasB2 * 60) + minutosB2;
+                            equipo2 = mListaPuntajes2.get(i).toString().substring(9);
+                            Datos.setValue(horasTB2, equipo2, String.valueOf(complejidad2));
+                            break;
+                        case 2:
+                            horasM2 = Integer.parseInt(mListaPuntajes2.get(i).toString().substring(0, 2));
+                            minutosM2 = Integer.parseInt(mListaPuntajes2.get(i).toString().substring(3, 5));
+                            horasTM2 = horasTM2 + (horasM2 * 60) + minutosM2;
+                            equipo2 = mListaPuntajes2.get(i).toString().substring(9);
+                            Datos.setValue(horasTM2, equipo2, String.valueOf(complejidad2));
+                            break;
+                        case 3:
+                            horasA2 = Integer.parseInt(mListaPuntajes2.get(i).toString().substring(0, 2));
+                            minutosA2 = Integer.parseInt(mListaPuntajes2.get(i).toString().substring(3, 5));
+                            horasTA2 = horasTA2 + (horasA2 * 60) + minutosA2;
+                            equipo2 = mListaPuntajes2.get(i).toString().substring(9);
+                            Datos.setValue(horasTA2, equipo2, String.valueOf(complejidad2));
+                            break;
+                    }
                 }
             }
             LBL_Mensajero2.setText("");
@@ -880,8 +922,8 @@ public class Graficas extends javax.swing.JInternalFrame {
                         } catch (Exception e) {
 
                         }
-                        //String urlImagen = "/Users/eduardogarcia/Documents/CYSCDP/CYSCDP_RANKINGS/Gráfico.png"; Chendo
-                        String urlImagen = "/Users/kevincruz/DAS/CYSCDP/CYSCDP_RANKINGS/Gráfico.png";
+                        String urlImagen = "Gráfico.png"; //Chendo
+                        //String urlImagen = "/Users/kevincruz/DAS/CYSCDP/CYSCDP_RANKINGS/Gráfico.png";
                         //Image img = new ImageIcon(urlImagen).getImage();
                         ImageIcon img = new ImageIcon(urlImagen);
                         //Ajustamos la imagen
