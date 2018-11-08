@@ -5,8 +5,6 @@
  */
 package swing;
 
-import java.sql.Date;
-
 /**
  *
  * @author eduardogarcia
