@@ -6,8 +6,17 @@
 package swing;
 
 import java.awt.Color;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -17,16 +26,18 @@ import javax.swing.JPanel;
 public class Home extends javax.swing.JFrame {
 //ESTE ES UN COMENTARIO DE JORGE :B
     // ESTE ES UN COMENTARIO DE KEVIN :BB
+
     /**
      * Creates new form Home
      */
+    public static String Puerto;
     public Home() {
         initComponents();
-        
+
         //Ponemos el boton 1 seleccionado automaticamente.
-        setColor(btn_1); 
+        setColor(btn_1);
         ind_1.setOpaque(true);
-        resetColor(new JPanel[]{btn_2,btn_3,btn_4, btn_6, btn_7, btn_8}, new JPanel[]{ind_2,ind_3, ind_4, ind_6, ind_7, ind_8});
+        resetColor(new JPanel[]{btn_2, btn_3, btn_4, btn_6, btn_7, btn_8}, new JPanel[]{ind_2, ind_3, ind_4, ind_6, ind_7, ind_8});
         Inicio in = new Inicio();
         ESCRITORIO.add(in);
         in.show();
@@ -517,10 +528,10 @@ public class Home extends javax.swing.JFrame {
 
     private void btn_1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_1MousePressed
         // TODO add your handling code here:
-        setColor(btn_1); 
+        setColor(btn_1);
         ind_1.setOpaque(true);
-        resetColor(new JPanel[]{btn_2,btn_3,btn_4, btn_6, btn_7, btn_8}, new JPanel[]{ind_2,ind_3, ind_4, ind_6, ind_7, ind_8});
-        
+        resetColor(new JPanel[]{btn_2, btn_3, btn_4, btn_6, btn_7, btn_8}, new JPanel[]{ind_2, ind_3, ind_4, ind_6, ind_7, ind_8});
+
         Inicio in = new Inicio();
         ESCRITORIO.add(in);
         in.show();
@@ -528,9 +539,9 @@ public class Home extends javax.swing.JFrame {
 
     private void btn_3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_3MousePressed
         // TODO add your handling code here:
-        setColor(btn_3); 
+        setColor(btn_3);
         ind_3.setOpaque(true);
-        resetColor(new JPanel[]{btn_2,btn_1,btn_4, btn_6, btn_7,btn_8}, new JPanel[]{ind_2,ind_1, ind_4, ind_6, ind_7, ind_8});
+        resetColor(new JPanel[]{btn_2, btn_1, btn_4, btn_6, btn_7, btn_8}, new JPanel[]{ind_2, ind_1, ind_4, ind_6, ind_7, ind_8});
         Equipos eq = new Equipos();
         Participantes p = new Participantes();
         Inicio in = new Inicio();
@@ -539,34 +550,34 @@ public class Home extends javax.swing.JFrame {
         eq.show();
         p.hide();
         in.hide();
- 
+
     }//GEN-LAST:event_btn_3MousePressed
 
     private void btn_4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_4MousePressed
         // TODO add your handling code here:
-        setColor(btn_4); 
+        setColor(btn_4);
         ind_4.setOpaque(true);
-        resetColor(new JPanel[]{btn_2,btn_3,btn_1, btn_6, btn_7,btn_8}, new JPanel[]{ind_2,ind_3, ind_1, ind_6, ind_7, ind_8});
+        resetColor(new JPanel[]{btn_2, btn_3, btn_1, btn_6, btn_7, btn_8}, new JPanel[]{ind_2, ind_3, ind_1, ind_6, ind_7, ind_8});
         Participantes p = new Participantes();
         Inicio in = new Inicio();
         Equipos eq = new Equipos();
-        
+
         this.ESCRITORIO.add(p);
         p.show();
     }//GEN-LAST:event_btn_4MousePressed
 
     private void btn_2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_2MouseReleased
         // TODO add your handling code here:
-        setColor(btn_2); 
+        setColor(btn_2);
         ind_2.setOpaque(true);
-        resetColor(new JPanel[]{btn_1,btn_3,btn_4, btn_6, btn_7, btn_8}, new JPanel[]{ind_1,ind_3, ind_4, ind_6, ind_7, ind_8});
-        
+        resetColor(new JPanel[]{btn_1, btn_3, btn_4, btn_6, btn_7, btn_8}, new JPanel[]{ind_1, ind_3, ind_4, ind_6, ind_7, ind_8});
+
         Concurso c = new Concurso();
         this.ESCRITORIO.add(c);
         c.show();
     }//GEN-LAST:event_btn_2MouseReleased
 
-    int xx,xy;
+    int xx, xy;
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
 
     }//GEN-LAST:event_jPanel2MousePressed
@@ -587,9 +598,9 @@ public class Home extends javax.swing.JFrame {
 
     private void btn_6MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_6MouseReleased
         // TODO add your handling code here:
-        setColor(btn_6); 
+        setColor(btn_6);
         ind_6.setOpaque(true);
-        resetColor(new JPanel[]{btn_1,btn_3,btn_4, btn_2, btn_7,btn_8}, new JPanel[]{ind_1,ind_3, ind_4, ind_2, ind_7, ind_8});
+        resetColor(new JPanel[]{btn_1, btn_3, btn_4, btn_2, btn_7, btn_8}, new JPanel[]{ind_1, ind_3, ind_4, ind_2, ind_7, ind_8});
         Puntajes P = new Puntajes();
         this.ESCRITORIO.add(P);
         P.show();
@@ -597,9 +608,9 @@ public class Home extends javax.swing.JFrame {
 
     private void btn_7MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_7MouseReleased
         // TODO add your handling code here:
-        setColor(btn_7); 
+        setColor(btn_7);
         ind_7.setOpaque(true);
-        resetColor(new JPanel[]{btn_1,btn_3,btn_4, btn_2, btn_6,btn_8}, new JPanel[]{ind_1,ind_3, ind_4, ind_2, ind_6,ind_8});
+        resetColor(new JPanel[]{btn_1, btn_3, btn_4, btn_2, btn_6, btn_8}, new JPanel[]{ind_1, ind_3, ind_4, ind_2, ind_6, ind_8});
         Graficas g = new Graficas();
         this.ESCRITORIO.add(g);
         g.show();
@@ -612,9 +623,9 @@ public class Home extends javax.swing.JFrame {
 
     private void btn_8MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_8MouseReleased
         // TODO add your handling code here:
-         setColor(btn_8); 
+        setColor(btn_8);
         ind_8.setOpaque(true);
-        resetColor(new JPanel[]{btn_1,btn_3,btn_4, btn_2, btn_6,btn_7}, new JPanel[]{ind_1,ind_3, ind_4, ind_2, ind_6, ind_7});
+        resetColor(new JPanel[]{btn_1, btn_3, btn_4, btn_2, btn_6, btn_7}, new JPanel[]{ind_1, ind_3, ind_4, ind_2, ind_6, ind_7});
         DatosContacto dc = new DatosContacto();
         this.ESCRITORIO.add(dc);
         dc.show();
@@ -623,7 +634,7 @@ public class Home extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws IOException {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -653,31 +664,38 @@ public class Home extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Home().setVisible(true);
+                
                 Conexion mCon = new Conexion();
-                mCon.conectar();
-                //Comentario de Chendo
+                boolean sixflag = false;
+                Puerto = JOptionPane.showInputDialog("No estás conectado a la Base de Datos \n Introduce tu puerto");
+                do {
+                    if (mCon.conectarConPuerto(Puerto)) {
+                        new Home().setVisible(true);
+                        sixflag = true;
+                    } else {
+                        Puerto = JOptionPane.showInputDialog("No estás conectado a la Base de Datos \n Introduce tu puerto");
+                        sixflag = false; 
+                    }
+                } while (sixflag != true);
             }
         });
     }
-   
-    
-    private void setColor(JPanel pane)
-    {
-        pane.setBackground(new Color(41,57,80));
+
+    private void setColor(JPanel pane) {
+        pane.setBackground(new Color(41, 57, 80));
     }
-    
-    private void resetColor(JPanel [] pane, JPanel [] indicators)
-    {
-        for(int i=0;i<pane.length;i++){
-           pane[i].setBackground(new Color(23,35,51));
-           
-        } for(int i=0;i<indicators.length;i++){
-           indicators[i].setOpaque(false);           
+
+    private void resetColor(JPanel[] pane, JPanel[] indicators) {
+        for (int i = 0; i < pane.length; i++) {
+            pane[i].setBackground(new Color(23, 35, 51));
+
         }
-        
+        for (int i = 0; i < indicators.length; i++) {
+            indicators[i].setOpaque(false);
+        }
+
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane ESCRITORIO;

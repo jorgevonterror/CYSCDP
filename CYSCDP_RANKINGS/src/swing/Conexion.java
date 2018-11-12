@@ -20,20 +20,41 @@ import javax.swing.JOptionPane;
 
 public class Conexion {
 
+    ArrayList mALPuertos = new ArrayList();
+    //mALPuertos = mConexion.ConsultarIDPuntajes(IDConcursos2, IDEquipo2);
+    
     private Connection conexion;
     ResultSet rs = null;
     Statement statement = null;
+    private String Puerto = "";
+    Home mHome = new Home();
 
     public boolean conectar() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:8889/CYSCDP_BaseDeDatos", "root", "root"); //LA RUTA CAMBIA, YO LO HAGO EN MAC.
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:"+ mHome.Puerto +"/CYSCDP_BaseDeDatos", "root", "root"); //LA RUTA CAMBIA, YO LO HAGO EN MAC.
             //conexion = DriverManager.getConnection("jdbc:mysql://localhost/bd_elsolecito", "root", "root");
             if (conexion != null) {
                 //JOptionPane.showMessageDialog(null, "Conectado");
                 return true;
             } else {
                 //JOptionPane.showMessageDialog(null, "NO Conectado");
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean conectarConPuerto(String puerto) {
+        Puerto = puerto;
+        try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:" + Puerto + "/CYSCDP_BaseDeDatos", "root", "root"); //LA RUTA CAMBIA, YO LO HAGO EN MAC.
+            if (conexion != null) {
+                return true;
+            } else {
                 return false;
             }
         } catch (Exception e) {

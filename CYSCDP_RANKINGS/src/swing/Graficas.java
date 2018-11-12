@@ -922,18 +922,8 @@ public class Graficas extends javax.swing.JInternalFrame {
                         } catch (Exception e) {
 
                         }
-                        String urlImagen = "Gráfico.png"; //Chendo
-                        //String urlImagen = "/Users/kevincruz/DAS/CYSCDP/CYSCDP_RANKINGS/Gráfico.png";
-                        //Image img = new ImageIcon(urlImagen).getImage();
+                        String urlImagen = "Gráfico.png";
                         ImageIcon img = new ImageIcon(urlImagen);
-                        //Ajustamos la imagen
-                        /*
-                        icon.getImage().getScaledInstance(jLabel4.getWidth(), jLabel4.getHeight(), Image.SCALE_DEFAULT);
-
-                        this.jLabel4.setIcon(icon);
-                        this.jLabel4.repaint();
-                        this.jLabel4.setText("");
-                         */
                         Icon icon = new ImageIcon(img.getImage().getScaledInstance(jLabel4.getWidth(), jLabel4.getHeight(), Image.SCALE_DEFAULT));
                         jLabel4.setIcon(icon);
                         this.repaint();
