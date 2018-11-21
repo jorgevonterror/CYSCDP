@@ -7,7 +7,6 @@ package swing;
 
 import java.awt.Desktop;
 import java.net.URI;
-import java.net.URL;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 

@@ -6,6 +6,7 @@
 package swing;
 
 import java.awt.Color;
+<<<<<<< HEAD
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -17,6 +18,8 @@ import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+=======
+>>>>>>> 84633f8e324ff26a9dc00f7b5b869f9627ed1cbc
 import javax.swing.JPanel;
 
 /**
