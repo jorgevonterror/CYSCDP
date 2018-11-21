@@ -533,12 +533,12 @@
                                                   </Group>
                                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="CBcar" min="-2" pref="104" max="-2" attributes="0"/>
-                                                      <Component id="CBsem" alignment="0" min="-2" pref="104" max="-2" attributes="0"/>
+                                                      <Component id="CBsem" min="-2" pref="104" max="-2" attributes="0"/>
+                                                      <Component id="TXTcarrEq" min="-2" pref="105" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
                                           </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="BTNmod" min="-2" max="-2" attributes="0"/>
                                               <Group type="102" alignment="0" attributes="0">
@@ -586,10 +586,10 @@
                                   <Component id="CBsem" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="CBcar" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="TXTcarrEq" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="LBLid" min="-2" max="-2" attributes="0"/>
@@ -637,22 +637,6 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Semestre: "/>
                   </Properties>
-                </Component>
-                <Component class="javax.swing.JComboBox" name="CBcar">
-                  <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="5">
-                        <StringItem index="0" value="ISC"/>
-                        <StringItem index="1" value="II"/>
-                        <StringItem index="2" value="ITICS"/>
-                        <StringItem index="3" value="IS"/>
-                        <StringItem index="4" value="IC"/>
-                      </StringArray>
-                    </Property>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="CBeq">
                   <Properties>
@@ -719,6 +703,11 @@
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
+                </Component>
+                <Component class="javax.swing.JTextField" name="TXTcarrEq">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TXTcarrEqActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

@@ -25,18 +25,21 @@ public class Conexion {
     ResultSet rs = null;
     Statement statement = null;
     private String Puerto = "";
+    private String User = "";
+    private String Pass = "";
     Home mHome = new Home();
 
     public boolean conectar() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:"+ mHome.Puerto +"/cyscdp_basededatosn", "root", "root"); //LA RUTA CAMBIA, YO LO HAGO EN MAC.
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:"+ mHome.Puerto +"/cyscdp_basededatos", ""+ mHome.User +"", ""+ mHome.Pass +""); //LA RUTA CAMBIA, YO LO HAGO EN MAC.
             //conexion = DriverManager.getConnection("jdbc:mysql://localhost/bd_elsolecito", "root", "root");
             if (conexion != null) {
                 //JOptionPane.showMessageDialog(null, "Conectado");
                 return true;
             } else {
                 //JOptionPane.showMessageDialog(null, "NO Conectado");
+                
                 return false;
             }
         } catch (Exception e) {
@@ -45,11 +48,11 @@ public class Conexion {
         }
     }
     
-    public boolean conectarConPuerto(String puerto) {
+    public boolean conectarConPuerto(String puerto, String user, String pass) {
         Puerto = puerto;
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:" + Puerto + "/cyscdp_basededatosn", "root", "root"); //LA RUTA CAMBIA, YO LO HAGO EN MAC.
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:" + Puerto + "/cyscdp_basededatos", ""+ user +"", "" + pass + ""); //LA RUTA CAMBIA, YO LO HAGO EN MAC.
             if (conexion != null) {
                 return true;
             } else {

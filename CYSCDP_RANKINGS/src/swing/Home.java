@@ -6,7 +6,6 @@
 package swing;
 
 import java.awt.Color;
-<<<<<<< HEAD
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -18,8 +17,6 @@ import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-=======
->>>>>>> 84633f8e324ff26a9dc00f7b5b869f9627ed1cbc
 import javax.swing.JPanel;
 
 /**
@@ -34,6 +31,9 @@ public class Home extends javax.swing.JFrame {
      * Creates new form Home
      */
     public static String Puerto = "";
+    public static String User = "";
+    public static String Pass = "";
+
     public Home() {
         initComponents();
 
@@ -667,16 +667,23 @@ public class Home extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
                 Conexion mCon = new Conexion();
                 int sixflag = 0;
                 Puerto = JOptionPane.showInputDialog("No estás conectado a la Base de Datos \n Introduce tu puerto ");
+                User = JOptionPane.showInputDialog("Usuario \n Introduce tu usuario: ");
+                Pass = JOptionPane.showInputDialog("Contraseña \n Introduce tu contraseña: ");
                 do {
-                    if (mCon.conectarConPuerto(Puerto)) {
+                    if (mCon.conectarConPuerto(Puerto,User,Pass)) {
                         new Home().setVisible(true);
                         sixflag = 1;
                     } else {
                         Puerto = JOptionPane.showInputDialog("No estás conectado a la Base de Datos \n Introduce tu puerto");
+                        User = JOptionPane.showInputDialog("Usuario \n Introduce tu usuario: ");
+                        Pass = JOptionPane.showInputDialog("Contraseña \n Introduce tu contraseña: ");
+                        if (Puerto.equals("") && User.equals("") && Pass.equals("")) {
+                            System.exit(0);   
+                        }
                     }
                 } while (sixflag == 0);
             }

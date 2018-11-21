@@ -89,7 +89,6 @@ public class Participantes extends javax.swing.JInternalFrame {
         tbl_Participantes = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        CBcar = new javax.swing.JComboBox<>();
         CBeq = new javax.swing.JComboBox<>();
         LBLmen = new javax.swing.JLabel();
         TXTnom = new javax.swing.JTextField();
@@ -98,6 +97,7 @@ public class Participantes extends javax.swing.JInternalFrame {
         BTNmod = new javax.swing.JButton();
         LBLid = new javax.swing.JLabel();
         CBsem = new javax.swing.JComboBox<>();
+        TXTcarrEq = new javax.swing.JTextField();
         jTabbedPane4 = new javax.swing.JTabbedPane();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
@@ -373,8 +373,6 @@ public class Participantes extends javax.swing.JInternalFrame {
 
         jLabel13.setText("Semestre: ");
 
-        CBcar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ISC", "II", "ITICS", "IS", "IC" }));
-
         LBLmen.setText("*");
 
         jLabel8.setText("Carrera: ");
@@ -392,6 +390,12 @@ public class Participantes extends javax.swing.JInternalFrame {
         LBLid.setText("ID");
 
         CBsem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        TXTcarrEq.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TXTcarrEqActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -417,9 +421,9 @@ public class Participantes extends javax.swing.JInternalFrame {
                                             .addComponent(jLabel8))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(CBcar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(CBsem, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(CBsem, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(TXTcarrEq, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(20, 20, 20)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(BTNmod)
                                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -451,10 +455,10 @@ public class Participantes extends javax.swing.JInternalFrame {
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel13)
                         .addComponent(CBsem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(9, 9, 9)
+                .addGap(8, 8, 8)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(CBcar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TXTcarrEq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(LBLid)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -762,11 +766,7 @@ public class Participantes extends javax.swing.JInternalFrame {
         TXTnom.setText(tbl_Participantes.getModel().getValueAt(Selec, 1).toString());
         String temp = (tbl_Participantes.getModel().getValueAt(Selec, 3).toString());
         EQtemp = (tbl_Participantes.getModel().getValueAt(Selec, 4).toString());
-        for (int i = 0; i < CBeq.getItemCount(); i++) {
-            if (EQtemp.equals(CBeq.getItemAt(i))) {
-                CBeq.setSelectedIndex(i);
-            }
-        }
+        TXTcarrEq.setText(tbl_Participantes.getModel().getValueAt(Selec, 2).toString());
         for (int i = 0; i < CBsem.getItemCount(); i++) {
             if (temp.equals(CBsem.getItemAt(i))) {
                 CBsem.setSelectedIndex(i);
@@ -822,7 +822,7 @@ public class Participantes extends javax.swing.JInternalFrame {
         DatosParticipante vParticipante = new DatosParticipante();
         DatosParticipante nParticipante = new DatosParticipante();
 
-        if (Validarcajas()) {
+        if (Validarcajas() && ValidarCambioCarrera() && CBeq.getSelectedItem() != "Ninguno") {
             String text = TXTnom.getText();
             text = text.replaceAll(" ", "");
             if (text.length() != 0 && text.length() <= 35) {
@@ -831,7 +831,7 @@ public class Participantes extends javax.swing.JInternalFrame {
                         ID = mConexion.ConsultarIDEquipos(CBeq.getSelectedItem().toString());
                         vParticipante.setIdParticipante(Integer.parseInt(LBLid.getText()));
                         nParticipante.setNombreParticipante(this.TXTnom.getText());
-                        nParticipante.setCarrera((String) CBcar.getSelectedItem());
+                        nParticipante.setCarrera((String) TXTcarrEq.getText());
                         nParticipante.setSemestre(Integer.parseInt((String) CBsem.getSelectedItem()));
                         nParticipante.setEquipos_idEquipos(ID);
                         if (mConexion.ModificarParticipantes(vParticipante, nParticipante)) {
@@ -865,6 +865,9 @@ public class Participantes extends javax.swing.JInternalFrame {
     }
     public boolean ValidarBajaCarrera() {
         return !CBcarrera.getText().equals("");
+    }
+    public boolean ValidarCambioCarrera() {
+        return !TXTcarrEq.getText().equals("");
     }
 
     public void ConsultaTabla2() {
@@ -985,12 +988,15 @@ public class Participantes extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_TXT_Nom_PKeyReleased
 
+    private void TXTcarrEqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXTcarrEqActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TXTcarrEqActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNelim;
     private javax.swing.JButton BTNguardar;
     private javax.swing.JButton BTNmod;
-    private javax.swing.JComboBox<String> CBcar;
     private javax.swing.JTextField CBcarrera;
     private javax.swing.JComboBox<String> CBeq;
     private javax.swing.JComboBox<String> CBequipo;
@@ -1006,6 +1012,7 @@ public class Participantes extends javax.swing.JInternalFrame {
     private javax.swing.JTable TBLaltaParticipante;
     private javax.swing.JTextField TXT_Nom_P;
     private javax.swing.JTextField TXT_NombreP;
+    private javax.swing.JTextField TXTcarrEq;
     private javax.swing.JTextField TXTnom;
     private javax.swing.JTextPane TXTnombre;
     private javax.swing.JLabel jLabel1;
