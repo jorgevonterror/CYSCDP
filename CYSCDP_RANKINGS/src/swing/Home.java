@@ -30,7 +30,7 @@ public class Home extends javax.swing.JFrame {
     /**
      * Creates new form Home
      */
-    public static String Puerto;
+    public static String Puerto = "";
     public Home() {
         initComponents();
 
@@ -666,17 +666,16 @@ public class Home extends javax.swing.JFrame {
             public void run() {
                 
                 Conexion mCon = new Conexion();
-                boolean sixflag = false;
-                Puerto = JOptionPane.showInputDialog("No estás conectado a la Base de Datos \n Introduce tu puerto");
+                int sixflag = 0;
+                Puerto = JOptionPane.showInputDialog("No estás conectado a la Base de Datos \n Introduce tu puerto ");
                 do {
                     if (mCon.conectarConPuerto(Puerto)) {
                         new Home().setVisible(true);
-                        sixflag = true;
+                        sixflag = 1;
                     } else {
                         Puerto = JOptionPane.showInputDialog("No estás conectado a la Base de Datos \n Introduce tu puerto");
-                        sixflag = false; 
                     }
-                } while (sixflag != true);
+                } while (sixflag == 0);
             }
         });
     }

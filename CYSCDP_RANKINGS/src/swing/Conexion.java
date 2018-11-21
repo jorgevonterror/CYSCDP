@@ -32,7 +32,7 @@ public class Conexion {
     public boolean conectar() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:"+ mHome.Puerto +"/CYSCDP_BaseDeDatos", "root", "root"); //LA RUTA CAMBIA, YO LO HAGO EN MAC.
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:"+ mHome.Puerto +"/cyscdp_basededatosn", "root", "root"); //LA RUTA CAMBIA, YO LO HAGO EN MAC.
             //conexion = DriverManager.getConnection("jdbc:mysql://localhost/bd_elsolecito", "root", "root");
             if (conexion != null) {
                 //JOptionPane.showMessageDialog(null, "Conectado");
@@ -51,7 +51,7 @@ public class Conexion {
         Puerto = puerto;
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:" + Puerto + "/CYSCDP_BaseDeDatos", "root", "root"); //LA RUTA CAMBIA, YO LO HAGO EN MAC.
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:" + Puerto + "/cyscdp_basededatosn", "root", "root"); //LA RUTA CAMBIA, YO LO HAGO EN MAC.
             if (conexion != null) {
                 return true;
             } else {
